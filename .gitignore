@@ -73,3 +73,27 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 .idea/**
+
+# === [Unity] ===
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+
+# === [Visual Studio / Rider] ===
+*.csproj
+*.sln
+.vscode/
+.idea/
+
+# === [Unity Generated] ===
+/ProjectSettings/EditorBuildSettings.asset
+/ProjectSettings/ProjectVersion.txt
+/Packages/packages-lock.json
+
+# === [OS-Specific] ===
+.DS_Store
+Thumbs.db
