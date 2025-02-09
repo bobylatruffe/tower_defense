@@ -32,9 +32,6 @@ class FileLogger implements I_Logger {
 class ConsoleLogger implements I_Logger {
 }
 
-class DatabaseLogger implements I_Logger {
-}
-
 ' note left of GameManager
 '     Orchestre le cycle de vie du jeu en
 '     coordonnant les différents gestionnaires
@@ -43,11 +40,15 @@ class DatabaseLogger implements I_Logger {
 
 abstract class A_GameboardManager  {
     - mediator : I_GameManagerMediator
-    - towers : List<A_Tower>
+    - towers : List<I_Tower>
     - enemies : List<I_Enemie>
     + addEnemy(enemie : I_Enemie)
-    + addTower(tower : A_Tower)
+    + addTower(tower : I_Tower)
+    + upgradeTower(tower : I_Tower)
 }
+
+A_GameboardManager o-- I_Tower
+A_GameboardManager *-- TowerDecorator
 
 abstract class A_WaveManager  {
     - mediator : I_GameManagerMediator
@@ -91,7 +92,7 @@ HighSpeedEnemieFactory ..> A_Enemie
 abstract class A_ShopManager {
     - mediator : I_GameManagerMediator
     - towerFactory : I_TowerFactory
-    + buyTower() : A_Tower
+    + buyTower() : I_Tower
     + sendTowerImageAvailable()
 }
 
@@ -117,7 +118,7 @@ abstract class A_HudManager {
 }
 
 interface I_TowerFactory {
-    + createTower(typeTower : string) : A_Tower
+    + createTower(typeTower : string) : I_Tower
 }
 
 interface I_SoundManager {
@@ -156,28 +157,30 @@ I_GameManagerMediator <-- A_PlayerManager
 I_GameManagerMediator <-- A_WaveManager
 I_GameManagerMediator <-- A_ShopManager
 
-A_GameboardManager o-- A_Tower
+/' A_GameboardManager o-- I_Tower '/
 A_GameboardManager o-- A_Enemie
 
-TowerFactory ..> A_Tower
+TowerFactory ..> I_Tower
 
-abstract class A_Tower {
-    - currentDamage : int
-    - rangeProjectile : int
-    - speedProjectile : int
+interface I_Tower {
     + shoot()
 }
 
-class SimpleTower implements A_Tower {
+class SimpleTower implements I_Tower {
     
 }
 
-class MediumTower implements A_Tower {
+class MediumTower implements I_Tower {
     
 }
 
-class HardTower implements A_Tower {
+class HardTower implements I_Tower {
     
+}
+
+class TowerDecorator implements I_Tower {
+    - wrappee : I_Tower
+    + towerDecorator(tower : I_Tower)
 }
 
 abstract class A_Enemie {
@@ -190,25 +193,4 @@ class SimpleGameBoard extends A_GameboardManager {
 
 }
 
-
-
-class Hud {
-
-}
-
-class Gameboard {
-
-}
-
-class Wave {
-
-}
-
-class Shop {
-
-}
-
-class Player {
-
-}
 @enduml
