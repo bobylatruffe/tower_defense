@@ -65,29 +65,21 @@ interface I_EnemieAbstractFactory {
 
 A_WaveManager --> I_EnemieAbstractFactory
 
-class LowSpeedEnemieFactory implements I_EnemieAbstractFactory {
+class StudentEnemieFactory implements I_EnemieAbstractFactory {
     + createWalkingEnemie() : A_Enemie
     + createFlyingEnemie() : A_Enemie
     + createTeleportingEnemie() : A_Enemie
 }
 
-LowSpeedEnemieFactory ..> A_Enemie
+StudentEnemieFactory ..> A_Enemie
 
-class MediumSpeedEnemieFactory implements I_EnemieAbstractFactory {
+class ZombieEnemieFactory implements I_EnemieAbstractFactory {
     + createWalkingEnemie() : A_Enemie
     + createFlyingEnemie() : A_Enemie
     + createTeleportingEnemie() : A_Enemie
 }
 
-MediumSpeedEnemieFactory ..> A_Enemie
-
-class HighSpeedEnemieFactory implements I_EnemieAbstractFactory {
-    + createWalkingEnemie() : A_Enemie
-    + createFlyingEnemie() : A_Enemie
-    + createTeleportingEnemie() : A_Enemie
-}
-
-HighSpeedEnemieFactory ..> A_Enemie
+ZombieEnemieFactory ..> A_Enemie
 
 abstract class A_ShopManager {
     - mediator : I_GameManagerMediator
@@ -183,11 +175,19 @@ class TowerDecorator implements I_Tower {
     + towerDecorator(tower : I_Tower)
 }
 
+interface I_MoveStrategy {
+    + move()
+}
+
 abstract class A_Enemie {
     - currentDamage : int
     - speed : int
+    - specialMove : I_MoveStrategy
     + move()
+    + addSpecialMove(specialMove : I_MoveStrategy)
 }
+
+A_Enemie --> I_MoveStrategy
 
 class SimpleGameBoard extends A_GameboardManager {
 
