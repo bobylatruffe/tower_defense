@@ -1,8 +1,10 @@
 @startuml "tower_defense_uml"
 
-left to right direction
+/' left to right direction '/
+/' skinparam linetype ortho '/
+/' skinparam linetype polyline '/
 
-class GameManager implements I_UIObserver {
+class GameManager implements I_UIObserver, I_GameManagerMediator {
     - gameboardManager : I_GameboardManager
     - levelManager : I_LevelManager
     - waveManager : I_WaveManager
@@ -11,7 +13,6 @@ class GameManager implements I_UIObserver {
     - systemObserver : I_SystemObserver
     + start()
     + end()
-    + notify()
 }
 
 class System implements I_SystemObserver {
@@ -19,23 +20,20 @@ class System implements I_SystemObserver {
     - soundManager : I_SoundManager
     - logger : List<I_Logger>
     - gameManager : GameManager
-    + onEvent()
 }
 
 interface I_Logger {
     + log()
 }
 
+
 class FileLogger implements I_Logger {
-    + log()
 }
 
 class ConsoleLogger implements I_Logger {
-    + log()
 }
 
 class DatabaseLogger implements I_Logger {
-    + log()
 }
 
 ' note left of GameManager
@@ -44,22 +42,32 @@ class DatabaseLogger implements I_Logger {
 '     nécessaires au fonctionnement du TowerDefense.
 ' end note
 
-interface I_GameboardManager {
+abstract class I_GameboardManager  {
+    - mediator : I_GameManagerMediator
     + addEnemy(enemie : I_Enemie)
     + addTower(tower : I_Tower)
 }
 
-interface I_LevelManager {
+abstract class I_LevelManager  {
+    - mediator : I_GameManagerMediator
     + loadLevel()
     + restartLevel()
 }
 
-interface I_WaveManager {
+abstract class I_WaveManager  {
+    - mediator : I_GameManagerMediator
     + startWave()
 }
 
-interface I_ShopManager {
+abstract class I_ShopManager   {
+    - mediator : I_GameManagerMediator
     + buyItem()
+}
+
+abstract class I_PlayerManager  {
+    - mediator : I_GameManagerMediator
+    + getLifePoint()
+    + getMoney()
 }
 
 abstract class I_HudManager {
@@ -68,7 +76,7 @@ abstract class I_HudManager {
     + showTowerShop(towersImages : List<TowersImage>)
     + showMenu()
     + showError()
-    + notify()
+    + sendUIEvent()
 }
 
 interface I_SoundManager {
@@ -77,17 +85,16 @@ interface I_SoundManager {
     + mute()
 }
 
-interface I_PlayerManager {
-    + getLifePoint()
-    + getMoney()
-}
-
 interface I_SystemObserver {
     + onEvent()
 }
 
 interface I_UIObserver {
     + onEventFromUI()
+}
+
+interface I_GameManagerMediator {
+    + notifyGameManager()
 }
 
 GameManager o-- I_GameboardManager
@@ -103,6 +110,14 @@ System *-- I_Logger
 System *-- GameManager
 
 I_HudManager --> I_UIObserver
+
+
+I_GameManagerMediator <-- I_GameboardManager
+I_GameManagerMediator <-- I_LevelManager
+I_GameManagerMediator <-- I_PlayerManager
+I_GameManagerMediator <-- I_WaveManager
+I_GameManagerMediator <-- I_ShopManager
+
 
 class Tower {
 
