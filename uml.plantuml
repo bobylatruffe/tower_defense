@@ -1,3 +1,130 @@
 @startuml "tower_defense_uml"
 
+left to right direction
+
+class GameManager implements I_UIObserver {
+    - gameboardManager : I_GameboardManager
+    - levelManager : I_LevelManager
+    - waveManager : I_WaveManager
+    - shopManager : I_ShopManager
+    - playerManager : I_PlayerManager
+    - systemObserver : I_SystemObserver
+    + start()
+    + end()
+    + notify()
+}
+
+class System implements I_SystemObserver {
+    - hudManager : I_HudManager
+    - soundManager : I_SoundManager
+    - logger : List<I_Logger>
+    - gameManager : GameManager
+    + onEvent()
+}
+
+interface I_Logger {
+    + log()
+}
+
+class FileLogger implements I_Logger {
+    + log()
+}
+
+class ConsoleLogger implements I_Logger {
+    + log()
+}
+
+class DatabaseLogger implements I_Logger {
+    + log()
+}
+
+' note left of GameManager
+'     Orchestre le cycle de vie du jeu en
+'     coordonnant les différents gestionnaires
+'     nécessaires au fonctionnement du TowerDefense.
+' end note
+
+interface I_GameboardManager {
+    + addEnemy(enemie : I_Enemie)
+    + addTower(tower : I_Tower)
+}
+
+interface I_LevelManager {
+    + loadLevel()
+    + restartLevel()
+}
+
+interface I_WaveManager {
+    + startWave()
+}
+
+interface I_ShopManager {
+    + buyItem()
+}
+
+abstract class I_HudManager {
+    - uiObserver : I_UIObserver
+    + showLevel(int level)
+    + showTowerShop(towersImages : List<TowersImage>)
+    + showMenu()
+    + showError()
+    + notify()
+}
+
+interface I_SoundManager {
+    + increase()
+    + decrease()
+    + mute()
+}
+
+interface I_PlayerManager {
+    + getLifePoint()
+    + getMoney()
+}
+
+interface I_SystemObserver {
+    + onEvent()
+}
+
+interface I_UIObserver {
+    + onEventFromUI()
+}
+
+GameManager o-- I_GameboardManager
+GameManager o-- I_LevelManager
+GameManager o-- I_WaveManager
+GameManager o-- I_ShopManager
+GameManager o-- I_PlayerManager
+GameManager o-- I_SystemObserver
+
+System *-- I_HudManager
+System *-- I_SoundManager
+System *-- I_Logger
+System *-- GameManager
+
+I_HudManager --> I_UIObserver
+
+class Tower {
+
+}
+
+class Hud {
+
+}
+
+class Gameboard {
+
+}
+
+class Wave {
+
+}
+
+class Shop {
+
+}
+
+class Player {
+
+}
 @enduml
