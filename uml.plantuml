@@ -19,7 +19,12 @@ class System implements I_SystemObserver {
     - soundManager : I_SoundManager
     - logger : List<I_Logger>
     - gameManager : GameManager
+    - {static} instance
+
+    + {static} getInstance() : System
 }
+
+System --> System
 
 interface I_Logger {
     + log()
