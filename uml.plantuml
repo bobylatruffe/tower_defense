@@ -48,7 +48,9 @@ abstract class A_GameboardManager  {
 }
 
 A_GameboardManager o-- I_Tower
-A_GameboardManager *-- TowerDecorator
+TowerDecorator o-- I_Tower
+/' A_GameboardManager *-- TowerDecorator '/
+/' A_GameboardManager --> TowerDecorator '/
 
 abstract class A_WaveManager  {
     - mediator : I_GameManagerMediator
