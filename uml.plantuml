@@ -130,7 +130,7 @@ interface I_UIObserver {
 }
 
 interface I_GameManagerMediator {
-    + notifyGameManager()
+    + onEventFromManagers()
 }
 
 /' GameManager o-- A_GameboardManager

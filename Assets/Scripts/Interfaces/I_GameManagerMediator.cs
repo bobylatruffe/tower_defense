@@ -1,4 +1,4 @@
 public interface I_GameManagerMediator
 {
-    void notifyGameManager(object data);
+    void onEventFromManagers(object data);
 }
