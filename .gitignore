@@ -8,7 +8,7 @@
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
-/[Uu]ser[Ss]ettings/
+#/[Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -80,7 +80,7 @@ crashlytics-build.properties
 [Oo]bj/
 [Bb]uilds/
 [Ll]ogs/
-UserSettings/
+#UserSettings/
 MemoryCaptures/
 
 # === [Visual Studio / Rider] ===
