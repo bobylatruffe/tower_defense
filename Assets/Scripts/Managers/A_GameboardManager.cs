@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ public abstract class A_GameboardManager : MonoBehaviour
 {
     protected int Rows { get; set; }
     protected int Cols { get; set; }
+    protected Tuple<int, int> EntryPoint { get; set; }
+    protected Tuple<int, int> LeavePoint { get; set; }
     public I_GameManagerMediator Mediator { get; protected set; }
     public List<I_Tower> Towers { get; private set; }
     public List<A_Enemie> Enemies { get; private set; }

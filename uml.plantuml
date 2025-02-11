@@ -50,6 +50,8 @@ abstract class A_GameboardManager  {
     - rows : int
     - cols : int
     - mediator : I_GameManagerMediator
+    - entryPoint : Tuple<row, col>
+    - leavePoint : Tuple<row, col>
     - towers : List<I_Tower>
     - enemies : List<I_Enemie>
     + addEnemy(enemie : I_Enemie)

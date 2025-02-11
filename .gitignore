@@ -97,3 +97,6 @@ MemoryCaptures/
 # === [OS-Specific] ===
 .DS_Store
 Thumbs.db
+
+Assets/TestAssets/
+Assets/TestAssets.meta
