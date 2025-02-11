@@ -10,9 +10,13 @@ class GameManager implements I_UIObserver, I_GameManagerMediator {
     - shopManager : A_ShopManager
     - playerManager : A_PlayerManager
     - systemObserver : I_SystemObserver
+    + {static} instance : GameManager
+    + {static} getInstance() : GameManager
     + start()
     + end()
 }
+
+GameManager --> GameManager
 
 class System implements I_SystemObserver {
     - hudManager : A_HudManager
@@ -30,7 +34,6 @@ interface I_Logger {
     + log()
 }
 
-
 class FileLogger implements I_Logger {
 }
 
@@ -44,6 +47,8 @@ class ConsoleLogger implements I_Logger {
 ' end note
 
 abstract class A_GameboardManager  {
+    - rows : int
+    - cols : int
     - mediator : I_GameManagerMediator
     - towers : List<I_Tower>
     - enemies : List<I_Enemie>
