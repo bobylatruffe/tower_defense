@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SimpleGameboard : A_GameboardManager
 {
@@ -89,8 +90,11 @@ public class SimpleGameboard : A_GameboardManager
             }
         }
 
-        GameObject entryPoint = Instantiate(cubePrefab, new Vector3(EntryPoint.Item1, 1, EntryPoint.Item2), Quaternion.identity, transform);
-        GameObject leavePoint = Instantiate(cubePrefab, new Vector3(LeavePoint.Item1, 1, LeavePoint.Item2), Quaternion.identity, transform);
+        GameObject entryPoint = Instantiate(cubePrefab, new Vector3(EntryPoint.Item1, 1, EntryPoint.Item2),
+            Quaternion.identity, transform);
+        GameObject leavePoint = Instantiate(cubePrefab, new Vector3(LeavePoint.Item1, 1, LeavePoint.Item2),
+            Quaternion.identity, transform);
+
         entryPoint.GetComponent<Renderer>().material.color = Color.magenta;
         leavePoint.GetComponent<Renderer>().material.color = Color.blue;
     }

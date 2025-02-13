@@ -198,6 +198,7 @@ abstract class A_Enemie {
     - speed : int
     - specialMove : I_MoveStrategy
     + move()
+    + takeDamage()
     + addSpecialMove(specialMove : I_MoveStrategy)
 }
 
