@@ -12,8 +12,6 @@ public class SimpleGameboard : A_GameboardManager
     public void Start()
     {
         cubePrefab = Resources.Load<GameObject>("Prefabs/Ground");
-        I_GameManagerMediator mediator = GameManager.Instance;
-        Mediator = mediator;
         Rows = 11;
         Cols = 20;
         EntryPoint = new Tuple<int, int>(0, -1);

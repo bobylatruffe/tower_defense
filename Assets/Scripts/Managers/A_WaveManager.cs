@@ -1,9 +1,16 @@
-public abstract class A_WaveManager
+using UnityEngine;
+
+public abstract class A_WaveManager : MonoBehaviour
 {
-    private I_GameManagerMediator mediator;
-    private I_EnemieAbstractFactory enemieFactory;
+    protected I_GameManagerMediator Mediator { get; private set; }
+    protected I_EnemieAbstractFactory EnemieFactory { get; private set; }
 
     public int CurrentLevel { get; set; }
+
+    private void Awake()
+    {
+        Mediator = GameManager.Instance;
+    }
 
     public abstract void startWave();
 }

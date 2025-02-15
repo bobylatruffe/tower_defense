@@ -31,8 +31,8 @@ public class MySystem : MonoBehaviour, I_SystemObserver
         gameManager = FindFirstObjectByType<GameManager>();
 
         if (gameManager != null) return;
-        GameObject gmObject = new GameObject("GameManager");
-        gameManager = gmObject.AddComponent<GameManager>();
+        GameObject go = new GameObject("GameManager");
+        gameManager = go.AddComponent<GameManager>();
     }
 
     public void addLogger(I_Logger logger)

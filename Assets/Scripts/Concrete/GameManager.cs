@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private A_GameboardManager gameboardManager;
+    [SerializeField] private A_WaveManager waveManager;
 
-    private A_WaveManager WaveManager { get; set; }
     private A_ShopManager ShopManager { get; set; }
     private A_PlayerManager PlayerManager { get; set; }
     private I_SystemObserver SystemObserver { get; set; }
@@ -28,6 +28,13 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
         if (gameboardManager != null) return;
         GameObject go = new GameObject("Gameboard");
         gameboardManager = go.AddComponent<SimpleGameboard>();
+
+        if (waveManager != null) return;
+        waveManager = FindFirstObjectByType<A_WaveManager>();
+
+        if (waveManager != null) return;
+        go = new GameObject("WaveManager");
+        waveManager = go.AddComponent<SimpleWaveManager>();
     }
 
     public void start()

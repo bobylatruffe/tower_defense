@@ -78,6 +78,7 @@ interface I_EnemieAbstractFactory {
 }
 
 A_WaveManager --> I_EnemieAbstractFactory
+A_WaveManager <|-- SimpleWaveManager
 
 class StudentEnemieFactory implements I_EnemieAbstractFactory {
     + createWalkingEnemie() : A_Enemie
@@ -87,13 +88,16 @@ class StudentEnemieFactory implements I_EnemieAbstractFactory {
 
 StudentEnemieFactory ..> A_Enemie
 
-class ZombieEnemieFactory implements I_EnemieAbstractFactory {
+class SimpleEnemieFactory implements I_EnemieAbstractFactory {
+    - prefabWalkingEnemies : List<Prebab>
+    - prefabFlyingEnemies : List<Prefab>
+    - prefabTeleportingEnemies : List<Prefab>
     + createWalkingEnemie() : A_Enemie
     + createFlyingEnemie() : A_Enemie
     + createTeleportingEnemie() : A_Enemie
 }
 
-ZombieEnemieFactory ..> A_Enemie
+SimpleEnemieFactory ..> A_Enemie
 
 abstract class A_ShopManager {
     - mediator : I_GameManagerMediator
