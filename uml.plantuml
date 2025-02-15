@@ -67,20 +67,23 @@ TowerDecorator o-- I_Tower
 abstract class A_WaveManager  {
     - mediator : I_GameManagerMediator
     - currentLevel : int
-    - enemieAbstractFactory : I_EnemieAbstractFactory
+    - enemieAbstractFactory : A_EnemieAbstractFactory
     + startWave()
 }
 
-interface I_EnemieAbstractFactory {
+abstract class A_EnemieAbstractFactory {
     + createWalkingEnemie() : A_Enemie
     + createFlyingEnemie() : A_Enemie
     + createTeleportingEnemie() : A_Enemie
 }
 
-A_WaveManager --> I_EnemieAbstractFactory
+A_WaveManager --> A_EnemieAbstractFactory
 A_WaveManager <|-- SimpleWaveManager
 
-class StudentEnemieFactory implements I_EnemieAbstractFactory {
+class StudentEnemieFactory extends A_EnemieAbstractFactory {
+    - prefabWalkingEnemies : List<Prebab>
+    - prefabFlyingEnemies : List<Prefab>
+    - prefabTeleportingEnemies : List<Prefab>
     + createWalkingEnemie() : A_Enemie
     + createFlyingEnemie() : A_Enemie
     + createTeleportingEnemie() : A_Enemie
@@ -88,7 +91,7 @@ class StudentEnemieFactory implements I_EnemieAbstractFactory {
 
 StudentEnemieFactory ..> A_Enemie
 
-class SimpleEnemieFactory implements I_EnemieAbstractFactory {
+class SimpleEnemieFactory extends A_EnemieAbstractFactory {
     - prefabWalkingEnemies : List<Prebab>
     - prefabFlyingEnemies : List<Prefab>
     - prefabTeleportingEnemies : List<Prefab>
