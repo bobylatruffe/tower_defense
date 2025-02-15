@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleAEnemieFactory : A_EnemieAbstractFactory
@@ -10,16 +9,17 @@ public class SimpleAEnemieFactory : A_EnemieAbstractFactory
 
     public override A_Enemie createWalkingEnemie()
     {
-        return InstantiateEnemy<WalkingEnemy>(prefabEnemiesWalking[0]);
+        return InstantiateEnemy<WalkingEnemy>(prefabEnemiesWalking[Random.Range(0, prefabEnemiesWalking.Count)]);
     }
 
     public override A_Enemie createFlyingEnemie()
     {
-        return InstantiateEnemy<FlyingEnemy>(prefabEnemiesFlying[0]);
+        return InstantiateEnemy<FlyingEnemy>(prefabEnemiesFlying[Random.Range(0, prefabEnemiesFlying.Count)]);
     }
 
     public override A_Enemie createTeleportingEnemie()
     {
-        return InstantiateEnemy<TeleportingEnemy>(prefabEnemiesTeleporting[0]);
+        return InstantiateEnemy<TeleportingEnemy>(
+            prefabEnemiesTeleporting[Random.Range(0, prefabEnemiesTeleporting.Count)]);
     }
 }
