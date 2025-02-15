@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
         {
             Instance = this;
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -52,6 +56,14 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
 
     public void onEventFromManagers(Tuple<string, object> eventData)
     {
-        throw new NotImplementedException();
+        switch (eventData.Item1)
+        {
+            case "ADD_NEW_ENEMY":
+                gameboardManager.addEnemie((A_Enemie)eventData.Item2);
+                break;
+
+            default:
+                throw new NotImplementedException();
+        }
     }
 }

@@ -14,7 +14,7 @@ public class SimpleGameboard : A_GameboardManager
         cubePrefab = Resources.Load<GameObject>("Prefabs/Ground");
         Rows = 11;
         Cols = 20;
-        EntryPoint = new Tuple<int, int>(0, -1);
+        EntryPoint = new Tuple<int, int>(2, -1);
         LeavePoint = new Tuple<int, int>(0, Cols);
         GenerateGrid();
     }
@@ -88,18 +88,22 @@ public class SimpleGameboard : A_GameboardManager
             }
         }
 
-        GameObject entryPoint = Instantiate(cubePrefab, new Vector3(EntryPoint.Item1, 1, EntryPoint.Item2),
+        Entry = Instantiate(cubePrefab, new Vector3(EntryPoint.Item1, 0.5f, EntryPoint.Item2),
             Quaternion.identity, transform);
-        GameObject leavePoint = Instantiate(cubePrefab, new Vector3(LeavePoint.Item1, 1, LeavePoint.Item2),
+        Leave = Instantiate(cubePrefab, new Vector3(LeavePoint.Item1, 0.5f, LeavePoint.Item2),
             Quaternion.identity, transform);
 
-        entryPoint.GetComponent<Renderer>().material.color = Color.magenta;
-        leavePoint.GetComponent<Renderer>().material.color = Color.blue;
+        Entry.GetComponent<Renderer>().material.color = Color.magenta;
+        Leave.GetComponent<Renderer>().material.color = Color.blue;
     }
 
     public override void addEnemie(A_Enemie newEnemie)
     {
-        throw new NotImplementedException();
+        newEnemie.transform.SetParent(transform);
+        newEnemie.transform.position = Entry.transform.position;
+        newEnemie.transform.rotation = Entry.transform.rotation;
+        newEnemie.transform.localScale = Entry.transform.localScale;
+        newEnemie.gameObject.SetActive(true);
     }
 
     public override void addTower(I_Tower newTower)

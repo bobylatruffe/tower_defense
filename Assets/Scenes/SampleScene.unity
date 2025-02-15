@@ -469,7 +469,7 @@ MonoBehaviour:
   prefabEnemiesWalking:
   - {fileID: 199001266052818907, guid: b8bb525ef29445f449a6036ce9fa361f, type: 3}
   prefabEnemiesFlying:
-  - {fileID: 5922742928518445864, guid: 23b9c2e4084d5784490bfee18dafe769, type: 3}
+  - {fileID: 245711100338653985, guid: 9213f763eabf487459d4608124e9ee3b, type: 3}
   prefabEnemiesTeleporting:
   - {fileID: 8424651998470670488, guid: 3319d3058c9424744b80c3493393d609, type: 3}
 --- !u!1 &832575517
@@ -550,7 +550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5b494844fc4576889d7d83f6d72246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAbstractFactory: {fileID: 0}
 --- !u!4 &1800624729
 Transform:
   m_ObjectHideFlags: 0

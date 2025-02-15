@@ -3,17 +3,18 @@ using UnityEngine;
 public abstract class A_WaveManager : MonoBehaviour
 {
     protected I_GameManagerMediator Mediator { get; private set; }
-    [SerializeField] private A_EnemieAbstractFactory enemyAbstractFactory;
+    protected A_EnemieAbstractFactory enemyAbstractFactory;
 
     public int CurrentLevel { get; set; }
 
     private void Awake()
     {
-        Mediator = GameManager.Instance;
     }
 
     private void Start()
     {
+        Mediator = GameManager.Instance;
+
         if (enemyAbstractFactory != null) return;
         enemyAbstractFactory = FindFirstObjectByType<A_EnemieAbstractFactory>();
 

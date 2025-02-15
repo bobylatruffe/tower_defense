@@ -23,10 +23,7 @@ public class MySystem : MonoBehaviour, I_SystemObserver
         {
             Destroy(gameObject);
         }
-    }
 
-    private void Start()
-    {
         if (gameManager != null) return;
         gameManager = FindFirstObjectByType<GameManager>();
 

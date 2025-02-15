@@ -8,6 +8,10 @@ public abstract class A_GameboardManager : MonoBehaviour
     protected int Cols { get; set; }
     protected Tuple<int, int> EntryPoint { get; set; }
     protected Tuple<int, int> LeavePoint { get; set; }
+
+    protected GameObject Entry { get; set; }
+    protected GameObject Leave { get; set; }
+
     public I_GameManagerMediator Mediator { get; protected set; }
     public List<I_Tower> Towers { get; private set; }
     public List<A_Enemie> Enemies { get; private set; }
