@@ -20,7 +20,7 @@ GameManager --> GameManager
 
 class System implements I_SystemObserver {
     - hudManager : A_HudManager
-    - soundManager : I_SoundManager
+    - soundManager : I_SoundManagers
     - logger : List<I_Logger>
     - gameManager : GameManager
     - {static} instance
@@ -50,8 +50,8 @@ abstract class A_GameboardManager  {
     - rows : int
     - cols : int
     - mediator : I_GameManagerMediator
-    - entryPoint : Tuple<row, col>
-    - leavePoint : Tuple<row, col>
+    - entries : List<Case>
+    - leaves : List<Case>
     - towers : List<I_Tower>
     - enemies : List<I_Enemie>
     + addEnemy(enemie : I_Enemie)

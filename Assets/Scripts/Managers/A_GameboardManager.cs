@@ -6,15 +6,13 @@ public abstract class A_GameboardManager : MonoBehaviour
 {
     protected int Rows { get; set; }
     protected int Cols { get; set; }
-    protected Tuple<int, int> EntryPoint { get; set; }
-    protected Tuple<int, int> LeavePoint { get; set; }
 
-    protected GameObject Entry { get; set; }
-    protected GameObject Leave { get; set; }
+    protected List<GameObject> Entries { get; set; } = new List<GameObject>();
+    protected List<GameObject> Leaves { get; set; } = new List<GameObject>();
 
-    public I_GameManagerMediator Mediator { get; protected set; }
-    public List<I_Tower> Towers { get; private set; }
-    public List<A_Enemie> Enemies { get; private set; }
+    protected I_GameManagerMediator Mediator { get; set; }
+    protected List<I_Tower> Towers { get; set; }
+    protected List<A_Enemie> Enemies { get; set; }
 
     private void Awake()
     {

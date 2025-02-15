@@ -2,6 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class SimpleGameboard : A_GameboardManager
 {
@@ -14,8 +15,6 @@ public class SimpleGameboard : A_GameboardManager
         cubePrefab = Resources.Load<GameObject>("Prefabs/Ground");
         Rows = 11;
         Cols = 20;
-        EntryPoint = new Tuple<int, int>(2, -1);
-        LeavePoint = new Tuple<int, int>(0, Cols);
         GenerateGrid();
     }
 
@@ -88,21 +87,24 @@ public class SimpleGameboard : A_GameboardManager
             }
         }
 
-        Entry = Instantiate(cubePrefab, new Vector3(EntryPoint.Item1, 0.5f, EntryPoint.Item2),
-            Quaternion.identity, transform);
-        Leave = Instantiate(cubePrefab, new Vector3(LeavePoint.Item1, 0.5f, LeavePoint.Item2),
-            Quaternion.identity, transform);
+        for (int x = 0; x < Rows; x++)
+        {
+            Entries.Add(Instantiate(cubePrefab, new Vector3(x - offsetX, 0.5f, -1), Quaternion.identity, transform));
+            Entries[x].GetComponent<Renderer>().material.color = Color.magenta;
 
-        Entry.GetComponent<Renderer>().material.color = Color.magenta;
-        Leave.GetComponent<Renderer>().material.color = Color.blue;
+        }
+
+        Leaves.Add(Instantiate(cubePrefab, new Vector3(0, 0.5f, Cols), Quaternion.identity, transform));
+        Leaves[0].GetComponent<Renderer>().material.color = Color.black;
     }
 
     public override void addEnemie(A_Enemie newEnemie)
     {
+        int whichEntry = Random.Range(0, Rows);
         newEnemie.transform.SetParent(transform);
-        newEnemie.transform.position = Entry.transform.position;
-        newEnemie.transform.rotation = Entry.transform.rotation;
-        newEnemie.transform.localScale = Entry.transform.localScale;
+        newEnemie.transform.position = Entries[whichEntry].transform.position;
+        newEnemie.transform.rotation = Entries[whichEntry].transform.rotation;
+        newEnemie.transform.localScale = Entries[whichEntry].transform.localScale;
         newEnemie.gameObject.SetActive(true);
     }
 
