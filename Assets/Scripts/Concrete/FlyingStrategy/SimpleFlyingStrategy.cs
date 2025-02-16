@@ -13,8 +13,9 @@ public class SimpleFlyingStrategy : MonoBehaviour, I_MoveStrategy
     public void move()
     {
         float speed = Random.Range(5f, 10f);
-        transform.position =
-            Vector3.MoveTowards(transform.position, destination.transform.position + Vector3.up, speed * Time.deltaTime);
+        // transform.position =
+        //     Vector3.MoveTowards(transform.position, destination.transform.position + Vector3.up, speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
     public void setDestination(GameObject destination)
