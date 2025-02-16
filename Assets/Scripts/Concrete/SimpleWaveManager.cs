@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class SimpleWaveManager : A_WaveManager
 {
+    [SerializeField] private I_MoveStrategy moveStrategy;
     public override void startWave()
     {
     }
@@ -30,9 +32,11 @@ public class SimpleWaveManager : A_WaveManager
                     SpawnWalkingEnemy();
                     break;
                 case 1:
-                    SpawnTeleportingEnemy();
+                    SpawnWalkingEnemy();
+                    // SpawnTeleportingEnemy();
                     break;
                 case 2:
+                    // SpawnWalkingEnemy();
                     SpawnFlyingEnemy();
                     break;
             }
@@ -47,6 +51,9 @@ public class SimpleWaveManager : A_WaveManager
     private void SpawnWalkingEnemy()
     {
         A_Enemie enemy = enemyAbstractFactory.createWalkingEnemie();
+        I_MoveStrategy strategy = enemy.AddComponent<SimpleWalkingToDestinationHighSpeedStrategy>();
+        strategy.setDestination(Mediator.onEventFromManagers(new Tuple<string, object>("GET_LEAVE", null)));
+        enemy.MoveStrategy = strategy;
         Mediator.onEventFromManagers(new Tuple<string, object>("ADD_NEW_ENEMY", enemy));
     }
 

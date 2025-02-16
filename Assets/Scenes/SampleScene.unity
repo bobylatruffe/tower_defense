@@ -470,8 +470,19 @@ MonoBehaviour:
   - {fileID: 199001266052818907, guid: b8bb525ef29445f449a6036ce9fa361f, type: 3}
   prefabEnemiesFlying:
   - {fileID: 245711100338653985, guid: 9213f763eabf487459d4608124e9ee3b, type: 3}
+  - {fileID: 6195203602124430309, guid: 934b6378286175d419cdf1b188c5557d, type: 3}
+  - {fileID: 4940937981000542743, guid: ba0b304d70cb2ce479677be3f0a6bbe6, type: 3}
+  - {fileID: 2671358823477132365, guid: 53541037b3e96714f90b80ccab9bd9af, type: 3}
   prefabEnemiesTeleporting:
   - {fileID: 8424651998470670488, guid: 3319d3058c9424744b80c3493393d609, type: 3}
+  - {fileID: 8850904451266298107, guid: 980f992fd6b92d34599f1d07c71c74ca, type: 3}
+  - {fileID: 4882376540902750747, guid: aa9c5997f7c58004291f94389cd0e480, type: 3}
+  - {fileID: 4859791240142080185, guid: d8de89a4ed18039468b18f6f3f633c1f, type: 3}
+  - {fileID: 6558217237259560821, guid: 8acb5a7805fc2894a9acb0c8c456651d, type: 3}
+  - {fileID: 8879074125731635993, guid: a2dfee59ea3d78c4da3f52702f44fc9d, type: 3}
+  - {fileID: 6128152816116768445, guid: a0abc5232b2396543ae495e23450c823, type: 3}
+  - {fileID: 184788881092861705, guid: 11d3b746955450842ba77cdcc5b4237c, type: 3}
+  - {fileID: 2045075581395886749, guid: 68c553d6bd36a98418c2e0cd0dd83b2f, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

@@ -204,9 +204,9 @@ abstract class A_Enemie {
     - currentDamage : int
     - speed : int
     - specialMove : I_MoveStrategy
-    + move()
+    - isMoving : boolean
     + takeDamage()
-    + addSpecialMove(specialMove : I_MoveStrategy)
+    + addSpecialMove(moveStrategy : I_MoveStrategy)
 }
 
 A_Enemie --> I_MoveStrategy

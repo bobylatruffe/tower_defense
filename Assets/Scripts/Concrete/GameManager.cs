@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
         throw new NotImplementedException();
     }
 
-    public void onEventFromManagers(Tuple<string, object> eventData)
+    public GameObject onEventFromManagers(Tuple<string, object> eventData)
     {
         switch (eventData.Item1)
         {
@@ -62,8 +62,13 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
                 gameboardManager.addEnemie((A_Enemie)eventData.Item2);
                 break;
 
+            case "GET_LEAVE":
+                return gameboardManager.getLeave();
+
             default:
                 throw new NotImplementedException();
         }
+
+        return null;
     }
 }

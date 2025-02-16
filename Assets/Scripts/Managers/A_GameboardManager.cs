@@ -11,8 +11,8 @@ public abstract class A_GameboardManager : MonoBehaviour
     protected List<GameObject> Leaves { get; set; } = new List<GameObject>();
 
     protected I_GameManagerMediator Mediator { get; set; }
-    protected List<I_Tower> Towers { get; set; }
-    protected List<A_Enemie> Enemies { get; set; }
+    protected List<I_Tower> Towers { get; set; } = new List<I_Tower>();
+    protected List<A_Enemie> Enemies { get; set; }  = new List<A_Enemie>();
 
     private void Awake()
     {
@@ -22,4 +22,5 @@ public abstract class A_GameboardManager : MonoBehaviour
     public abstract void addEnemie(A_Enemie newEnemie);
     public abstract void addTower(I_Tower newTower);
     public abstract void upgradeTower(I_Tower towerToUpgrade);
+    public abstract GameObject getLeave();
 }

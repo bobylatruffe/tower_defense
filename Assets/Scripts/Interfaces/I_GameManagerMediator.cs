@@ -1,6 +1,7 @@
 using System;
+using UnityEngine;
 
 public interface I_GameManagerMediator
 {
-    void onEventFromManagers(Tuple<string, object> eventData);
+    GameObject onEventFromManagers(Tuple<string, object> eventData);
 }

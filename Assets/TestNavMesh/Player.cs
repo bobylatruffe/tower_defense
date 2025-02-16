@@ -1,19 +1,14 @@
-using Unity.AI.Navigation;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private NavMeshSurface surface;
-    [SerializeField]
-    private NavMeshAgent agent;
-    [SerializeField]
-    private Transform target;
+    public GameObject direction;
+    public NavMeshAgent agent;
 
-    void Update()
+    private void Update()
     {
-        // surface.BuildNavMesh();
-        agent.SetDestination(target.position);
+        agent.SetDestination(direction.transform.position);
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,11 +12,13 @@ public class SimpleGameboard : A_GameboardManager
     private GameObject lastHitObject;
     private Color originalColor;
 
+    private NavMeshSurface navMeshSurface;
+
     public void Start()
     {
         cubePrefab = Resources.Load<GameObject>("Prefabs/Ground");
         Rows = 11;
-        Cols = 20;
+        Cols = 11;
         GenerateGrid();
     }
 
@@ -22,6 +26,7 @@ public class SimpleGameboard : A_GameboardManager
     {
         whichCaseSelected();
     }
+
 
     private void whichCaseSelected()
     {
@@ -89,23 +94,37 @@ public class SimpleGameboard : A_GameboardManager
 
         for (int x = 0; x < Rows; x++)
         {
-            Entries.Add(Instantiate(cubePrefab, new Vector3(x - offsetX, 0.5f, -1), Quaternion.identity, transform));
+            Entries.Add(Instantiate(cubePrefab, new Vector3(x - offsetX, 0f, -1), Quaternion.identity, transform));
             Entries[x].GetComponent<Renderer>().material.color = Color.magenta;
 
+            Leaves.Add(Instantiate(cubePrefab, new Vector3(x - offsetX, 0f, Cols), Quaternion.identity, transform));
+            Leaves[x].GetComponent<Renderer>().material.color = Color.black;
+            Leaves[x].AddComponent<BoxCollider>();
+            Leaves[x].GetComponent<BoxCollider>().isTrigger = true;
         }
 
-        Leaves.Add(Instantiate(cubePrefab, new Vector3(0, 0.5f, Cols), Quaternion.identity, transform));
-        Leaves[0].GetComponent<Renderer>().material.color = Color.black;
+
+        navMeshSurface = gameObject.AddComponent<NavMeshSurface>();
+        navMeshSurface.collectObjects = CollectObjects.Children;
+        navMeshSurface.BuildNavMesh();
     }
 
     public override void addEnemie(A_Enemie newEnemie)
     {
-        int whichEntry = Random.Range(0, Rows);
         newEnemie.transform.SetParent(transform);
+
+        int whichEntry = Random.Range(0, Rows);
+        int whichLeave = Random.Range(0, Rows);
+
         newEnemie.transform.position = Entries[whichEntry].transform.position;
         newEnemie.transform.rotation = Entries[whichEntry].transform.rotation;
         newEnemie.transform.localScale = Entries[whichEntry].transform.localScale;
+
         newEnemie.gameObject.SetActive(true);
+        newEnemie.IsMoving = true;
+        newEnemie.GetComponent<I_MoveStrategy>().initStrategy();
+
+        Enemies.Add(newEnemie);
     }
 
     public override void addTower(I_Tower newTower)
@@ -116,5 +135,10 @@ public class SimpleGameboard : A_GameboardManager
     public override void upgradeTower(I_Tower towerToUpgrade)
     {
         throw new NotImplementedException();
+    }
+
+    public override GameObject getLeave()
+    {
+        return Leaves[Random.Range(0, Leaves.Count)];
     }
 }
