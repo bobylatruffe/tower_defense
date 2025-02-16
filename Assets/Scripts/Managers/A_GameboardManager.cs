@@ -12,7 +12,7 @@ public abstract class A_GameboardManager : MonoBehaviour
 
     protected I_GameManagerMediator Mediator { get; set; }
     protected List<I_Tower> Towers { get; set; } = new List<I_Tower>();
-    protected List<A_Enemie> Enemies { get; set; }  = new List<A_Enemie>();
+    protected List<A_Enemie> Enemies { get; set; } = new List<A_Enemie>();
 
     private void Awake()
     {
@@ -23,4 +23,5 @@ public abstract class A_GameboardManager : MonoBehaviour
     public abstract void addTower(I_Tower newTower);
     public abstract void upgradeTower(I_Tower towerToUpgrade);
     public abstract GameObject getLeave();
+    public abstract GameObject getEntry();
 }

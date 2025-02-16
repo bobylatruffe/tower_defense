@@ -141,4 +141,9 @@ public class SimpleGameboard : A_GameboardManager
     {
         return Leaves[Random.Range(0, Leaves.Count)];
     }
+
+    public override GameObject getEntry()
+    {
+        return Entries[Random.Range(0, Leaves.Count)];
+    }
 }

@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class SimpleWaveManager : A_WaveManager
 {
-    [SerializeField] private I_MoveStrategy moveStrategy;
+    private List<Type> walkingMoveStrategies = new List<Type>
+    {
+        typeof(SimpleWalkingToDestinationStrategy),
+        typeof(SimpleWalkingToDestinationHighSpeedStrategy),
+        // typeof(SimpleWalkingRodingStrategy)
+    };
+
     public override void startWave()
     {
     }
@@ -36,12 +42,12 @@ public class SimpleWaveManager : A_WaveManager
                     // SpawnTeleportingEnemy();
                     break;
                 case 2:
-                    // SpawnWalkingEnemy();
-                    SpawnFlyingEnemy();
+                    SpawnWalkingEnemy();
+                    // SpawnFlyingEnemy();
                     break;
             }
 
-            float waitTime = Random.Range(1f, 3f);
+            float waitTime = Random.Range(0.5f, 2f);
             yield return new WaitForSeconds(waitTime);
 
             elapsedTime += waitTime;
@@ -51,7 +57,10 @@ public class SimpleWaveManager : A_WaveManager
     private void SpawnWalkingEnemy()
     {
         A_Enemie enemy = enemyAbstractFactory.createWalkingEnemie();
-        I_MoveStrategy strategy = enemy.AddComponent<SimpleWalkingToDestinationHighSpeedStrategy>();
+
+        Type randomStrategyType = walkingMoveStrategies[Random.Range(0, walkingMoveStrategies.Count)];
+        I_MoveStrategy strategy = (I_MoveStrategy)enemy.gameObject.AddComponent(randomStrategyType);
+
         strategy.setDestination(Mediator.onEventFromManagers(new Tuple<string, object>("GET_LEAVE", null)));
         enemy.MoveStrategy = strategy;
         Mediator.onEventFromManagers(new Tuple<string, object>("ADD_NEW_ENEMY", enemy));

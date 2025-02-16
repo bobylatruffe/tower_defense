@@ -57,6 +57,8 @@ abstract class A_GameboardManager  {
     + addEnemy(enemie : I_Enemie)
     + addTower(tower : I_Tower)
     + upgradeTower(tower : I_Tower)
+    + getEntry() : Case
+    + getLeave() : Case
 }
 
 A_GameboardManager o-- I_Tower
@@ -205,11 +207,13 @@ abstract class A_Enemie {
     - speed : int
     - specialMove : I_MoveStrategy
     - isMoving : boolean
+    - mediator : I_GameManagerMediator
     + takeDamage()
     + addSpecialMove(moveStrategy : I_MoveStrategy)
 }
 
 A_Enemie --> I_MoveStrategy
+A_Enemie --> I_GameManagerMediator
 
 class SimpleGameBoard extends A_GameboardManager {
 

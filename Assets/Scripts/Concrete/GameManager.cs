@@ -65,6 +65,10 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
             case "GET_LEAVE":
                 return gameboardManager.getLeave();
 
+            case "GET_ENTRY":
+                return gameboardManager.getEntry();
+
+
             default:
                 throw new NotImplementedException();
         }
