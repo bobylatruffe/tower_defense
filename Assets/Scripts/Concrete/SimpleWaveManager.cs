@@ -13,6 +13,11 @@ public class SimpleWaveManager : A_WaveManager
         // typeof(SimpleWalkingRodingStrategy)
     };
 
+    private List<Type> flyingMoveStrategies = new List<Type>
+    {
+        typeof(SimpleFlyingStrategy),
+    };
+
     public override void startWave()
     {
     }
@@ -36,14 +41,16 @@ public class SimpleWaveManager : A_WaveManager
             {
                 case 0:
                     SpawnWalkingEnemy();
+                    // SpawnFlyingEnemy();
                     break;
                 case 1:
-                    SpawnWalkingEnemy();
+                    // SpawnWalkingEnemy();
                     // SpawnTeleportingEnemy();
+                    SpawnFlyingEnemy();
                     break;
                 case 2:
-                    SpawnWalkingEnemy();
-                    // SpawnFlyingEnemy();
+                    // SpawnWalkingEnemy();
+                    SpawnFlyingEnemy();
                     break;
             }
 
@@ -75,6 +82,13 @@ public class SimpleWaveManager : A_WaveManager
     private void SpawnFlyingEnemy()
     {
         A_Enemie enemy = enemyAbstractFactory.createFlyingEnemie();
+
+        Type randomStrategyType = flyingMoveStrategies[Random.Range(0, flyingMoveStrategies.Count)];
+        I_MoveStrategy strategy = (I_MoveStrategy)enemy.gameObject.AddComponent(randomStrategyType);
+
+        strategy.setDestination(Mediator.onEventFromManagers(new Tuple<string, object>("GET_LEAVE", null)));
+        enemy.MoveStrategy = strategy;
+
         Mediator.onEventFromManagers(new Tuple<string, object>("ADD_NEW_ENEMY", enemy));
     }
 }

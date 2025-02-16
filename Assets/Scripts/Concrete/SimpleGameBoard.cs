@@ -18,7 +18,7 @@ public class SimpleGameboard : A_GameboardManager
     {
         cubePrefab = Resources.Load<GameObject>("Prefabs/Ground");
         Rows = 11;
-        Cols = 11;
+        Cols = 30;
         GenerateGrid();
     }
 
