@@ -12,7 +12,7 @@ public class SimpleFlyingStrategy : MonoBehaviour, I_MoveStrategy
 
     public void move()
     {
-        float speed = Random.Range(5f, 10f);
+        float speed = Random.Range(1f, 1.5f);
         // transform.position =
         //     Vector3.MoveTowards(transform.position, destination.transform.position + Vector3.up, speed * Time.deltaTime);
         transform.Translate(Vector3.forward * speed * Time.deltaTime);

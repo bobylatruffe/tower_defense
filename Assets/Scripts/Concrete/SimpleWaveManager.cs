@@ -9,7 +9,7 @@ public class SimpleWaveManager : A_WaveManager
     private List<Type> walkingMoveStrategies = new List<Type>
     {
         typeof(SimpleWalkingToDestinationStrategy),
-        typeof(SimpleWalkingToDestinationHighSpeedStrategy),
+        // typeof(SimpleWalkingToDestinationHighSpeedStrategy),
         // typeof(SimpleWalkingRodingStrategy)
     };
 

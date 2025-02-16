@@ -18,6 +18,7 @@ class SimpleWalkingToDestinationStrategy : MonoBehaviour, I_MoveStrategy
     {
         NavMeshAgent agent = gameObject.AddComponent<NavMeshAgent>();
         agent.autoBraking = false;
+        agent.speed = Random.Range(0.5f, 1f);
         agent.SetDestination(Destination.transform.position);
     }
 }

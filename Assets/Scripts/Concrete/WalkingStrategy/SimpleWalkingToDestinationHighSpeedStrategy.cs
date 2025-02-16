@@ -18,7 +18,7 @@ class SimpleWalkingToDestinationHighSpeedStrategy : MonoBehaviour, I_MoveStrateg
     {
         NavMeshAgent agent = gameObject.AddComponent<NavMeshAgent>();
         agent.autoBraking = false;
-        agent.speed = 6f;
+        agent.speed = 1f;
         agent.SetDestination(Destination.transform.position);
     }
 }
