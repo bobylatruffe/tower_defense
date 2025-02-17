@@ -4,11 +4,27 @@ using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
-    public GameObject direction;
-    public NavMeshAgent agent;
+    [SerializeField]
+    private Camera cam;
+    private NavMeshAgent agent;
+
+    private RaycastHit[] hits = new RaycastHit[1];
+
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
 
     private void Update()
     {
-        agent.SetDestination(direction.transform.position);
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.RaycastNonAlloc(ray, hits) > 0)
+            {
+                agent.destination = hits[0].point;
+            }
+        }
     }
 }
