@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 
 public class SimpleGameboard : A_GameboardManager
 {
-    private GameObject cubePrefab;
     private GameObject lastHitObject;
     private Color originalColor;
 
@@ -16,17 +15,17 @@ public class SimpleGameboard : A_GameboardManager
 
     public void Start()
     {
-        cubePrefab = Resources.Load<GameObject>("Prefabs/Ground");
         Rows = 11;
         Cols = 30;
-        GenerateGrid();
+
+        Entries.AddRange(GameObject.FindGameObjectsWithTag("Spawn"));
+        Leaves.AddRange(GameObject.FindGameObjectsWithTag("Finish"));
     }
 
     void Update()
     {
         whichCaseSelected();
     }
-
 
     private void whichCaseSelected()
     {
@@ -80,33 +79,6 @@ public class SimpleGameboard : A_GameboardManager
 
     private void GenerateGrid()
     {
-        float offsetX = (Rows - 1) / 2.0f;
-        // float offsetZ = (gameboardLogic.Cols - 1) / 2.0f;
-
-        for (int x = 0; x < Rows; x++)
-        {
-            for (int z = 0; z < Cols; z++)
-            {
-                Vector3 position = new Vector3(x - offsetX, 0, z);
-                Instantiate(cubePrefab, position, Quaternion.identity, transform);
-            }
-        }
-
-        for (int x = 0; x < Rows; x++)
-        {
-            Entries.Add(Instantiate(cubePrefab, new Vector3(x - offsetX, 0f, -1), Quaternion.identity, transform));
-            Entries[x].GetComponent<Renderer>().material.color = Color.magenta;
-
-            Leaves.Add(Instantiate(cubePrefab, new Vector3(x - offsetX, 0f, Cols), Quaternion.identity, transform));
-            Leaves[x].GetComponent<Renderer>().material.color = Color.black;
-            Leaves[x].AddComponent<BoxCollider>();
-            Leaves[x].GetComponent<BoxCollider>().isTrigger = true;
-        }
-
-
-        navMeshSurface = gameObject.AddComponent<NavMeshSurface>();
-        navMeshSurface.collectObjects = CollectObjects.Children;
-        navMeshSurface.BuildNavMesh();
     }
 
     public override void addEnemie(A_Enemie newEnemie)
@@ -114,7 +86,6 @@ public class SimpleGameboard : A_GameboardManager
         newEnemie.transform.SetParent(transform);
 
         int whichEntry = Random.Range(0, Rows);
-        int whichLeave = Random.Range(0, Rows);
 
         newEnemie.transform.position = Entries[whichEntry].transform.position;
         newEnemie.transform.rotation = Entries[whichEntry].transform.rotation;

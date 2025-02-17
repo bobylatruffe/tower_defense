@@ -3,7 +3,6 @@
 public class SimpleFlyingStrategy : MonoBehaviour, I_MoveStrategy
 {
     private GameObject destination;
-    private bool strategyInited = true;
 
     private void Start()
     {
@@ -25,6 +24,6 @@ public class SimpleFlyingStrategy : MonoBehaviour, I_MoveStrategy
 
     public void initStrategy()
     {
-        strategyInited = true;
+
     }
 }
