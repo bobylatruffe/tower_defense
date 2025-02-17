@@ -8,13 +8,16 @@ using Random = UnityEngine.Random;
 
 public class SimpleGameboard : A_GameboardManager
 {
+    private GameObject wall;
     private GameObject lastHitObject;
     private Color originalColor;
+    private Vector3 lastMousePosition;
 
-    private NavMeshSurface navMeshSurface;
 
     public void Start()
     {
+        wall = Resources.Load("Prefabs/Wall", typeof(GameObject)) as GameObject;
+
         Rows = 11;
         Cols = 30;
 
@@ -33,53 +36,72 @@ public class SimpleGameboard : A_GameboardManager
         if (cam == null) return;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
         RaycastHit hit;
         float maxDistance = Cols * 2;
+        int groundLayer = LayerMask.GetMask("Ground");
 
-        if (Physics.Raycast(ray, out hit, maxDistance))
+        if (Physics.Raycast(ray, out hit, maxDistance, groundLayer))
         {
-            handleSelectedCase(hit.collider.gameObject);
+            GameObject hitObject = hit.collider.gameObject;
+
+            if (lastHitObject != null && hitObject != lastHitObject)
+            {
+                lastHitObject.GetComponent<Renderer>().material.color = originalColor;
+            }
+
+            if (lastHitObject != hitObject)
+            {
+                originalColor = hitObject.GetComponent<Renderer>().material.color;
+            }
+
+            hitObject.GetComponent<Renderer>().material.color = Color.green;
+
+            lastHitObject = hitObject;
         }
         else
         {
-            resetLastCase();
+            if (lastHitObject != null)
+            {
+                lastHitObject.GetComponent<Renderer>().material.color = originalColor;
+                lastHitObject = null;
+            }
         }
 
         Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);
     }
 
-    private void handleSelectedCase(GameObject hitObject)
-    {
-        if (hitObject == lastHitObject) return;
 
-        resetLastCase();
-
-        Renderer objRenderer = hitObject.GetComponent<Renderer>();
-        if (objRenderer)
-        {
-            originalColor = objRenderer.material.color;
-            objRenderer.material.color = Color.red;
-            lastHitObject = hitObject;
-        }
-    }
-
-    private void resetLastCase()
-    {
-        if (lastHitObject)
-        {
-            Renderer lastRenderer = lastHitObject.GetComponent<Renderer>();
-            if (lastRenderer)
-            {
-                lastRenderer.material.color = originalColor;
-            }
-
-            lastHitObject = null;
-        }
-    }
-
-    private void GenerateGrid()
-    {
-    }
+    // private bool checkIfPossibleToAddTower(Vector3 possibleNewTower)
+    // {
+    //     GameObject tempObstacle = Instantiate(wall, possibleNewTower + Vector3.up, Quaternion.identity);
+    //     surface.BuildNavMesh();
+    //
+    //     foreach (A_Enemie enemy in Enemies)
+    //     {
+    //         if (enemy == null || enemy.gameObject == null) continue;
+    //
+    //         NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+    //         if (agent == null) continue;
+    //
+    //         Vector3 src = enemy.transform.position;
+    //         Vector3 dst = agent.destination;
+    //
+    //         NavMeshPath path = new NavMeshPath();
+    //         bool pathExists = NavMesh.CalculatePath(src, dst, NavMesh.AllAreas, path);
+    //
+    //         if (!pathExists || path.status != NavMeshPathStatus.PathComplete)
+    //         {
+    //             Destroy(tempObstacle);
+    //             surface.BuildNavMesh();
+    //             return false;
+    //         }
+    //     }
+    //
+    //     Destroy(tempObstacle);
+    //     surface.BuildNavMesh();
+    //     return true;
+    // }
 
     public override void addEnemie(A_Enemie newEnemie)
     {
