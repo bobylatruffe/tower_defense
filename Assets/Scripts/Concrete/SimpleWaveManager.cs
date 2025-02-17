@@ -37,7 +37,7 @@ public class SimpleWaveManager : A_WaveManager
 
         while (elapsedTime < spawnDuration)
         {
-            switch (Random.Range(0, 2))
+            switch (Random.Range(0, 1))
             {
                 case 0:
                     SpawnWalkingEnemy();
@@ -46,7 +46,7 @@ public class SimpleWaveManager : A_WaveManager
                 case 1:
                     // SpawnWalkingEnemy();
                     // SpawnTeleportingEnemy();
-                    SpawnFlyingEnemy();
+                    // SpawnFlyingEnemy();
                     break;
                 case 2:
                     // SpawnWalkingEnemy();
