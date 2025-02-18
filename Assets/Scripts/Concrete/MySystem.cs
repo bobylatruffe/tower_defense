@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MySystem : MonoBehaviour, I_SystemObserver
 {
-    public static MySystem Instance { get; private set; }
+    private static MySystem Instance { get; set; }
 
-    private A_HudManager HudManager { get; set; }
     private I_SoundManager SoundManager { get; set; }
 
+    [SerializeField] private A_HudManager hudManager;
     [SerializeField] private GameManager gameManager;
 
     private List<I_Logger> loggers = new List<I_Logger>();
@@ -24,12 +24,25 @@ public class MySystem : MonoBehaviour, I_SystemObserver
             Destroy(gameObject);
         }
 
-        if (gameManager != null) return;
-        gameManager = FindFirstObjectByType<GameManager>();
+        if (gameManager == null)
+        {
+            gameManager = FindFirstObjectByType<GameManager>();
+            if (gameManager == null)
+            {
+                GameObject go = new GameObject("GameManager");
+                gameManager = go.AddComponent<GameManager>();
+            }
+        }
 
-        if (gameManager != null) return;
-        GameObject go = new GameObject("GameManager");
-        gameManager = go.AddComponent<GameManager>();
+        if (hudManager == null)
+        {
+            hudManager = FindFirstObjectByType<A_HudManager>();
+            if (hudManager == null)
+            {
+                GameObject hudGo = new GameObject("HudManager");
+                hudManager = hudGo.AddComponent<Hud>();
+            }
+        }
     }
 
     public void addLogger(I_Logger logger)
@@ -42,6 +55,18 @@ public class MySystem : MonoBehaviour, I_SystemObserver
         foreach (I_Logger logger in loggers)
         {
             logger.log(eventData.Item1);
+        }
+
+        switch (eventData.Item1)
+        {
+            case "SHOW_MAIN_MENU":
+                hudManager.showMenu();
+                break;
+
+            case "UPDATE_LIFE_POINTS":
+                int newLifePoints = (int)eventData.Item2;
+                hudManager.updateLife(newLifePoints);
+                break;
         }
     }
 }

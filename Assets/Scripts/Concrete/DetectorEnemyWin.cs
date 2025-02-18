@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class DetectorEnemyWin : MonoBehaviour
 {
+    private I_DetectorEnemyWin GameboardObserver { get; set; }
+
+    private void Start()
+    {
+        GameboardObserver = FindFirstObjectByType<SimpleGameboard>();
+    }
+
     private void Update()
     {
         Collider[] colliders =
@@ -10,7 +17,7 @@ public class DetectorEnemyWin : MonoBehaviour
 
         foreach (Collider col in colliders)
         {
-            Destroy(col.gameObject);
+            GameboardObserver.enemyWin(col.gameObject);
         }
     }
 

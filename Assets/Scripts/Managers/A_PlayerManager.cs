@@ -1,7 +1,27 @@
-public abstract class A_PlayerManager
+using System;
+using UnityEngine;
+
+public abstract class A_PlayerManager : MonoBehaviour
 {
-    private I_GameManagerMediator mediator;
+    protected I_GameManagerMediator Mediator { get; set; }
 
     public int LifePoints { get; set; }
     public int Money { get; set; }
+
+    private void Awake()
+    {
+        Mediator = GameManager.Instance;
+    }
+
+    public void showMenu()
+    {
+        Mediator.onEventFromManagers(new Tuple<string, object>("SHOW_MAIN_MENU", null));
+    }
+
+    public void showTowerShop()
+    {
+        Mediator.onEventFromManagers(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
+    }
+
+    public abstract int removeLifePoint(int pointsToRemove);
 }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class A_GameboardManager : MonoBehaviour
+public abstract class A_GameboardManager : MonoBehaviour, I_DetectorEnemyWin
 {
     protected int Rows { get; set; }
     protected int Cols { get; set; }
@@ -24,4 +24,5 @@ public abstract class A_GameboardManager : MonoBehaviour
     public abstract void upgradeTower(I_Tower towerToUpgrade);
     public abstract GameObject getLeave();
     public abstract GameObject getEntry();
+    public abstract void enemyWin(GameObject enemyGo);
 }

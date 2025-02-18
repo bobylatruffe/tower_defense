@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 class SimpleWalkingToDestinationStrategy : MonoBehaviour, I_MoveStrategy
 {
     private GameObject Destination { get; set; }
-
     public void move()
     {
     }

@@ -1,0 +1,13 @@
+.button {
+    font-size: 30px;
+    background-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.button:hover {
+    font-size: 30px;
+    transition-duration: 0.25s;
+    scale: 1.1 1;
+    -unity-font-style: bold;
+    transition-property: scale;
+}

@@ -139,4 +139,11 @@ public class SimpleGameboard : A_GameboardManager
     {
         return Entries[Random.Range(0, Leaves.Count)];
     }
+
+    public override void enemyWin(GameObject enemyGo)
+    {
+        A_Enemie enemy =  enemyGo.GetComponent<A_Enemie>();
+        Mediator.onEventFromManagers(new Tuple<string, object>("REMOVE_LIFE", enemy.Point));
+        Destroy(enemyGo);
+    }
 }

@@ -52,17 +52,17 @@ abstract class A_GameboardManager  {
     - mediator : I_GameManagerMediator
     - entries : List<Case>
     - leaves : List<Case>
-    - towers : List<I_Tower>
+    - towers : List<A_Tower>
     - enemies : List<I_Enemie>
     + addEnemy(enemie : I_Enemie)
-    + addTower(tower : I_Tower)
-    + upgradeTower(tower : I_Tower)
+    + addTower(tower : A_Tower)
+    + upgradeTower(tower : A_Tower)
     + getEntry() : Case
     + getLeave() : Case
 }
 
-A_GameboardManager o-- I_Tower
-TowerDecorator o-- I_Tower
+A_GameboardManager o-- A_Tower
+TowerDecorator o-- A_Tower
 /' A_GameboardManager *-- TowerDecorator '/
 /' A_GameboardManager --> TowerDecorator '/
 
@@ -106,22 +106,24 @@ SimpleEnemieFactory ..> A_Enemie
 
 abstract class A_ShopManager {
     - mediator : I_GameManagerMediator
-    - towerFactory : I_TowerFactory
-    + buyTower() : I_Tower
+    - towerFactory : A_TowerFactory
+    + buyTower() : A_Tower
     + sendTowerImageAvailable()
 }
 
 abstract class A_PlayerManager  {
     - mediator : I_GameManagerMediator
-    + getLifePoint()
-    + getMoney()
+    - lifePoint : int
+    - money : int
+    + showMainMenu()
+    + showTowerShop()
 }
 
-class TowerFactory implements I_TowerFactory {
+class TowerFactory implements A_TowerFactory {
 
 }
 
-A_ShopManager --> I_TowerFactory
+A_ShopManager --> A_TowerFactory
 
 abstract class A_HudManager {
     - uiObserver : I_UIObserver
@@ -132,8 +134,8 @@ abstract class A_HudManager {
     + sendUIEvent()
 }
 
-interface I_TowerFactory {
-    + createTower(typeTower : string) : I_Tower
+interface A_TowerFactory {
+    + createTower(typeTower : string) : A_Tower
 }
 
 interface I_SoundManager {
@@ -172,30 +174,32 @@ I_GameManagerMediator <-- A_PlayerManager
 I_GameManagerMediator <-- A_WaveManager
 I_GameManagerMediator <-- A_ShopManager
 
-/' A_GameboardManager o-- I_Tower '/
+/' A_GameboardManager o-- A_Tower '/
 A_GameboardManager o-- A_Enemie
 
-TowerFactory ..> I_Tower
+TowerFactory ..> A_Tower
 
-interface I_Tower {
+abstract class A_Tower {
+    - state : A_TowerState
+    + setState(state : A_TowerState)
     + shoot()
 }
 
-class SimpleTower implements I_Tower {
+class SimpleTower implements A_Tower {
     
 }
 
-class MediumTower implements I_Tower {
+class MediumTower implements A_Tower {
     
 }
 
-class HardTower implements I_Tower {
+class HardTower implements A_Tower {
     
 }
 
-class TowerDecorator implements I_Tower {
-    - wrappee : I_Tower
-    + towerDecorator(tower : I_Tower)
+class TowerDecorator implements A_Tower {
+    - wrappee : A_Tower
+    + towerDecorator(tower : A_Tower)
 }
 
 interface I_MoveStrategy {
@@ -218,5 +222,48 @@ A_Enemie --> I_GameManagerMediator
 class SimpleGameBoard extends A_GameboardManager {
 
 }
+
+interface A_TowerState {
+    + handleState(tower : A_Tower);
+}
+
+class IdleState implements A_TowerState {
+    - context : A_Tower
+    + setContext(context : A_Tower)
+}
+
+class ShootingState implements A_TowerState {
+    - context : A_Tower
+    + setContext(context : A_Tower)
+}
+
+class ReloadingState implements A_TowerState {
+    - context : A_Tower
+    + setContext(context : A_Tower)
+}
+
+IdleState --> A_Tower
+ShootingState --> A_Tower
+ReloadingState --> A_Tower
+
+A_Tower o-- A_TowerState
+
+class Player extends A_PlayerManager {
+    
+}
+
+interface I_DetectorEnemyWinObserver {
+    + enemyWin(enemy : A_Enemie)
+}
+
+class DetectorEnemyWin {
+    - gameboardManager : I_DetectorEnemyWinObserver
+}
+
+abstract class A_GameboardManager implements I_DetectorEnemyWinObserver {
+    
+}
+
+DetectorEnemyWin --> I_DetectorEnemyWinObserver
 
 @enduml
