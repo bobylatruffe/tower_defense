@@ -1,4 +1,6 @@
+using System;
+
 public interface I_UIObserver
 {
-    void onEventFromUI(object data);
+    void onEventFromUI(Tuple<string, object> dataEvent);
 }

@@ -67,6 +67,15 @@ public class MySystem : MonoBehaviour, I_SystemObserver
                 int newLifePoints = (int)eventData.Item2;
                 hudManager.updateLife(newLifePoints);
                 break;
+
+            case "SHOW_TOWER_SHOP":
+                hudManager.showTowerShop();
+                break;
+
+            case "UPDATE_MONEY":
+                int money = (int)eventData.Item2;
+                hudManager.updateMoney(money);
+                break;
         }
     }
 }

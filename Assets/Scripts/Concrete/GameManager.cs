@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
     [SerializeField] private A_GameboardManager gameboardManager;
     [SerializeField] private A_WaveManager waveManager;
     [SerializeField] private A_PlayerManager playerManager;
-    [SerializeField] private MySystem system;
+    [SerializeField] private I_SystemObserver system;
+    [SerializeField] private A_ShopManager shopManager;
 
     private void Awake()
     {
@@ -60,10 +61,17 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
             if (system == null)
             {
                 GameObject waveGO = new GameObject("MySystem");
-                system =
-                    waveGO
-                        .AddComponent<
-                            MySystem>();
+                system = waveGO.AddComponent<MySystem>();
+            }
+        }
+
+        if (shopManager == null)
+        {
+            shopManager = FindFirstObjectByType<Shop>();
+            if (shopManager == null)
+            {
+                GameObject waveGO = new GameObject("ShopManager");
+                shopManager = waveGO.AddComponent<Shop>();
             }
         }
     }
@@ -75,12 +83,7 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
     public void end()
     {
     }
-
-    public void onEventFromUI(object data)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public GameObject onEventFromManagers(Tuple<string, object> eventData)
     {
         switch (eventData.Item1)
@@ -99,14 +102,22 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
                 system.onEvent(new Tuple<string, object>("SHOW_MAIN_MENU", null));
                 break;
 
-            case "REMOVE_LIFE" :
-                int lifePointsToRemmove = (int) eventData.Item2;
+            case "REMOVE_LIFE":
+                int lifePointsToRemmove = (int)eventData.Item2;
                 int newLifePoints = playerManager.removeLifePoint(lifePointsToRemmove);
                 system.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", newLifePoints));
                 break;
 
             case "UPDATE_LIFE_POINT":
-                system.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", playerManager.LifePoints));
+                system.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", eventData.Item2));
+                break;
+
+            case "UPDATE_MONEY":
+                system.onEvent(new Tuple<string, object>("UPDATE_MONEY", eventData.Item2));
+                break;
+
+            case "SHOW_TOWER_SHOP":
+                system.onEvent(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
                 break;
 
 
@@ -115,5 +126,15 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
         }
 
         return null;
+    }
+
+    public void onEventFromUI(Tuple<string, object> dataEvent)
+    {
+        switch (dataEvent.Item1)
+        {
+            case "TOWER_SELECTED_FROM_HUD":
+                Debug.Log(dataEvent.Item2);
+                break;
+        }
     }
 }

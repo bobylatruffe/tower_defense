@@ -1,7 +1,7 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/button.uss?fileID=7433441132597879392&amp;guid=9b8741aed5de8154da08266aac94c506&amp;type=3#button" />
     <engine:VisualElement name="MoneyPanel" style="flex-grow: 1; position: absolute;">
-        <engine:Label text="1000€" name="Money" style="font-size: 40px; -unity-font-style: bold; margin-top: 30px; margin-left: 30px; color: rgb(255, 255, 255);" />
+        <engine:Label text="0€" name="Money" style="font-size: 40px; -unity-font-style: bold; margin-top: 30px; margin-left: 30px; color: rgb(255, 255, 255);" />
     </engine:VisualElement>
     <engine:VisualElement name="NbLifePanel" style="flex-grow: 1; position: absolute; right: 0;">
         <engine:Label text="0" name="NbLife" style="-unity-font-style: bold; font-size: 40px; margin-right: 30px; margin-top: 30px; color: rgb(255, 255, 255);" />

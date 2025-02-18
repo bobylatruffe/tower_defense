@@ -6,7 +6,9 @@ public class SimplePlayer : A_PlayerManager
     private void Start()
     {
         LifePoints = 100;
-        Mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_LIFE_POINT", null));
+        Money = 100;
+        Mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_LIFE_POINT", LifePoints));
+        Mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_MONEY", Money));
     }
 
     private void Update()
@@ -14,6 +16,11 @@ public class SimplePlayer : A_PlayerManager
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             showMenu();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            showTowerShop();
         }
     }
 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1127901272943799204
+--- !u!1001 &4097153862269005133
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -13,28 +13,16 @@ PrefabInstance:
       value: Turret 1c Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4000012355355172, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012355355172, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012355355172, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012355355172, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.514166
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000012355355172, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25437796
+      value: -2.9014057e-16
       objectReference: {fileID: 0}
     - target: {fileID: 4000012355355172, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.148537
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4000012355355172, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
       propertyPath: m_LocalRotation.w
@@ -64,24 +52,56 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4000012355355172, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013875459528, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.21041393
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013875459528, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.0000008940697
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013875459528, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -11.439652
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1000010378282670, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 906863676289087366}
+    - targetCorrespondingSourceObject: {fileID: 1000010378282670, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2323542528798464878}
   m_SourcePrefab: {fileID: 100100000, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
+--- !u!1 &4098150573909961699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000010378282670, guid: 913c474af4fed6e45bc3725b21e84f11, type: 3}
+  m_PrefabInstance: {fileID: 4097153862269005133}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &906863676289087366
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4098150573909961699}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 11, y: 11, z: 11}
+  m_Center: {x: 0, y: 5, z: 0}
+--- !u!208 &2323542528798464878
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4098150573909961699}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 5.5, y: 5.5, z: 5.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 5, z: 0}
+  m_TimeToStationary: 0.5
