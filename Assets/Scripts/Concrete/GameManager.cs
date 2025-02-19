@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
+public class GameManager : I_GameManagerMediator, I_UIObserver
 {
     public static GameManager Instance { get; private set; }
 
@@ -83,8 +83,8 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
     public void end()
     {
     }
-    
-    public GameObject onEventFromManagers(Tuple<string, object> eventData)
+
+    public override GameObject onEventFromManagers(Tuple<string, object> eventData)
     {
         switch (eventData.Item1)
         {
@@ -120,6 +120,11 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
                 system.onEvent(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
                 break;
 
+            case "REMOVE_MONEY":
+                int moneyToRemove = (int)eventData.Item2;
+                playerManager.removeMoney(moneyToRemove);
+                break;
+
 
             default:
                 throw new NotImplementedException();
@@ -133,7 +138,11 @@ public class GameManager : MonoBehaviour, I_UIObserver, I_GameManagerMediator
         switch (dataEvent.Item1)
         {
             case "TOWER_SELECTED_FROM_HUD":
-                Debug.Log(dataEvent.Item2);
+                string nameTowerSelectedByUser = dataEvent.Item2 as string;
+                A_Tower tower = shopManager.buyIfPlayerCanAffordIt(playerManager.Money, nameTowerSelectedByUser);
+                system.onEvent(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
+                gameboardManager.addTower(tower);
+
                 break;
         }
     }

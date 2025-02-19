@@ -29,4 +29,10 @@ public class SimplePlayer : A_PlayerManager
         LifePoints -= pointsToRemove;
         return LifePoints;
     }
+
+    public override int removeMoney(int moneyToRemove)
+    {
+        Money -= moneyToRemove;
+        return Money;
+    }
 }

@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 58748
+  controlID: 5755
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 58749
+  controlID: 5756
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 54110
+  controlID: 5681
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -243,10 +243,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 3390}
-      m_SelectedIDs: aea90600
-      m_LastClickedID: 436654
-      m_ExpandedIDs: 4c1cfaff521cfaff8833fbff8c33fbfffa45fcff844cfcff8eb9fcff9eb9fcffa2b9fcffa4b9fcff6cbefcff5ac0fcff78c1fcffd285fdffda85fdffb086fdffb486fdffbe90fdff9ebaffff20fbffffeea80000a8b500005474050026a406003eaf0600
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 44a80000
+      m_LastClickedID: 43076
+      m_ExpandedIDs: 20fbffff2eaa0000b4b40000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -792,9 +792,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -2.5080872, y: -0.5796212, z: 13.391393}
+    m_Target: {x: 4.872949, y: 4.922032, z: 7.5323024}
     speed: 2
-    m_Value: {x: -2.5080872, y: -0.5796212, z: 13.391393}
+    m_Value: {x: 4.872949, y: 4.922032, z: 7.5323024}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -840,13 +840,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.15896262, y: -0.7028919, z: 0.16598424, w: 0.6731571}
+    m_Target: {x: 0.25103298, y: -0.6579831, z: 0.24834165, w: 0.6651209}
     speed: 2
-    m_Value: {x: 0.15795135, y: -0.70313394, z: 0.16492827, w: 0.67338896}
+    m_Value: {x: 0.2524017, y: -0.6566059, z: 0.24894774, w: 0.6657231}
   m_Size:
-    m_Target: 17.31196
+    m_Target: 1.7001083
     speed: 2
-    m_Value: 16.56647
+    m_Value: 1.7001083
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -904,7 +904,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 58750
+  controlID: 5757
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -980,7 +980,7 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/TestAssets/Sci Fi Assets/Simple SciFi Gun Turret Set/Textures
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -990,16 +990,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/TestAssets/Sci Fi Assets/Simple SciFi Gun Turret Set/Textures
   m_LastFoldersGridSize: 96
   m_LastProjectPath: E:\projects\tower_defense
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 54}
-    m_SelectedIDs: 8ab80000
-    m_LastClickedID: 47242
-    m_ExpandedIDs: 0000000078b600007ab600007cb600007eb6000080b6000082b6000084b6000086b6000088b600008ab600008cb600008eb6000090b6000092b6000094b6000096b6000098b600009ab600009cb600009eb60000a0b60000a2b60000a4b60000a6b60000a8b60000aab6000094b800001a5c0500bc5d050000ca9a3bffffff7f
+    m_SelectedIDs: c0160100
+    m_LastClickedID: 71360
+    m_ExpandedIDs: 000000006cb900006eb9000070b9000072b9000074b9000076b9000078b900007ab900007cb900007eb9000080b9000082b9000084b9000086b9000088b900008ab900008cb900008eb9000090b9000092b9000094b9000096b9000098b900009ab900009cb900009eb90000a0b90000a2b90000a4b9000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1028,7 +1028,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000078b600007ab600007cb600007eb6000080b6000082b6000084b6000086b6000088b600008ab600008cb600008eb6000090b6000092b6000094b6000096b6000098b600009ab600009cb600009eb60000a0b60000a2b60000a4b60000a6b60000a8b60000aab600001a5c0500bc5d050000ca9a3bffffff7f
+    m_ExpandedIDs: 000000006cb900006eb9000070b9000072b9000074b9000076b9000078b900007ab900007cb900007eb9000080b9000082b9000084b9000086b9000088b900008ab900008cb900008eb9000090b9000092b9000094b9000096b9000098b900009ab900009cb900009eb90000a0b90000a2b90000a4b9000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1054,9 +1054,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: aea90600
-    m_LastClickedInstanceID: 436654
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 44a80000
+    m_LastClickedInstanceID: 43076
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c623000034a70000ceaf00007eb000004ead0000cead000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1074,7 +1074,7 @@ MonoBehaviour:
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
-      m_ClientGUIView: {fileID: 7}
+      m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -1109,7 +1109,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 912
-    width: 2050
+    width: 1366
     height: 434
   m_SerializedDataModeController:
     m_DataMode: 0

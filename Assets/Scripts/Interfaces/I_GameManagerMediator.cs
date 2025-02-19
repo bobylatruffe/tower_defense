@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public interface I_GameManagerMediator
+public abstract class I_GameManagerMediator : MonoBehaviour
 {
-    GameObject onEventFromManagers(Tuple<string, object> eventData);
+    public abstract GameObject onEventFromManagers(Tuple<string, object> eventData);
 }

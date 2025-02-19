@@ -45,7 +45,7 @@ public class Hud : A_HudManager
 
             if (Input.GetMouseButtonDown(0))
             {
-                uiObserver.onEventFromUI(new Tuple<string, object>("TOWER_SELECTED_FROM_HUD", item));
+                uiObserver.onEventFromUI(new Tuple<string, object>("TOWER_SELECTED_FROM_HUD", item.name));
             }
         }
 
@@ -102,4 +102,5 @@ public class Hud : A_HudManager
     {
         throw new NotImplementedException();
     }
+
 }

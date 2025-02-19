@@ -12,6 +12,7 @@ public class SimpleGameboard : A_GameboardManager
     private GameObject lastHitObject;
     private Color originalColor;
     private Vector3 lastMousePosition;
+    private A_Tower pendingTower;
 
 
     public void Start()
@@ -27,7 +28,10 @@ public class SimpleGameboard : A_GameboardManager
 
     void Update()
     {
-        whichCaseSelected();
+        if (pendingTower != null)
+        {
+            whichCaseSelected();
+        }
     }
 
     private void whichCaseSelected()
@@ -58,6 +62,16 @@ public class SimpleGameboard : A_GameboardManager
             hitObject.GetComponent<Renderer>().material.color = Color.green;
 
             lastHitObject = hitObject;
+
+            pendingTower.gameObject.transform.position = hitObject.transform.position + Vector3.up * 0.5f ;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                pendingTower.gameObject.SetActive(true);
+                pendingTower = null;
+                hitObject.layer = LayerMask.NameToLayer("Default");
+                lastHitObject.GetComponent<Renderer>().material.color = originalColor;
+            }
         }
         else
         {
@@ -120,12 +134,12 @@ public class SimpleGameboard : A_GameboardManager
         Enemies.Add(newEnemie);
     }
 
-    public override void addTower(I_Tower newTower)
+    public override void addTower(A_Tower tower)
     {
-        throw new NotImplementedException();
+        pendingTower = tower;
     }
 
-    public override void upgradeTower(I_Tower towerToUpgrade)
+    public override void upgradeTower(A_Tower aTowerToUpgrade)
     {
         throw new NotImplementedException();
     }
@@ -142,7 +156,7 @@ public class SimpleGameboard : A_GameboardManager
 
     public override void enemyWin(GameObject enemyGo)
     {
-        A_Enemie enemy =  enemyGo.GetComponent<A_Enemie>();
+        A_Enemie enemy = enemyGo.GetComponent<A_Enemie>();
         Mediator.onEventFromManagers(new Tuple<string, object>("REMOVE_LIFE", enemy.Point));
         Destroy(enemyGo);
     }
