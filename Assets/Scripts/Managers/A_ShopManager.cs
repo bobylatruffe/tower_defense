@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class A_ShopManager : MonoBehaviour
 {
-    [SerializeField] protected I_GameManagerMediator mediator;
-    [SerializeField] protected I_TowerFactory towerFactory;
+    public static A_ShopManager Instance { get; protected set; }
 
-    public abstract A_Tower buyTower(String towerName);
+    protected I_GameManagerMediator Mediator { get; set; }
+    protected I_TowerFactory TowerFactory { get; set; }
 
     public abstract A_Tower buyIfPlayerCanAffordIt(int playerMoney, string towerName);
 }

@@ -7,7 +7,7 @@ public class DetectorEnemyWin : MonoBehaviour
 
     private void Start()
     {
-        GameboardObserver = FindFirstObjectByType<SimpleGameboard>();
+        GameboardObserver = A_GameboardManager.Instance;
     }
 
     private void Update()

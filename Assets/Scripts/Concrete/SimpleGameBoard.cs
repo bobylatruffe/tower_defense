@@ -1,9 +1,5 @@
 using System;
-using System.Linq;
-using Unity.AI.Navigation;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class SimpleGameboard : A_GameboardManager
@@ -14,9 +10,21 @@ public class SimpleGameboard : A_GameboardManager
     private Vector3 lastMousePosition;
     private A_Tower pendingTower;
 
-
-    public void Start()
+    private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        Mediator = GameManager.Instance;
         wall = Resources.Load("Prefabs/Wall", typeof(GameObject)) as GameObject;
 
         Rows = 11;
@@ -63,7 +71,7 @@ public class SimpleGameboard : A_GameboardManager
 
             lastHitObject = hitObject;
 
-            pendingTower.gameObject.transform.position = hitObject.transform.position + Vector3.up * 0.5f ;
+            pendingTower.gameObject.transform.position = hitObject.transform.position + Vector3.up * 0.5f;
 
             if (Input.GetMouseButtonDown(0))
             {

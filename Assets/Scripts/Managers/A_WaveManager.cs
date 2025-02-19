@@ -2,31 +2,12 @@ using UnityEngine;
 
 public abstract class A_WaveManager : MonoBehaviour
 {
-    protected I_GameManagerMediator Mediator { get; private set; }
-    protected A_EnemieAbstractFactory enemyAbstractFactory;
+    public static A_WaveManager Instance { get; protected set; }
+
+    protected I_GameManagerMediator Mediator { get; set; }
+    protected I_EnemieAbstractFactory EnemyAbstractFactory { get; set; }
 
     public int CurrentLevel { get; set; }
-
-    private void Awake()
-    {
-    }
-
-    private void Start()
-    {
-        Mediator = GameManager.Instance;
-
-        if (enemyAbstractFactory != null) return;
-        enemyAbstractFactory = FindFirstObjectByType<A_EnemieAbstractFactory>();
-
-        if (enemyAbstractFactory != null) return;
-        GameObject obj = new GameObject("AbstractEnemieFactory");
-        obj.transform.SetParent(transform);
-
-        obj.AddComponent<SimpleAEnemieFactory>();
-
-        enemyAbstractFactory = obj.GetComponent<A_EnemieAbstractFactory>();
-    }
-
 
     public abstract void startWave();
 }

@@ -5,12 +5,11 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField] private A_GameboardManager gameboardManager;
-    [SerializeField] private A_WaveManager waveManager;
-    [SerializeField] private A_PlayerManager playerManager;
-    private I_SystemObserver system;
-    [SerializeField] private GameObject systemGo;
-    [SerializeField] private A_ShopManager shopManager;
+    private A_GameboardManager gameboardManager;
+    private A_WaveManager waveManager;
+    private A_PlayerManager playerManager;
+    private I_SystemObserver systemObserver;
+    private A_ShopManager shopManager;
 
     private void Awake()
     {
@@ -26,11 +25,17 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
 
     private void Start()
     {
-        system = systemGo.GetComponent<MySystem>();
+        gameboardManager = A_GameboardManager.Instance;
+        waveManager = A_WaveManager.Instance;
+        playerManager = A_PlayerManager.Instance;
+        systemObserver = MySystem.Instance;
+        shopManager = A_ShopManager.Instance;
     }
 
     public void start()
     {
+        systemObserver.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", playerManager.LifePoints));
+        systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", playerManager.Money));
     }
 
     public void end()
@@ -52,35 +57,36 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
                 return gameboardManager.getEntry();
 
             case "SHOW_MAIN_MENU":
-                system.onEvent(new Tuple<string, object>("SHOW_MAIN_MENU", null));
+                systemObserver.onEvent(new Tuple<string, object>("SHOW_MAIN_MENU", null));
                 break;
 
             case "REMOVE_LIFE":
                 int lifePointsToRemmove = (int)eventData.Item2;
                 int newLifePoints = playerManager.removeLifePoint(lifePointsToRemmove);
-                system.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", newLifePoints));
+                systemObserver.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", newLifePoints));
                 break;
 
-            case "UPDATE_LIFE_POINT":
-                system.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", eventData.Item2));
+            case "UPDATE_LIFE_POINTS":
+                systemObserver.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", eventData.Item2));
                 break;
 
             case "UPDATE_MONEY":
-                system.onEvent(new Tuple<string, object>("UPDATE_MONEY", eventData.Item2));
+                systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", eventData.Item2));
                 break;
 
             case "SHOW_TOWER_SHOP":
-                system.onEvent(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
+                systemObserver.onEvent(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
                 break;
 
             case "REMOVE_MONEY":
                 int moneyToRemove = (int)eventData.Item2;
-                playerManager.removeMoney(moneyToRemove);
+                int newMoneyValue = playerManager.removeMoney(moneyToRemove);
+                systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", newMoneyValue));
                 break;
 
-
-            default:
-                throw new NotImplementedException();
+            case "NO_MONEY":
+                Debug.Log("NO MONEY");
+                break;
         }
 
         return null;
@@ -93,9 +99,12 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
             case "TOWER_SELECTED_FROM_HUD":
                 string nameTowerSelectedByUser = dataEvent.Item2 as string;
                 A_Tower tower = shopManager.buyIfPlayerCanAffordIt(playerManager.Money, nameTowerSelectedByUser);
-                system.onEvent(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
+                systemObserver.onEvent(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
                 gameboardManager.addTower(tower);
+                break;
 
+            case "START_GAME":
+                start();
                 break;
         }
     }

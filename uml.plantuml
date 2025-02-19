@@ -119,7 +119,7 @@ abstract class A_PlayerManager  {
     + showTowerShop()
 }
 
-class TowerFactory extends A_TowerFactory {
+class TowerFactory implements A_TowerFactory {
 
 }
 
@@ -134,7 +134,7 @@ abstract class A_HudManager {
     + sendUIEvent()
 }
 
-abstract class A_TowerFactory {
+interface A_TowerFactory {
     + createTower(typeTower : string) : A_Tower
 }
 

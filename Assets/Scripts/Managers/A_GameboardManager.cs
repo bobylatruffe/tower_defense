@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class A_GameboardManager : MonoBehaviour, I_DetectorEnemyWin
 {
+    public static A_GameboardManager Instance {get; protected set;}
+
     protected int Rows { get; set; }
     protected int Cols { get; set; }
 
@@ -13,11 +15,6 @@ public abstract class A_GameboardManager : MonoBehaviour, I_DetectorEnemyWin
     protected I_GameManagerMediator Mediator { get; set; }
     protected List<A_Tower> Towers { get; set; } = new List<A_Tower>();
     protected List<A_Enemie> Enemies { get; set; } = new List<A_Enemie>();
-
-    private void Awake()
-    {
-        Mediator = GameManager.Instance;
-    }
 
     public abstract void addEnemie(A_Enemie newEnemie);
     public abstract void addTower(A_Tower tower);

@@ -6,17 +6,27 @@ public class Shop : A_ShopManager
 {
     List<Tuple<string, int>> towersAvailable = new List<Tuple<string, int>>();
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
+        Mediator = GameManager.Instance;
+        TowerFactory = FindFirstObjectByType<TowerFactory>();
+
         towersAvailable.Add(new Tuple<string, int>("Turret 1a", 20));
         towersAvailable.Add(new Tuple<string, int>("Turret 1b", 40));
         towersAvailable.Add(new Tuple<string, int>("Turret 1c", 60));
         towersAvailable.Add(new Tuple<string, int>("Turret 1d", 80));
-    }
-
-    public override A_Tower buyTower(string towerName)
-    {
-        throw new NotImplementedException();
     }
 
     public override A_Tower buyIfPlayerCanAffordIt(int playerMoney, string towerName)
@@ -27,11 +37,12 @@ public class Shop : A_ShopManager
             {
                 if (playerMoney >= tower.Item2)
                 {
-                    mediator.onEventFromManagers(new Tuple<string, object>("REMOVE_MONEY", tower.Item2));
-                    return towerFactory.createTower(tower.Item1);
+                    Mediator.onEventFromManagers(new Tuple<string, object>("REMOVE_MONEY", tower.Item2));
+                    return TowerFactory.createTower(tower.Item1);
                 }
 
-                mediator.onEventFromManagers(new Tuple<string, object>("Pas assez d'argent!", null));
+                Mediator.onEventFromManagers(new Tuple<string, object>("NO_MONEY", null));
+                return null;
             }
         }
 

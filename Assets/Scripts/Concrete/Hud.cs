@@ -7,8 +7,14 @@ using DG.Tweening;
 public class Hud : A_HudManager
 {
     private VisualElement mainMenu;
+
     private Label nbLife;
     private Label money;
+
+    private Button jouer;
+    private Button quitter;
+    private Button options;
+    private Button historique;
 
     [SerializeField] private Light towerLight;
     [SerializeField] private Light towerLight2;
@@ -17,12 +23,38 @@ public class Hud : A_HudManager
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        uiObserver = GameManager.Instance;
         cam = Camera.main;
 
         VisualElement root = GetComponentInChildren<UIDocument>().rootVisualElement;
         mainMenu = root.Q<VisualElement>("MainMenuPanel");
         nbLife = root.Q<Label>("NbLife");
         money = root.Q<Label>("Money");
+
+        jouer = root.Q<Button>("Jouer");
+        quitter = root.Q<Button>("Quitter");
+        options = root.Q<Button>("Options");
+        historique = root.Q<Button>("Historique");
+
+        jouer.RegisterCallback<ClickEvent>(OnJouerClicked);
+    }
+
+    private void OnJouerClicked(ClickEvent evt)
+    {
+        uiObserver.onEventFromUI(new Tuple<string, object>("START_GAME", null));
+        mainMenu.style.display = DisplayStyle.None;
     }
 
     private void Update()
@@ -102,5 +134,4 @@ public class Hud : A_HudManager
     {
         throw new NotImplementedException();
     }
-
 }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MySystem : MonoBehaviour, I_SystemObserver
 {
-    private static MySystem Instance { get; set; }
+    public static MySystem Instance { get; private set; }
 
     private I_SoundManager SoundManager { get; set; }
 
-    [SerializeField] private A_HudManager hudManager;
-    [SerializeField] private GameManager gameManager;
+    private A_HudManager hudManager;
+    private GameManager gameManager;
 
     private List<I_Logger> loggers = new List<I_Logger>();
 
@@ -23,6 +23,12 @@ public class MySystem : MonoBehaviour, I_SystemObserver
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        hudManager = A_HudManager.Instance;
+        gameManager = GameManager.Instance;
     }
 
     public void addLogger(I_Logger logger)

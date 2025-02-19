@@ -18,6 +18,24 @@ public class SimpleWaveManager : A_WaveManager
         typeof(SimpleFlyingStrategy),
     };
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        Mediator = GameManager.Instance;
+        EnemyAbstractFactory = FindFirstObjectByType<SimpleAEnemieFactory>();
+    }
+
     public override void startWave()
     {
     }
@@ -63,7 +81,7 @@ public class SimpleWaveManager : A_WaveManager
 
     private void SpawnWalkingEnemy()
     {
-        A_Enemie enemy = enemyAbstractFactory.createWalkingEnemie();
+        A_Enemie enemy = EnemyAbstractFactory.createWalkingEnemie();
 
         Type randomStrategyType = walkingMoveStrategies[Random.Range(0, walkingMoveStrategies.Count)];
         I_MoveStrategy strategy = (I_MoveStrategy)enemy.gameObject.AddComponent(randomStrategyType);
@@ -75,13 +93,13 @@ public class SimpleWaveManager : A_WaveManager
 
     private void SpawnTeleportingEnemy()
     {
-        A_Enemie enemy = enemyAbstractFactory.createTeleportingEnemie();
+        A_Enemie enemy = EnemyAbstractFactory.createTeleportingEnemie();
         Mediator.onEventFromManagers(new Tuple<string, object>("ADD_NEW_ENEMY", enemy));
     }
 
     private void SpawnFlyingEnemy()
     {
-        A_Enemie enemy = enemyAbstractFactory.createFlyingEnemie();
+        A_Enemie enemy = EnemyAbstractFactory.createFlyingEnemie();
 
         Type randomStrategyType = flyingMoveStrategies[Random.Range(0, flyingMoveStrategies.Count)];
         I_MoveStrategy strategy = (I_MoveStrategy)enemy.gameObject.AddComponent(randomStrategyType);

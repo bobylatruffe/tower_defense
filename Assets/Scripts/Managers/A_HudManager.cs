@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class A_HudManager : MonoBehaviour
 {
+    public static A_HudManager Instance { get; protected set; }
+
     protected I_UIObserver uiObserver;
 
     public abstract void udpateLevel(int level);
@@ -13,9 +15,4 @@ public abstract class A_HudManager : MonoBehaviour
     public abstract void showMenu();
     public abstract void showError();
     public abstract void sendUIEvent(Tuple<string, int> eventData);
-
-    private void Start()
-    {
-        uiObserver = GameManager.Instance;
-    }
 }

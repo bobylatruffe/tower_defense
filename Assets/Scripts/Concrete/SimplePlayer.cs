@@ -3,14 +3,24 @@ using UnityEngine;
 
 public class SimplePlayer : A_PlayerManager
 {
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
-        base.Start();
+        Mediator = GameManager.Instance;
 
         LifePoints = 100;
-        Money = 100;
-        mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_LIFE_POINT", LifePoints));
-        mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_MONEY", Money));
+        Money = 500;
     }
 
     private void Update()
