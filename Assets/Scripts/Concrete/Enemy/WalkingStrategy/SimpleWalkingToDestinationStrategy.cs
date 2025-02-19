@@ -24,6 +24,7 @@ class SimpleWalkingToDestinationStrategy : MonoBehaviour, I_MoveStrategy
         agent.speed = speed;
         agent.acceleration = speed;
         agent.angularSpeed = 360f;
+        agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
 
         agent.SetDestination(Destination.transform.position);
     }
