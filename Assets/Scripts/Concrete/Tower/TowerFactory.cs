@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class TowerFactory : MonoBehaviour, I_TowerFactory
 {
-    [SerializeField]
-    List<GameObject> towers;
+    [SerializeField] List<GameObject> towers;
 
     public A_Tower createTower(string towerName)
     {
@@ -17,6 +16,7 @@ public class TowerFactory : MonoBehaviour, I_TowerFactory
                 GameObject tower = Instantiate(towerToCreate);
                 tower.transform.localScale = Vector3.one * 0.1f;
                 tower.SetActive(false);
+
                 return tower.AddComponent<Tower>();
             }
         }

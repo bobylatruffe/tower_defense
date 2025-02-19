@@ -42,7 +42,7 @@ public class SimpleWaveManager : A_WaveManager
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButton(1))
         {
             StartCoroutine(SpawnEnemies());
         }
@@ -72,7 +72,7 @@ public class SimpleWaveManager : A_WaveManager
                     break;
             }
 
-            float waitTime = Random.Range(0.5f, 2f);
+            float waitTime = Random.Range(0.1f, 0.5f);
             yield return new WaitForSeconds(waitTime);
 
             elapsedTime += waitTime;

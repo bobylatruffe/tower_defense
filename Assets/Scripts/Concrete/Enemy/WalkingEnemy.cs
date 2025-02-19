@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class WalkingEnemy : A_Enemie
@@ -20,5 +21,13 @@ public class WalkingEnemy : A_Enemie
             MoveStrategy.move();
             animator.SetFloat("Speed", agent.velocity.magnitude);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(other.gameObject);
+        agent.enabled = false;
+        animator.SetTrigger("Death");
+        enemyTouchedByProjectile(gameObject);
     }
 }

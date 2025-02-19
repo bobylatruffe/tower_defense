@@ -3,6 +3,8 @@ using UnityEngine;
 
 public abstract class A_Enemie : MonoBehaviour
 {
+    public Action<GameObject> enemyTouchedByProjectile { get; set; }
+
     protected int CurrentHealth { get; set; }
     protected int Speed { get; set; }
 
