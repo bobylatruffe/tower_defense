@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class A_ShopManager : MonoBehaviour
 {
     [SerializeField] protected I_GameManagerMediator mediator;
-    [SerializeField] protected A_TowerFactory towerFactory;
+    [SerializeField] protected I_TowerFactory towerFactory;
 
     public abstract A_Tower buyTower(String towerName);
 

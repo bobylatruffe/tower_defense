@@ -5,10 +5,12 @@ public class SimplePlayer : A_PlayerManager
 {
     private void Start()
     {
+        base.Start();
+
         LifePoints = 100;
         Money = 100;
-        Mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_LIFE_POINT", LifePoints));
-        Mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_MONEY", Money));
+        mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_LIFE_POINT", LifePoints));
+        mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_MONEY", Money));
     }
 
     private void Update()

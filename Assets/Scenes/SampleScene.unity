@@ -6971,8 +6971,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae425842241848fda22f9c9eee5fd86f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hudManager: {fileID: 0}
-  gameManager: {fileID: 0}
+  hudManager: {fileID: 1922904082}
+  gameManager: {fileID: 1037615994}
 --- !u!1 &353411710
 GameObject:
   m_ObjectHideFlags: 0
@@ -9037,6 +9037,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439435549}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &449681651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 449681653}
+  - component: {fileID: 449681652}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &449681652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449681651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13772a15f12641dd8f1deb2a2c363d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mediatorGo: {fileID: 1037615993}
+--- !u!4 &449681653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449681651}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &455757225
 GameObject:
   m_ObjectHideFlags: 0
@@ -12544,8 +12589,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b543399f24be4ea69fb07cbdf518eb7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mediator: {fileID: 1037615994}
-  towerFactory: {fileID: 626354927}
 --- !u!4 &588318133
 Transform:
   m_ObjectHideFlags: 0
@@ -23046,6 +23089,7 @@ MonoBehaviour:
   gameboardManager: {fileID: 535402320}
   waveManager: {fileID: 1800624728}
   playerManager: {fileID: 0}
+  systemGo: {fileID: 351836355}
   shopManager: {fileID: 588318132}
 --- !u!4 &1037615995
 Transform:
@@ -47732,3 +47776,4 @@ SceneRoots:
   - {fileID: 1922904081}
   - {fileID: 588318133}
   - {fileID: 1037615995}
+  - {fileID: 449681653}

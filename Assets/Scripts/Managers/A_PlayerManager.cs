@@ -3,24 +3,25 @@ using UnityEngine;
 
 public abstract class A_PlayerManager : MonoBehaviour
 {
-    protected I_GameManagerMediator Mediator { get; set; }
+    [SerializeField] private GameObject mediatorGo;
+    protected I_GameManagerMediator mediator;
 
     public int LifePoints { get; set; }
     public int Money { get; set; }
 
-    private void Awake()
+    protected void Start()
     {
-        Mediator = GameManager.Instance;
+        mediator = mediatorGo.GetComponent<GameManager>();
     }
 
     public void showMenu()
     {
-        Mediator.onEventFromManagers(new Tuple<string, object>("SHOW_MAIN_MENU", null));
+        mediator.onEventFromManagers(new Tuple<string, object>("SHOW_MAIN_MENU", null));
     }
 
     public void showTowerShop()
     {
-        Mediator.onEventFromManagers(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
+        mediator.onEventFromManagers(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
     }
 
     public abstract int removeLifePoint(int pointsToRemove);

@@ -23,26 +23,6 @@ public class MySystem : MonoBehaviour, I_SystemObserver
         {
             Destroy(gameObject);
         }
-
-        if (gameManager == null)
-        {
-            gameManager = FindFirstObjectByType<GameManager>();
-            if (gameManager == null)
-            {
-                GameObject go = new GameObject("GameManager");
-                gameManager = go.AddComponent<GameManager>();
-            }
-        }
-
-        if (hudManager == null)
-        {
-            hudManager = FindFirstObjectByType<A_HudManager>();
-            if (hudManager == null)
-            {
-                GameObject hudGo = new GameObject("HudManager");
-                hudManager = hudGo.AddComponent<Hud>();
-            }
-        }
     }
 
     public void addLogger(I_Logger logger)

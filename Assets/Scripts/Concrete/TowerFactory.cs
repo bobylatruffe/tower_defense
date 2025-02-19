@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TowerFactory : A_TowerFactory
+public class TowerFactory : MonoBehaviour, I_TowerFactory
 {
     [SerializeField]
     List<GameObject> towers;
 
-    public override A_Tower createTower(string towerName)
+    public A_Tower createTower(string towerName)
     {
         foreach (GameObject towerToCreate in towers)
         {

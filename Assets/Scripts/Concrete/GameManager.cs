@@ -1,14 +1,15 @@
 using System;
 using UnityEngine;
 
-public class GameManager : I_GameManagerMediator, I_UIObserver
+public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
 {
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private A_GameboardManager gameboardManager;
     [SerializeField] private A_WaveManager waveManager;
     [SerializeField] private A_PlayerManager playerManager;
-    [SerializeField] private I_SystemObserver system;
+    private I_SystemObserver system;
+    [SerializeField] private GameObject systemGo;
     [SerializeField] private A_ShopManager shopManager;
 
     private void Awake()
@@ -25,55 +26,7 @@ public class GameManager : I_GameManagerMediator, I_UIObserver
 
     private void Start()
     {
-        if (gameboardManager == null)
-        {
-            gameboardManager = FindFirstObjectByType<A_GameboardManager>();
-            if (gameboardManager == null)
-            {
-                GameObject gameboardGO = new GameObject("Gameboard");
-                gameboardManager = gameboardGO.AddComponent<SimpleGameboard>();
-            }
-        }
-
-        if (waveManager == null)
-        {
-            waveManager = FindFirstObjectByType<A_WaveManager>();
-            if (waveManager == null)
-            {
-                GameObject waveGO = new GameObject("WaveManager");
-                waveManager = waveGO.AddComponent<SimpleWaveManager>();
-            }
-        }
-
-        if (playerManager == null)
-        {
-            playerManager = FindFirstObjectByType<A_PlayerManager>();
-            if (playerManager == null)
-            {
-                GameObject waveGO = new GameObject("PlayerManager");
-                playerManager = waveGO.AddComponent<SimplePlayer>();
-            }
-        }
-
-        if (system == null)
-        {
-            system = FindFirstObjectByType<MySystem>();
-            if (system == null)
-            {
-                GameObject waveGO = new GameObject("MySystem");
-                system = waveGO.AddComponent<MySystem>();
-            }
-        }
-
-        if (shopManager == null)
-        {
-            shopManager = FindFirstObjectByType<Shop>();
-            if (shopManager == null)
-            {
-                GameObject waveGO = new GameObject("ShopManager");
-                shopManager = waveGO.AddComponent<Shop>();
-            }
-        }
+        system = systemGo.GetComponent<MySystem>();
     }
 
     public void start()
@@ -84,7 +37,7 @@ public class GameManager : I_GameManagerMediator, I_UIObserver
     {
     }
 
-    public override GameObject onEventFromManagers(Tuple<string, object> eventData)
+    public GameObject onEventFromManagers(Tuple<string, object> eventData)
     {
         switch (eventData.Item1)
         {
