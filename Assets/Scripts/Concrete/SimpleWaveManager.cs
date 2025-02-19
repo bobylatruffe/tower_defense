@@ -15,7 +15,7 @@ public class SimpleWaveManager : A_WaveManager
 
     private List<Type> flyingMoveStrategies = new List<Type>
     {
-        typeof(SimpleFlyingStrategy),
+        // typeof(SimpleFlyingStrategy),
     };
 
     private void Awake()

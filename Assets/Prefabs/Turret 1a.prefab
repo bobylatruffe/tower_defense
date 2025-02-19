@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000012174300454, guid: 8a4fca54c9faa3449bcff12193992420, type: 3}
       propertyPath: m_Name
-      value: Turret 1a Variant
+      value: Turret 1a
       objectReference: {fileID: 0}
     - target: {fileID: 4000010737274380, guid: 8a4fca54c9faa3449bcff12193992420, type: 3}
       propertyPath: m_LocalScale.x
@@ -96,7 +96,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 5.5, y: 5.5, z: 5.5}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 5, z: 0}
   m_TimeToStationary: 0.5
