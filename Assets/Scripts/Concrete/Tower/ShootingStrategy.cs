@@ -9,7 +9,7 @@ public class ShootingStrategy : MonoBehaviour, I_TowerStrategy
     private GameObject projectile;
     private GameObject projectileSpawn;
 
-    private float range = 3f;
+    private float range = 2f;
     private float fireRate = 0.5f;
     private bool canShoot = true;
     private float speedProjectile = 100f;
@@ -45,7 +45,7 @@ public class ShootingStrategy : MonoBehaviour, I_TowerStrategy
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             targetRotation *= Quaternion.Euler(0, -90, 0);
-            rotor.rotation = Quaternion.Slerp(rotor.rotation, targetRotation, Time.deltaTime * 25f);
+            rotor.rotation = Quaternion.Slerp(rotor.rotation, targetRotation, Time.deltaTime * 50f);
 
             float angleDifference = Quaternion.Angle(rotor.rotation, targetRotation);
             if (angleDifference < 5f && canShoot)
