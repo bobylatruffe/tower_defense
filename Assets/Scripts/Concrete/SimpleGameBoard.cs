@@ -178,6 +178,7 @@ public class SimpleGameboard : A_GameboardManager
         Enemies.Remove(enemyTouched.GetComponent<A_Enemie>());
         enemyTouched.GetComponent<BoxCollider>().enabled = false;
 
-        Destroy(enemyTouched, 2);
+        // Destroy(enemyTouched, 2); // pour l'animation de death
+        Destroy(enemyTouched);
     }
 }

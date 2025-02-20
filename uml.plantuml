@@ -202,7 +202,7 @@ class HardTower implements A_Tower {
 
 class TowerDecorator implements A_Tower {
     - wrappee : A_Tower
-    + towerDecorator(tower : A_Tower)
+    + TowerDecorator(tower : A_Tower)
 }
 
 interface I_MoveStrategy {

@@ -10,13 +10,15 @@ public class ShootingStrategy : MonoBehaviour, I_TowerStrategy
     private GameObject projectileSpawn;
 
     private float range = 2f;
-    private float fireRate = 0.5f;
+    private float fireRate = 1f;
     private bool canShoot = true;
-    private float speedProjectile = 100f;
+    private float speedProjectile = 50f;
+
+    private A_Enemie currentTarget;
 
     private void Start()
     {
-        projectileSpawn = findDeepChild(transform, "projectile").gameObject;
+        projectileSpawn = findDeepChild(transform, "projectile")?.gameObject;
         rotor = findDeepChild(transform, "Turret");
         projectile = Resources.Load<GameObject>("Prefabs/projectile");
     }
@@ -36,22 +38,22 @@ public class ShootingStrategy : MonoBehaviour, I_TowerStrategy
         return null;
     }
 
-    private void trackClosestEnemy(A_Enemie closestEnemy)
+    private void trackTarget()
     {
-        if (closestEnemy != null)
+        if (currentTarget == null)
+            return;
+
+        Vector3 direction = currentTarget.transform.position - rotor.position;
+        direction.y = 0;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        targetRotation *= Quaternion.Euler(0, -90, 0);
+        rotor.rotation = Quaternion.Slerp(rotor.rotation, targetRotation, Time.deltaTime * 50f);
+
+        float angleDifference = Quaternion.Angle(rotor.rotation, targetRotation);
+        if (angleDifference < 5f && canShoot)
         {
-            Vector3 direction = closestEnemy.transform.position - rotor.position;
-            direction.y = 0;
-
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            targetRotation *= Quaternion.Euler(0, -90, 0);
-            rotor.rotation = Quaternion.Slerp(rotor.rotation, targetRotation, Time.deltaTime * 50f);
-
-            float angleDifference = Quaternion.Angle(rotor.rotation, targetRotation);
-            if (angleDifference < 5f && canShoot)
-            {
-                StartCoroutine(Shoot(closestEnemy));
-            }
+            StartCoroutine(Shoot(currentTarget));
         }
     }
 
@@ -77,11 +79,11 @@ public class ShootingStrategy : MonoBehaviour, I_TowerStrategy
         return closestEnemy;
     }
 
-    private IEnumerator Shoot(A_Enemie closestEnemy)
+    private IEnumerator Shoot(A_Enemie target)
     {
         canShoot = false;
 
-        if (closestEnemy != null && projectileSpawn != null)
+        if (target != null && projectileSpawn != null)
         {
             GameObject newProjectile =
                 Instantiate(projectile, projectileSpawn.transform.position, projectileSpawn.transform.rotation);
@@ -99,13 +101,16 @@ public class ShootingStrategy : MonoBehaviour, I_TowerStrategy
         canShoot = true;
     }
 
-
     public void shoot(List<A_Enemie> enemies)
     {
-        A_Enemie closestEnemy = getClosestEnemy(enemies, range);
-        if (closestEnemy)
+        if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.transform.position) > range)
         {
-            trackClosestEnemy(closestEnemy);
+            currentTarget = getClosestEnemy(enemies, range);
+        }
+
+        if (currentTarget != null)
+        {
+            trackTarget();
         }
     }
 }
