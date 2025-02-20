@@ -17,9 +17,9 @@ public class Hud : A_HudManager
     private Button historique;
 
     [SerializeField] private Light towerLight;
-    [SerializeField] private Light towerLight2;
 
     private Camera cam;
+    private bool isSelectionTower = false;
 
     private void Awake()
     {
@@ -59,29 +59,29 @@ public class Hud : A_HudManager
 
     private void Update()
     {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hit;
-        float maxDistance = 20;
-        int groundLayer = LayerMask.GetMask("Item");
-
-        if (Physics.Raycast(ray, out hit, maxDistance, groundLayer))
+        if (isSelectionTower)
         {
-            GameObject item = hit.collider.gameObject;
-            towerLight.transform.position = new Vector3(towerLight.transform.position.x,
-                towerLight.transform.position.y,
-                item.transform.position.z);
-            towerLight2.transform.position = new Vector3(towerLight2.transform.position.x,
-                towerLight2.transform.position.y,
-                item.transform.position.z);
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-            if (Input.GetMouseButtonDown(0))
+            RaycastHit hit;
+            float maxDistance = 20;
+            int groundLayer = LayerMask.GetMask("Item");
+
+            if (Physics.Raycast(ray, out hit, maxDistance, groundLayer))
             {
-                uiObserver.onEventFromUI(new Tuple<string, object>("TOWER_SELECTED_FROM_HUD", item.name));
-            }
-        }
+                GameObject item = hit.collider.gameObject;
+                towerLight.transform.position = new Vector3(towerLight.transform.position.x,
+                    towerLight.transform.position.y,
+                    item.transform.position.z);
 
-        Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    uiObserver.onEventFromUI(new Tuple<string, object>("TOWER_SELECTED_FROM_HUD", item.name));
+                }
+            }
+
+            Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);
+        }
     }
 
 
@@ -102,6 +102,7 @@ public class Hud : A_HudManager
 
     public override void showTowerShop()
     {
+        isSelectionTower = !isSelectionTower;
         Vector3 transformPosition = cam.transform.position;
         if (transformPosition.x < 16f)
         {

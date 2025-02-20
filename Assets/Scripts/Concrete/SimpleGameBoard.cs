@@ -77,7 +77,7 @@ public class SimpleGameboard : A_GameboardManager
             {
                 pendingTower.gameObject.SetActive(true);
                 pendingTower.transform.SetParent(transform);
-                pendingTower.GetClosestEnemyMethod = getClosestEnemy;
+                // pendingTower.GetEnemies = () => Enemies;
                 pendingTower = null;
                 hitObject.layer = LayerMask.NameToLayer("Default");
                 lastHitObject.GetComponent<Renderer>().material.color = originalColor;
@@ -179,27 +179,5 @@ public class SimpleGameboard : A_GameboardManager
         enemyTouched.GetComponent<BoxCollider>().enabled = false;
 
         Destroy(enemyTouched, 2);
-    }
-
-    public A_Enemie getClosestEnemy(A_Tower tower, float range)
-    {
-        A_Enemie closestEnemy = null;
-        float closestDistance = float.MaxValue;
-        Vector3 towerPosition = tower.transform.position;
-
-        foreach (A_Enemie enemy in Enemies)
-        {
-            if (enemy == null) continue;
-
-            float distance = Vector3.Distance(towerPosition, enemy.transform.position);
-
-            if (distance < closestDistance && distance <= range)
-            {
-                closestDistance = distance;
-                closestEnemy = enemy;
-            }
-        }
-
-        return closestEnemy;
     }
 }

@@ -184,8 +184,7 @@ abstract class A_Tower {
     - fireRate : int
     - projectile : GameObject
     - firePoint : Transform
-    - state : A_TowerState
-    + setState(state : A_TowerState)
+    - strategy : ShootStrategy
     + shoot()
 }
 
@@ -227,30 +226,23 @@ class SimpleGameBoard extends A_GameboardManager {
 
 }
 
-interface A_TowerState {
-    + handleState(tower : A_Tower);
+interface ShootStrategy {
+    + shoot(enemy: A_Enemie);
 }
 
-class IdleState implements A_TowerState {
-    - context : A_Tower
-    + setContext(context : A_Tower)
+class IdleStrategy implements ShootStrategy {
+    
 }
 
-class ShootingState implements A_TowerState {
-    - context : A_Tower
-    + setContext(context : A_Tower)
+class ShootingStrategy implements ShootStrategy {
+    
 }
 
-class ReloadingState implements A_TowerState {
-    - context : A_Tower
-    + setContext(context : A_Tower)
+class ReloadingStrategy implements ShootStrategy {
+    
 }
 
-IdleState --> A_Tower
-ShootingState --> A_Tower
-ReloadingState --> A_Tower
-
-A_Tower o-- A_TowerState
+A_Tower o-- ShootStrategy
 
 class Player extends A_PlayerManager {
     

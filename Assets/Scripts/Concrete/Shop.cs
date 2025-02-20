@@ -24,9 +24,13 @@ public class Shop : A_ShopManager
         TowerFactory = FindFirstObjectByType<TowerFactory>();
 
         towersAvailable.Add(new Tuple<string, int>("Turret 1a", 20));
-        towersAvailable.Add(new Tuple<string, int>("Turret 1b", 40));
-        towersAvailable.Add(new Tuple<string, int>("Turret 1c", 60));
-        towersAvailable.Add(new Tuple<string, int>("Turret 1d", 80));
+        towersAvailable.Add(new Tuple<string, int>("Turret 2a", 40));
+        towersAvailable.Add(new Tuple<string, int>("Turret 3a", 60));
+        towersAvailable.Add(new Tuple<string, int>("Turret 4a", 80));
+        towersAvailable.Add(new Tuple<string, int>("Turret 5a", 100));
+        towersAvailable.Add(new Tuple<string, int>("Turret 6a", 120));
+        towersAvailable.Add(new Tuple<string, int>("Turret 7a", 140));
+        towersAvailable.Add(new Tuple<string, int>("Turret 8a", 160));
     }
 
     public override A_Tower buyIfPlayerCanAffordIt(int playerMoney, string towerName)

@@ -42,9 +42,10 @@ public class SimpleWaveManager : A_WaveManager
 
     private void Update()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
-            StartCoroutine(SpawnEnemies());
+            SpawnWalkingEnemy();
+            // StartCoroutine(SpawnEnemies());
         }
     }
 

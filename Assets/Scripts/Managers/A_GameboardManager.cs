@@ -14,7 +14,7 @@ public abstract class A_GameboardManager : MonoBehaviour, I_DetectorEnemyWin
 
     protected I_GameManagerMediator Mediator { get; set; }
     protected List<A_Tower> Towers { get; set; } = new List<A_Tower>();
-    protected List<A_Enemie> Enemies { get; set; } = new List<A_Enemie>();
+    public List<A_Enemie> Enemies { get; protected set; } = new List<A_Enemie>();
 
     public abstract void addEnemie(A_Enemie newEnemie);
     public abstract void addTower(A_Tower tower);
