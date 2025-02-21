@@ -93,7 +93,7 @@ public class ShootingStrategy : MonoBehaviour, I_TowerStrategy
             Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
             rb.AddForce(newProjectile.transform.up * speedProjectile, ForceMode.Impulse);
 
-            Destroy(newProjectile, 1f);
+            Destroy(newProjectile, 5f);
         }
 
         yield return new WaitForSeconds(fireRate);

@@ -192,19 +192,6 @@ class SimpleTower implements A_Tower {
     
 }
 
-class MediumTower implements A_Tower {
-    
-}
-
-class HardTower implements A_Tower {
-    
-}
-
-class TowerDecorator implements A_Tower {
-    - wrappee : A_Tower
-    + TowerDecorator(tower : A_Tower)
-}
-
 interface I_MoveStrategy {
     + move()
 }
@@ -230,19 +217,19 @@ interface ShootStrategy {
     + shoot(enemy: A_Enemie);
 }
 
-class IdleStrategy implements ShootStrategy {
+class IdleStrategy implements I_TowerStrategy {
     
 }
 
-class ShootingStrategy implements ShootStrategy {
+class ShootingStrategy implements I_TowerStrategy {
     
 }
 
-class ReloadingStrategy implements ShootStrategy {
+class ReloadingStrategy implements I_TowerStrategy {
     
 }
 
-A_Tower o-- ShootStrategy
+A_Tower o-- I_TowerStrategy
 
 class Player extends A_PlayerManager {
     

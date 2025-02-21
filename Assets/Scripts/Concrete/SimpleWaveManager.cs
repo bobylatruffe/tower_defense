@@ -44,7 +44,7 @@ public class SimpleWaveManager : A_WaveManager
     {
         if (Input.GetMouseButtonDown(1))
         {
-            SpawnWalkingEnemy();
+            for (int i = 0; i < 10; i++) SpawnWalkingEnemy();
             // StartCoroutine(SpawnEnemies());
         }
     }

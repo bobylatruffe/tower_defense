@@ -10,7 +10,11 @@ public class Tower : A_Tower
 
     private void Update()
     {
+        shoot();
+    }
 
+    public override void shoot()
+    {
         Strategy.shoot(A_GameboardManager.Instance.Enemies);
     }
 }
