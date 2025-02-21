@@ -6,7 +6,7 @@ using UnityEngine;
 public class TrackFirstClosestEnemy : MonoBehaviour, I_TowerStrategy
 {
     private Transform rotor;
-    private GameObject projectile;
+    private ProjectileData projectileData;
     private GameObject projectileSpawn;
 
     private float range = 2f;
@@ -18,9 +18,9 @@ public class TrackFirstClosestEnemy : MonoBehaviour, I_TowerStrategy
 
     private void Start()
     {
-        projectileSpawn = findDeepChild(transform, "projectile")?.gameObject;
+        projectileSpawn = findDeepChild(transform, "projectile").gameObject;
         rotor = findDeepChild(transform, "Turret");
-        projectile = Resources.Load<GameObject>("Prefabs/projectile");
+        projectileData = projectileSpawn.GetComponent<Projectile>().projectileData;
     }
 
     private Transform findDeepChild(Transform parent, string childName)
@@ -86,9 +86,10 @@ public class TrackFirstClosestEnemy : MonoBehaviour, I_TowerStrategy
         if (target != null && projectileSpawn != null)
         {
             GameObject newProjectile =
-                Instantiate(projectile, projectileSpawn.transform.position, projectileSpawn.transform.rotation);
+                Instantiate(projectileData.projectilePrefab, projectileSpawn.transform.position,
+                    projectileSpawn.transform.rotation);
 
-            newProjectile.transform.localScale *= 0.3f;
+            newProjectile.AddComponent<Projectile>().CopyFrom(projectileData);
 
             Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
             rb.AddForce(newProjectile.transform.up * speedProjectile, ForceMode.Impulse);

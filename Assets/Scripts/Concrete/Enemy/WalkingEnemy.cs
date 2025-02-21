@@ -9,6 +9,7 @@ public class WalkingEnemy : A_Enemie
 
     private void Start()
     {
+        CurrentHealth = 5;
         Point = 10;
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -23,11 +24,12 @@ public class WalkingEnemy : A_Enemie
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider projectile)
     {
-        Destroy(other.gameObject);
-        agent.enabled = false;
-        animator.SetTrigger("Death");
-        enemyTouchedByProjectile(gameObject);
+        ProjectileData projectileData = projectile.GetComponent<Projectile>().projectileData;
+        Destroy(projectile.gameObject);
+        // agent.enabled = false;
+        // animator.SetTrigger("Death");
+        enemyTouchedByProjectile(gameObject, projectileData.projectileDamage);
     }
 }
