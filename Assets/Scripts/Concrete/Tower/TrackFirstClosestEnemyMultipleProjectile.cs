@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrackFirstClosestEnemy : MonoBehaviour, I_TowerStrategy
+public class TrackFirstClosestEnemyMultipleProjectile : MonoBehaviour, I_TowerStrategy
 {
     private Transform rotor;
     private ProjectileData projectileData;
     private GameObject projectileSpawn;
+    private List<GameObject> projectiles = new List<GameObject>();
 
     private float range;
     private float fireRate;
@@ -22,6 +23,10 @@ public class TrackFirstClosestEnemy : MonoBehaviour, I_TowerStrategy
         projectileData = projectileSpawn.GetComponent<Projectile>().projectileData;
         range = projectileData.projectileRange;
         fireRate = projectileData.projectileFireRate;
+        foreach (Transform child in projectileSpawn.transform)
+        {
+            projectiles.Add(child.gameObject);
+        }
     }
 
     private Transform findDeepChild(Transform parent, string childName)
@@ -86,16 +91,20 @@ public class TrackFirstClosestEnemy : MonoBehaviour, I_TowerStrategy
 
         if (target != null && projectileSpawn != null)
         {
-            GameObject newProjectile =
-                Instantiate(projectileData.projectilePrefab, projectileSpawn.transform.position,
-                    projectileSpawn.transform.rotation);
+            foreach (GameObject projectile in projectiles)
+            {
+                GameObject newProjectile =
+                    Instantiate(projectileData.projectilePrefab,
+                        projectile.transform.position,
+                        projectile.transform.rotation);
 
-            newProjectile.AddComponent<Projectile>().CopyFrom(projectileData);
+                newProjectile.AddComponent<Projectile>().CopyFrom(projectileData);
 
-            Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
-            rb.AddForce(newProjectile.transform.up * projectileData.projectileSpeed, ForceMode.Impulse);
+                Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
+                rb.AddForce(newProjectile.transform.up * projectileData.projectileSpeed, ForceMode.Impulse);
 
-            Destroy(newProjectile, 5f);
+                Destroy(newProjectile, 5f);
+            }
         }
 
         yield return new WaitForSeconds(fireRate);

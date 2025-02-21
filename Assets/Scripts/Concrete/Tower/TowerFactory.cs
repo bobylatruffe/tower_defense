@@ -17,7 +17,12 @@ public class TowerFactory : MonoBehaviour, I_TowerFactory
                 tower.transform.localScale = Vector3.one * 0.1f;
                 tower.SetActive(false);
 
-                tower.AddComponent<TrackFirstClosestEnemy>();
+                if (towerName == "Turret 1a")
+                    tower.AddComponent<TrackFirstClosestEnemy>();
+
+                if (towerName == "Turret 4a")
+                    tower.AddComponent<TrackFirstClosestEnemyMultipleProjectile>();
+
                 return tower.AddComponent<Tower>();
             }
         }

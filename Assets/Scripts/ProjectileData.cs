@@ -5,4 +5,7 @@ public class ProjectileData : ScriptableObject
 {
     public GameObject projectilePrefab;
     public int projectileDamage;
+    public float projectileSpeed;
+    public float projectileRange;
+    public float projectileFireRate;
 }

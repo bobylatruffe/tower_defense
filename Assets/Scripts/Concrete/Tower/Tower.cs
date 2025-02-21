@@ -5,7 +5,7 @@ public class Tower : A_Tower
 {
     private void Start()
     {
-        Strategy = GetComponent<TrackFirstClosestEnemy>();
+        Strategy = GetComponent<I_TowerStrategy>();
     }
 
     private void Update()
