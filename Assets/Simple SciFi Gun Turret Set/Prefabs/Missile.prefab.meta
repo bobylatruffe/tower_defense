@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: d3bd98b61e096aa418ed1d9dfa214db8
+timeCreated: 1517685241
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65938
+  packageName: Simple SciFi Turret Complete Set
+  packageVersion: 1.2
+  assetPath: Assets/TestAssets/Sci Fi Assets/Simple SciFi Gun Turret Set/Prefabs/Missile.prefab
+  uploadId: 230262

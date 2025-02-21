@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 007356e6e2acf1e4a959e1f5811522f3
+timeCreated: 1518097538
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65938
+  packageName: Simple SciFi Turret Complete Set
+  packageVersion: 1.2
+  assetPath: Assets/TestAssets/Sci Fi Assets/Simple SciFi Gun Turret Set/Fbx/Materials/_2.mat
+  uploadId: 230262
