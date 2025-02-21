@@ -87,6 +87,11 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
             case "NO_MONEY":
                 Debug.Log("NO MONEY");
                 break;
+
+            case "ADD_MONEY_PLAYER":
+                int moneyToAdd = (int)eventData.Item2;
+                systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", playerManager.addMoney(moneyToAdd)));
+                break;
         }
 
         return null;

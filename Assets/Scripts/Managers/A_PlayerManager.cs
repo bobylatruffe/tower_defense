@@ -23,4 +23,5 @@ public abstract class A_PlayerManager : MonoBehaviour
 
     public abstract int removeLifePoint(int pointsToRemove);
     public abstract int removeMoney(int moneyToRemove);
+    public abstract int addMoney(int moneyToAdd);
 }

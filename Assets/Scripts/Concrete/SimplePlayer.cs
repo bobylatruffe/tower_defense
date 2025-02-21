@@ -47,4 +47,10 @@ public class SimplePlayer : A_PlayerManager
         Money -= moneyToRemove;
         return Money;
     }
+
+    public override int addMoney(int moneyToAdd)
+    {
+        Money += moneyToAdd;
+        return Money;
+    }
 }

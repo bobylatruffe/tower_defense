@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingStrategy : MonoBehaviour, I_TowerStrategy
+public class TrackFirstClosestEnemy : MonoBehaviour, I_TowerStrategy
 {
     private Transform rotor;
     private GameObject projectile;

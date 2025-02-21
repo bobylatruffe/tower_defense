@@ -176,9 +176,13 @@ public class SimpleGameboard : A_GameboardManager
     public void enemyTouchedByProjectile(GameObject enemyTouched)
     {
         Enemies.Remove(enemyTouched.GetComponent<A_Enemie>());
-        enemyTouched.GetComponent<BoxCollider>().enabled = false;
 
-        // Destroy(enemyTouched, 2); // pour l'animation de death
+        // Pour l'animation death
+        // enemyTouched.GetComponent<BoxCollider>().enabled = false;
+        // Destroy(enemyTouched, 2);
         Destroy(enemyTouched);
+
+        A_Enemie enemy = enemyTouched.GetComponent<A_Enemie>();
+        Mediator.onEventFromManagers(new Tuple<string, object>("ADD_MONEY_PLAYER", enemy.Point));
     }
 }

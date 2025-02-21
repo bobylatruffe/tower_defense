@@ -180,10 +180,6 @@ A_GameboardManager o-- A_Enemie
 TowerFactory ..> A_Tower
 
 abstract class A_Tower {
-    - range : int
-    - fireRate : int
-    - projectile : GameObject
-    - firePoint : Transform
     - strategy : ShootStrategy
     + shoot()
 }
@@ -217,15 +213,7 @@ interface ShootStrategy {
     + shoot(enemy: A_Enemie);
 }
 
-class IdleStrategy implements I_TowerStrategy {
-    
-}
-
-class ShootingStrategy implements I_TowerStrategy {
-    
-}
-
-class ReloadingStrategy implements I_TowerStrategy {
+class TrackFirstClosestEnemy implements I_TowerStrategy {
     
 }
 
