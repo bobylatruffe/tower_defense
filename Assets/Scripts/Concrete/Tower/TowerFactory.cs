@@ -23,6 +23,9 @@ public class TowerFactory : MonoBehaviour, I_TowerFactory
                 if (towerName == "Turret 4a")
                     tower.AddComponent<TrackFirstClosestEnemyMultipleProjectile>();
 
+                if (towerName == "Turret 2a")
+                    tower.AddComponent<TrackFirstClosestEnemyMultipleProjectileTrackEnemy>();
+
                 return tower.AddComponent<Tower>();
             }
         }

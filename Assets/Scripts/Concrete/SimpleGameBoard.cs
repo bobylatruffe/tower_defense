@@ -173,7 +173,7 @@ public class SimpleGameboard : A_GameboardManager
         Destroy(enemyGo);
     }
 
-    public void enemyTouchedByProjectile(GameObject enemyTouched, int projectileDammage)
+    public void enemyTouchedByProjectile(GameObject enemyTouched, float projectileDammage)
     {
         A_Enemie enemy = enemyTouched.GetComponent<A_Enemie>();
 

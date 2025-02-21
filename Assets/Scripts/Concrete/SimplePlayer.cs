@@ -20,7 +20,7 @@ public class SimplePlayer : A_PlayerManager
         Mediator = GameManager.Instance;
 
         LifePoints = 500;
-        Money = 500;
+        Money = 250;
     }
 
     private void Update()
