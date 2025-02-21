@@ -17,16 +17,30 @@ public class TowerFactory : MonoBehaviour, I_TowerFactory
                 tower.transform.localScale = Vector3.one * 0.1f;
                 tower.SetActive(false);
 
-                if (towerName == "Turret 1a")
-                    tower.AddComponent<TrackFirstClosestEnemy>();
+                A_Tower atower = tower.AddComponent<Tower>();
 
-                if (towerName == "Turret 4a")
+                if (towerName == "Turret 1a" || towerName == "Turret 1b" || towerName == "Turret 1c" ||
+                    towerName == "Turret 1d")
+                {
                     tower.AddComponent<TrackFirstClosestEnemyMultipleProjectile>();
+                    atower.possibleUpgrade = Resources.Load<PossibleUpgrade>("Turret1PossibleUpgrade");
+                }
 
-                if (towerName == "Turret 2a")
+                if (towerName == "Turret 4a" || towerName == "Turret 4b" || towerName == "Turret 4c" ||
+                    towerName == "Turret 4d")
+                {
+                    tower.AddComponent<TrackFirstClosestEnemyMultipleProjectile>();
+                    atower.possibleUpgrade = Resources.Load<PossibleUpgrade>("Turret4PossibleUpgrade");
+                }
+
+                if (towerName == "Turret 2a" || towerName == "Turret 2b" || towerName == "Turret 2c" ||
+                    towerName == "Turret 2d")
+                {
                     tower.AddComponent<TrackFirstClosestEnemyMultipleProjectileTrackEnemy>();
+                    atower.possibleUpgrade = Resources.Load<PossibleUpgrade>("Turret2PossibleUpgrade");
+                }
 
-                return tower.AddComponent<Tower>();
+                return atower;
             }
         }
 

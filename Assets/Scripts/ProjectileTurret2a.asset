@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fdc577b5237909468531089850ce537, type: 3}
-  m_Name: ProjectileTurret2
+  m_Name: ProjectileTurret2a
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 9011120737154723414, guid: efab1515874b5584583445debd1e8a38, type: 3}
   projectileDamage: 1

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public abstract class A_Tower : MonoBehaviour
 {
-    private GameObject ProjectileSpawn { get; set; }
-    public I_TowerStrategy Strategy { get; set; }
+    public PossibleUpgrade possibleUpgrade { get; set; }
+
+    protected I_TowerStrategy Strategy { get; set; }
 
     public abstract void shoot();
 }

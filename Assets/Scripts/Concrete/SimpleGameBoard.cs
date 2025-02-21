@@ -76,6 +76,7 @@ public class SimpleGameboard : A_GameboardManager
             if (Input.GetMouseButtonDown(0))
             {
                 pendingTower.gameObject.SetActive(true);
+                pendingTower.gameObject.layer = LayerMask.NameToLayer("ItemAdded");
                 pendingTower.transform.SetParent(transform);
                 // pendingTower.GetEnemies = () => Enemies;
                 pendingTower = null;
@@ -151,9 +152,17 @@ public class SimpleGameboard : A_GameboardManager
         pendingTower = tower;
     }
 
-    public override void upgradeTower(A_Tower aTowerToUpgrade)
+    public override void upgradeTower(A_Tower aTowerToUpgrade, A_Tower newTowerUpgraded)
     {
-        throw new NotImplementedException();
+        if (newTowerUpgraded == null || aTowerToUpgrade == null) return;
+
+        newTowerUpgraded.transform.SetParent(transform);
+        newTowerUpgraded.transform.position = aTowerToUpgrade.transform.position;
+        newTowerUpgraded.transform.rotation = aTowerToUpgrade.transform.rotation;
+        newTowerUpgraded.gameObject.SetActive(true);
+        newTowerUpgraded.gameObject.layer = LayerMask.NameToLayer("ItemAdded");
+
+        Destroy(aTowerToUpgrade.gameObject);
     }
 
     public override GameObject getLeave()

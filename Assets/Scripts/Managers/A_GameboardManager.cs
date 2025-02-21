@@ -18,7 +18,7 @@ public abstract class A_GameboardManager : MonoBehaviour, I_DetectorEnemyWin
 
     public abstract void addEnemie(A_Enemie newEnemie);
     public abstract void addTower(A_Tower tower);
-    public abstract void upgradeTower(A_Tower aTowerToUpgrade);
+    public abstract void upgradeTower(A_Tower aTowerToUpgrade, A_Tower newTowerUpgraded);
     public abstract GameObject getLeave();
     public abstract GameObject getEntry();
     public abstract void enemyWin(GameObject enemyGo);
