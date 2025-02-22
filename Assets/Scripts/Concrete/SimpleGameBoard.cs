@@ -180,6 +180,7 @@ public class SimpleGameboard : A_GameboardManager
         A_Enemie enemy = enemyGo.GetComponent<A_Enemie>();
         Mediator.onEventFromManagers(new Tuple<string, object>("REMOVE_LIFE", enemy.Point));
         Destroy(enemyGo);
+        Enemies.Remove(enemy);
     }
 
     public void enemyTouchedByProjectile(GameObject enemyTouched, float projectileDammage)
