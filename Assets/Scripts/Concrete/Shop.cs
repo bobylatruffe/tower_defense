@@ -40,6 +40,8 @@ public class Shop : A_ShopManager
         towersAvailable.Add(new Tuple<string, int>("Turret 5a", 100));
 
         towersAvailable.Add(new Tuple<string, int>("Turret 6a", 120));
+        towersAvailable.Add(new Tuple<string, int>("Turret 6c", 220));
+        towersAvailable.Add(new Tuple<string, int>("Turret 6d", 440));
 
         towersAvailable.Add(new Tuple<string, int>("Turret 7a", 140));
 

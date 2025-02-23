@@ -33,6 +33,13 @@ public class TowerFactory : MonoBehaviour, I_TowerFactory
                     atower.possibleUpgrade = Resources.Load<PossibleUpgrade>("Turret4PossibleUpgrade");
                 }
 
+                if (towerName == "Turret 6a" || towerName == "Turret 6b" || towerName == "Turret 6c" ||
+                    towerName == "Turret 6d")
+                {
+                    tower.AddComponent<TrackFirstClosestEnemyMultipleProjectile>();
+                    atower.possibleUpgrade = Resources.Load<PossibleUpgrade>("Turret6PossibleUpgrade");
+                }
+
                 if (towerName == "Turret 2a" || towerName == "Turret 2b" || towerName == "Turret 2c" ||
                     towerName == "Turret 2d")
                 {
