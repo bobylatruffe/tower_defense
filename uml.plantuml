@@ -62,7 +62,17 @@ abstract class A_GameboardManager  {
 }
 
 A_GameboardManager o-- A_Tower
-TowerDecorator o-- A_Tower
+BaseTowerDecorator o-- A_Tower
+
+class BaseTowerDecorator extends A_Tower {
+    - wrappee : A_Tower
+    + shoot()
+}
+
+class TowerDecorator extends BaseTowerDecorator {
+    + shoot()
+}
+
 /' A_GameboardManager *-- TowerDecorator '/
 /' A_GameboardManager --> TowerDecorator '/
 
@@ -184,7 +194,7 @@ abstract class A_Tower {
     + shoot()
 }
 
-class SimpleTower implements A_Tower {
+class SimpleTower extends A_Tower {
     
 }
 

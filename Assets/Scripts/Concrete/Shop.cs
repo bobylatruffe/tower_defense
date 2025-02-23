@@ -84,6 +84,13 @@ public class Shop : A_ShopManager
                     A_GameboardManager.Instance.upgradeTower(atower, newATower);
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                Debug.Log("Decorateur");
+                GameObject towerGo = hit.collider.gameObject;
+                towerGo.AddComponent<TowerDecorateur>();
+            }
         }
 
         Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);
