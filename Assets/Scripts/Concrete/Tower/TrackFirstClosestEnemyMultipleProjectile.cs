@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TrackFirstClosestEnemyMultipleProjectile : MonoBehaviour, I_TowerStrategy
 {
@@ -49,7 +50,8 @@ public class TrackFirstClosestEnemyMultipleProjectile : MonoBehaviour, I_TowerSt
         if (currentTarget == null)
             return;
 
-        Vector3 direction = currentTarget.transform.position - rotor.position;
+        Vector3 futurePosition = PredictFuturePosition(currentTarget, projectileData.projectileSpeed);
+        Vector3 direction = futurePosition - rotor.position;
         direction.y = 0;
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -84,6 +86,22 @@ public class TrackFirstClosestEnemyMultipleProjectile : MonoBehaviour, I_TowerSt
 
         return closestEnemy;
     }
+
+    private Vector3 PredictFuturePosition(A_Enemie enemy, float projectileSpeed)
+    {
+        if (enemy == null) return enemy.transform.position;
+
+        NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+        if (agent == null) return enemy.transform.position;
+
+        Vector3 enemyPosition = enemy.transform.position;
+        Vector3 enemyVelocity = agent.velocity;
+
+        float timeToTarget = Vector3.Distance(transform.position, enemyPosition) / projectileSpeed;
+
+        return enemyPosition + enemyVelocity * timeToTarget;
+    }
+
 
     private IEnumerator Shoot(A_Enemie target)
     {
