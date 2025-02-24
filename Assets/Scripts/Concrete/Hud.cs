@@ -10,6 +10,8 @@ public class Hud : A_HudManager
 
     private Label nbLife;
     private Label money;
+    private Label nbWave;
+    private Label timerBeforeWave;
 
     private Button jouer;
     private Button quitter;
@@ -42,6 +44,8 @@ public class Hud : A_HudManager
         mainMenu = root.Q<VisualElement>("MainMenuPanel");
         nbLife = root.Q<Label>("NbLife");
         money = root.Q<Label>("Money");
+        nbWave = root.Q<Label>("NbWave");
+        timerBeforeWave = root.Q<Label>("TimerBeforeWave");
 
         jouer = root.Q<Button>("Jouer");
         quitter = root.Q<Button>("Quitter");
@@ -85,9 +89,9 @@ public class Hud : A_HudManager
     }
 
 
-    public override void udpateLevel(int level)
+    public override void updateLevel(int level)
     {
-        throw new NotImplementedException();
+        nbWave.text = level.ToString();
     }
 
     public override void updateMoney(int money)
@@ -98,6 +102,12 @@ public class Hud : A_HudManager
     public override void updateLife(int life)
     {
         nbLife.text = $"{life}";
+    }
+
+    public override void updateTimerBeforeWave(int timer)
+    {
+        timerBeforeWave.style.display = DisplayStyle.Flex;
+        timerBeforeWave.text = timer.ToString();
     }
 
     public override void showTowerShop()
@@ -134,5 +144,10 @@ public class Hud : A_HudManager
     public override void sendUIEvent(Tuple<string, int> eventData)
     {
         throw new NotImplementedException();
+    }
+
+    public override void hideTimerBeforeWave()
+    {
+        timerBeforeWave.style.display = DisplayStyle.None;
     }
 }

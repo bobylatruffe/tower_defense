@@ -63,6 +63,19 @@ public class MySystem : MonoBehaviour, I_SystemObserver
                 int money = (int)eventData.Item2;
                 hudManager.updateMoney(money);
                 break;
+
+            case "UPDATE_LEVEL_HUD":
+                int currentLevel = (int)eventData.Item2;
+                hudManager.updateLevel(currentLevel);
+                break;
+
+            case "UPDATE_TIMER_BEFORE_WAVE":
+                hudManager.updateTimerBeforeWave((int)eventData.Item2);
+                break;
+
+            case "HIDE_TIMER_BEFORE_WAVE":
+                hudManager.hideTimerBeforeWave();
+                break;
         }
     }
 }

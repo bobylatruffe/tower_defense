@@ -7,7 +7,7 @@ public abstract class A_WaveManager : MonoBehaviour
     protected I_GameManagerMediator Mediator { get; set; }
     protected I_EnemieAbstractFactory EnemyAbstractFactory { get; set; }
 
-    public int CurrentLevel { get; set; }
+    protected int CurrentLevel { get; set; }
 
     public abstract void startWave();
 }

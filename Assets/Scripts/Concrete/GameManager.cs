@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
     {
         systemObserver.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", playerManager.LifePoints));
         systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", playerManager.Money));
+        waveManager.startWave();
     }
 
     public void end()
@@ -91,6 +92,20 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
             case "ADD_MONEY_PLAYER":
                 int moneyToAdd = (int)eventData.Item2;
                 systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", playerManager.addMoney(moneyToAdd)));
+                break;
+
+            case "UPDATE_LEVEL_HUD":
+                int currentLevel = (int)eventData.Item2;
+                systemObserver.onEvent(new Tuple<string, object>("UPDATE_LEVEL_HUD", currentLevel));
+                break;
+
+            case "UPDATE_TIMER_BEFORE_WAVE":
+                int currentTimer = (int)eventData.Item2;
+                systemObserver.onEvent(new Tuple<string, object>("UPDATE_TIMER_BEFORE_WAVE", currentTimer));
+                break;
+
+            case "HIDE_TIMER_BEFORE_WAVE":
+                systemObserver.onEvent(new Tuple<string, object>("HIDE_TIMER_BEFORE_WAVE", null));
                 break;
         }
 

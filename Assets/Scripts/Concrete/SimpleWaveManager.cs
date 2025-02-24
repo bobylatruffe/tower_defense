@@ -18,6 +18,10 @@ public class SimpleWaveManager : A_WaveManager
         // typeof(SimpleFlyingStrategy),
     };
 
+    private int timerBeforeWave = 3;
+    private float inistialSpawnDuraction = 5f;
+    private float waitTimeBeforeSpawnOneEnemy = 0.5f;
+
     private void Awake()
     {
         if (Instance == null)
@@ -34,10 +38,40 @@ public class SimpleWaveManager : A_WaveManager
     {
         Mediator = GameManager.Instance;
         EnemyAbstractFactory = FindFirstObjectByType<SimpleAEnemieFactory>();
+        CurrentLevel = 1;
     }
 
     public override void startWave()
     {
+        Mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_LEVEL_HUD", CurrentLevel));
+        StartCoroutine(ManageWave());
+    }
+
+    private IEnumerator ManageWave()
+    {
+        while (true)
+        {
+            yield return StartCoroutine(TimerBeforeWave(timerBeforeWave));
+            Mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_LEVEL_HUD", CurrentLevel));
+            yield return StartCoroutine(SpawnEnemies(
+                inistialSpawnDuraction * (CurrentLevel / 2f),
+                waitTimeBeforeSpawnOneEnemy / (CurrentLevel)));
+        }
+    }
+
+    private IEnumerator TimerBeforeWave(int timerBeforeWave)
+    {
+        while (A_GameboardManager.Instance.Enemies.Count > 0)
+            yield return new WaitForSeconds(0.1f);
+
+        while (timerBeforeWave > 0)
+        {
+            Mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_TIMER_BEFORE_WAVE", timerBeforeWave));
+            timerBeforeWave -= 1;
+            yield return new WaitForSeconds(1);
+        }
+
+        yield return Mediator.onEventFromManagers(new Tuple<string, object>("HIDE_TIMER_BEFORE_WAVE", null));
     }
 
     private void Update()
@@ -49,10 +83,9 @@ public class SimpleWaveManager : A_WaveManager
         }
     }
 
-    private IEnumerator SpawnEnemies()
+    private IEnumerator SpawnEnemies(float spawnDuration, float waitTime)
     {
         float elapsedTime = 0f;
-        float spawnDuration = 10f;
 
         while (elapsedTime < spawnDuration)
         {
@@ -73,11 +106,13 @@ public class SimpleWaveManager : A_WaveManager
                     break;
             }
 
-            float waitTime = Random.Range(0.1f, 0.5f);
+            // float waitTime = Random.Range(0.1f, 0.5f);
             yield return new WaitForSeconds(waitTime);
 
             elapsedTime += waitTime;
         }
+
+        CurrentLevel++;
     }
 
     private void SpawnWalkingEnemy()
