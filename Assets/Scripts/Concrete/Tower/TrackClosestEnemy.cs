@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class TrackFirstClosestEnemy : MonoBehaviour, I_TowerStrategy
+public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
 {
     private Transform rotor;
     private ProjectileData projectileData;
     private GameObject projectileSpawn;
+    private List<GameObject> projectiles = new List<GameObject>();
 
     private float range;
     private float fireRate;
@@ -22,6 +24,10 @@ public class TrackFirstClosestEnemy : MonoBehaviour, I_TowerStrategy
         projectileData = projectileSpawn.GetComponent<Projectile>().projectileData;
         range = projectileData.projectileRange;
         fireRate = projectileData.projectileFireRate;
+        foreach (Transform child in projectileSpawn.transform)
+        {
+            projectiles.Add(child.gameObject);
+        }
     }
 
     private Transform findDeepChild(Transform parent, string childName)
@@ -44,7 +50,8 @@ public class TrackFirstClosestEnemy : MonoBehaviour, I_TowerStrategy
         if (currentTarget == null)
             return;
 
-        Vector3 direction = currentTarget.transform.position - rotor.position;
+        Vector3 futurePosition = PredictFuturePosition(currentTarget, projectileData.projectileSpeed);
+        Vector3 direction = futurePosition - rotor.position;
         direction.y = 0;
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -80,22 +87,42 @@ public class TrackFirstClosestEnemy : MonoBehaviour, I_TowerStrategy
         return closestEnemy;
     }
 
+    private Vector3 PredictFuturePosition(A_Enemie enemy, float projectileSpeed)
+    {
+        if (enemy == null) return enemy.transform.position;
+
+        NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+        if (agent == null) return enemy.transform.position;
+
+        Vector3 enemyPosition = enemy.transform.position;
+        Vector3 enemyVelocity = agent.velocity;
+
+        float timeToTarget = Vector3.Distance(transform.position, enemyPosition) / projectileSpeed;
+
+        return enemyPosition + enemyVelocity * timeToTarget;
+    }
+
+
     private IEnumerator Shoot(A_Enemie target)
     {
         canShoot = false;
 
         if (target != null && projectileSpawn != null)
         {
-            GameObject newProjectile =
-                Instantiate(projectileData.projectilePrefab, projectileSpawn.transform.position,
-                    projectileSpawn.transform.rotation);
+            foreach (GameObject projectile in projectiles)
+            {
+                GameObject newProjectile =
+                    Instantiate(projectileData.projectilePrefab,
+                        projectile.transform.position,
+                        projectile.transform.rotation);
 
-            newProjectile.AddComponent<Projectile>().CopyFrom(projectileData);
+                newProjectile.AddComponent<Projectile>().CopyFrom(projectileData);
 
-            Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
-            rb.AddForce(newProjectile.transform.up * projectileData.projectileSpeed, ForceMode.Impulse);
+                Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
+                rb.AddForce(newProjectile.transform.up * projectileData.projectileSpeed, ForceMode.Impulse);
 
-            Destroy(newProjectile, 5f);
+                Destroy(newProjectile, 5f);
+            }
         }
 
         yield return new WaitForSeconds(fireRate);

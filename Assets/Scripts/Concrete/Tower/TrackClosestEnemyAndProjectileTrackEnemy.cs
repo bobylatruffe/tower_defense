@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TrackFirstClosestEnemyMultipleProjectileTrackEnemy : MonoBehaviour, I_TowerStrategy
+public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerStrategy
 {
     private Transform rotor;
     private ProjectileData projectileData;
