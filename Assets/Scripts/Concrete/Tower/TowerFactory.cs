@@ -14,7 +14,7 @@ public class TowerFactory : MonoBehaviour, I_TowerFactory
             if (towerToCreate.name == towerName)
             {
                 GameObject tower = Instantiate(towerToCreate);
-                tower.transform.localScale = Vector3.one * 0.1f;
+                tower.transform.localScale = Vector3.one * 0.25f;
                 tower.SetActive(false);
 
                 A_Tower atower = tower.AddComponent<Tower>();

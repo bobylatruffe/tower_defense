@@ -70,9 +70,10 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         targetRotation *= Quaternion.Euler(0, -90, 0);
-        rotor.rotation = Quaternion.Slerp(rotor.rotation, targetRotation, Time.deltaTime * 50f);
+        rotor.rotation = Quaternion.Slerp(rotor.rotation, targetRotation, Time.deltaTime * 2f);
 
-        if (Quaternion.Angle(rotor.rotation, targetRotation) < 5f && canShoot)
+        // if (Quaternion.Angle(rotor.rotation, targetRotation) < 5f && canShoot)
+        if (canShoot)
         {
             StartCoroutine(Shoot());
         }
@@ -104,11 +105,10 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
                 Projectile projectileComponent = newProjectile.AddComponent<Projectile>();
                 projectileComponent.CopyFrom(projectileData);
 
-                // Assigner la cible à suivre
                 TrackerProjectile trackerProjectile = newProjectile.AddComponent<TrackerProjectile>();
                 trackerProjectile.SetTarget(currentTargets[i]);
 
-                Destroy(newProjectile, 5f); // Sécurité au cas où le projectile ne touche pas sa cible
+                Destroy(newProjectile, 5f);
             }
         }
 

@@ -59,7 +59,7 @@ public class SimpleWaveManager : A_WaveManager
                 currentSpawnDuration += 1,
                 Mathf.Max(waitTimeBeforeSpawnOneEnemy -= 0.05f, 0.1f)));
 
-            Mediator.onEventFromManagers(new Tuple<string, object>("ADD_MONEY_PLAYER", 500));
+            Mediator.onEventFromManagers(new Tuple<string, object>("ADD_MONEY_PLAYER", 250));
         }
     }
 

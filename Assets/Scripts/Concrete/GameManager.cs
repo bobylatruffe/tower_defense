@@ -119,7 +119,6 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
             case "TOWER_SELECTED_FROM_HUD":
                 string nameTowerSelectedByUser = dataEvent.Item2 as string;
                 A_Tower tower = shopManager.buyIfPlayerCanAffordIt(playerManager.Money, nameTowerSelectedByUser);
-                systemObserver.onEvent(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
                 gameboardManager.addTower(tower);
                 break;
 
