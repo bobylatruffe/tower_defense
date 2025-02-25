@@ -194,7 +194,6 @@ public class SimpleGameboard : A_GameboardManager
             // enemyTouched.GetComponent<BoxCollider>().enabled = false;
             // Destroy(enemyTouched, 2);
             Destroy(enemyTouched);
-            Mediator.onEventFromManagers(new Tuple<string, object>("ADD_MONEY_PLAYER", enemy.Point));
         }
         else
         {

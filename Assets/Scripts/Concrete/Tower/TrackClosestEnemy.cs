@@ -52,7 +52,7 @@ public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
 
         Vector3 futurePosition = PredictFuturePosition(currentTarget, projectileData.projectileSpeed);
         Vector3 direction = futurePosition - rotor.position;
-        direction.y = 0;
+        // direction.y = 0;
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         targetRotation *= Quaternion.Euler(0, -90, 0);
@@ -98,8 +98,10 @@ public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
         Vector3 enemyVelocity = agent.velocity;
 
         float timeToTarget = Vector3.Distance(transform.position, enemyPosition) / projectileSpeed;
+        float heightOffset = enemy.GetComponent<Collider>()?.bounds.extents.y ?? 1.0f;
+        Vector3 adjustedEnemyPosition = enemyPosition + Vector3.up * heightOffset;
 
-        return enemyPosition + enemyVelocity * timeToTarget;
+        return adjustedEnemyPosition + enemyVelocity * timeToTarget;
     }
 
 
