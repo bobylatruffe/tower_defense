@@ -13,10 +13,13 @@ public class Hud : A_HudManager
     private Label nbWave;
     private Label timerBeforeWave;
 
+    private VisualElement shopPanel;
+
     private Button jouer;
     private Button quitter;
     private Button options;
     private Button historique;
+    private Button startWave;
 
     [SerializeField] private Light towerLight;
 
@@ -51,8 +54,18 @@ public class Hud : A_HudManager
         quitter = root.Q<Button>("Quitter");
         options = root.Q<Button>("Options");
         historique = root.Q<Button>("Historique");
+        startWave = root.Q<Button>("StartWave");
 
         jouer.RegisterCallback<ClickEvent>(OnJouerClicked);
+        startWave.RegisterCallback<ClickEvent>(OnStartWaveClicked);
+
+        shopPanel = root.Q<VisualElement>("ShopPanel");
+    }
+
+    private void OnStartWaveClicked(ClickEvent evt)
+    {
+        showTowerShop();
+        uiObserver.onEventFromUI(new Tuple<string, object>("BUY_TOWER_FINISHED", null));
     }
 
     private void OnJouerClicked(ClickEvent evt)
@@ -117,10 +130,12 @@ public class Hud : A_HudManager
         if (transformPosition.x < 16f)
         {
             Camera.main.transform.DOMoveX(20, 0.5f).SetEase(Ease.Flash);
+            shopPanel.style.display = DisplayStyle.Flex;
         }
         else
         {
             Camera.main.transform.DOMoveX(12, 0.5f).SetEase(Ease.Flash);
+            shopPanel.style.display = DisplayStyle.None;
         }
     }
 

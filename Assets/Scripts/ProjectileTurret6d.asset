@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ProjectileTurret6d
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 9011120737154723414, guid: efab1515874b5584583445debd1e8a38, type: 3}
-  projectileDamage: 0.8
+  projectileDamage: 0.3
   projectileSpeed: 35
   projectileRange: 6
   projectileFireRate: 0.35

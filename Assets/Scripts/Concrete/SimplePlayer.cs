@@ -39,6 +39,11 @@ public class SimplePlayer : A_PlayerManager
     public override int removeLifePoint(int pointsToRemove)
     {
         LifePoints -= pointsToRemove;
+        if (LifePoints <= 0)
+        {
+            // GameManager.Instance.changeState(new DeathTime(GameManager.Instance));
+        }
+
         return LifePoints;
     }
 

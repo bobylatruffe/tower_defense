@@ -94,7 +94,7 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
 
         if (currentTargets.Count > 0 && projectileSpawn != null)
         {
-            for (int i = 0; i < projectiles.Count && i < currentTargets.Count; i++)
+            for (int i = 0; i < projectiles.Count; i++)
             {
                 GameObject newProjectile = Instantiate(
                     projectileData.projectilePrefab,
@@ -106,7 +106,7 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
                 projectileComponent.CopyFrom(projectileData);
 
                 TrackerProjectile trackerProjectile = newProjectile.AddComponent<TrackerProjectile>();
-                trackerProjectile.SetTarget(currentTargets[i]);
+                trackerProjectile.SetTarget(currentTargets[i % currentTargets.Count]);
 
                 Destroy(newProjectile, 5f);
             }

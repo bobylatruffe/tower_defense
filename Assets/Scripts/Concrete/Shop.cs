@@ -23,15 +23,15 @@ public class Shop : A_ShopManager
         Mediator = GameManager.Instance;
         TowerFactory = FindFirstObjectByType<TowerFactory>();
 
-        towersAvailable.Add(new Tuple<string, int>("Turret 1a", 20));
-        towersAvailable.Add(new Tuple<string, int>("Turret 1b", 40));
-        towersAvailable.Add(new Tuple<string, int>("Turret 1c", 80));
-        towersAvailable.Add(new Tuple<string, int>("Turret 1d", 160));
+        towersAvailable.Add(new Tuple<string, int>("Turret 1a", 60));
+        towersAvailable.Add(new Tuple<string, int>("Turret 1b", 120));
+        towersAvailable.Add(new Tuple<string, int>("Turret 1c", 240));
+        towersAvailable.Add(new Tuple<string, int>("Turret 1d", 480));
 
-        towersAvailable.Add(new Tuple<string, int>("Turret 2a", 40));
-        towersAvailable.Add(new Tuple<string, int>("Turret 2b", 80));
-        towersAvailable.Add(new Tuple<string, int>("Turret 2c", 160));
-        towersAvailable.Add(new Tuple<string, int>("Turret 2d", 260));
+        towersAvailable.Add(new Tuple<string, int>("Turret 2a", 80));
+        towersAvailable.Add(new Tuple<string, int>("Turret 2b", 160));
+        towersAvailable.Add(new Tuple<string, int>("Turret 2c", 320));
+        towersAvailable.Add(new Tuple<string, int>("Turret 2d", 640));
 
         towersAvailable.Add(new Tuple<string, int>("Turret 4a", 80));
         towersAvailable.Add(new Tuple<string, int>("Turret 4c", 160));

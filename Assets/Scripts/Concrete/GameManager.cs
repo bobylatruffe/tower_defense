@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
@@ -8,8 +9,10 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
     private A_GameboardManager gameboardManager;
     private A_WaveManager waveManager;
     private A_PlayerManager playerManager;
-    private I_SystemObserver systemObserver;
+    internal I_SystemObserver systemObserver;
     private A_ShopManager shopManager;
+
+    public I_State state;
 
     private void Awake()
     {
@@ -23,6 +26,12 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         }
     }
 
+    public void changeState(I_State newState)
+    {
+        state = newState;
+        state.start();
+    }
+
     private void Start()
     {
         gameboardManager = A_GameboardManager.Instance;
@@ -30,13 +39,16 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         playerManager = A_PlayerManager.Instance;
         systemObserver = MySystem.Instance;
         shopManager = A_ShopManager.Instance;
+
+        state = new ShopTime(this);
     }
 
     public void start()
     {
         systemObserver.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", playerManager.LifePoints));
         systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", playerManager.Money));
-        waveManager.startWave();
+
+        state.start();
     }
 
     public void end()
@@ -124,6 +136,10 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
 
             case "START_GAME":
                 start();
+                break;
+
+            case "BUY_TOWER_FINISHED":
+                state.end();
                 break;
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
@@ -20,7 +19,7 @@ class SimpleWalkingToDestinationStrategy : MonoBehaviour, I_MoveStrategy
     {
         NavMeshAgent agent = gameObject.AddComponent<NavMeshAgent>();
         agent.autoBraking = false;
-        float speed = Random.Range(5f, 10f);
+        float speed = Random.Range(3f, 10f);
         agent.speed = speed;
         agent.acceleration = speed;
         agent.angularSpeed = 360f;

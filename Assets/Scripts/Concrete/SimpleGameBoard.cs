@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,7 +11,6 @@ public class SimpleGameboard : A_GameboardManager
     private Color originalColor;
     private Vector3 lastMousePosition;
     private A_Tower pendingTower;
-    private List<GameObject> lastAdjacentObjects = new List<GameObject>();
 
     private void Awake()
     {
@@ -50,6 +50,7 @@ public class SimpleGameboard : A_GameboardManager
         if (cam == null) return;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
         RaycastHit hit;
         float maxDistance = Cols * 2;
         int groundLayer = LayerMask.GetMask("Ground");
@@ -58,36 +59,18 @@ public class SimpleGameboard : A_GameboardManager
         {
             GameObject hitObject = hit.collider.gameObject;
 
-            if (lastHitObject != null && lastHitObject != hitObject)
+            if (lastHitObject != null && hitObject != lastHitObject)
             {
                 lastHitObject.GetComponent<Renderer>().material.color = originalColor;
             }
-
-            foreach (GameObject adjacent in lastAdjacentObjects)
-            {
-                adjacent.GetComponent<Renderer>().material.color = originalColor;
-            }
-
-            lastAdjacentObjects.Clear();
 
             if (lastHitObject != hitObject)
             {
                 originalColor = hitObject.GetComponent<Renderer>().material.color;
             }
 
-            CheckAdjacentCubes(hitObject);
-
-            if (lastAdjacentObjects.Count < 4)
-            {
-                foreach (GameObject adjacent in lastAdjacentObjects)
-                {
-                    adjacent.GetComponent<Renderer>().material.color = originalColor;
-                }
-
-                return;
-            }
-
             hitObject.GetComponent<Renderer>().material.color = Color.green;
+
             lastHitObject = hitObject;
 
             pendingTower.gameObject.transform.position = hitObject.transform.position + Vector3.up * 0.5f;
@@ -97,21 +80,11 @@ public class SimpleGameboard : A_GameboardManager
                 pendingTower.gameObject.SetActive(true);
                 pendingTower.gameObject.layer = LayerMask.NameToLayer("ItemAdded");
                 pendingTower.transform.SetParent(transform);
+                // pendingTower.GetEnemies = () => Enemies;
                 pendingTower = null;
-                foreach (GameObject adjacentObject in lastAdjacentObjects)
-                {
-                    adjacentObject.layer = LayerMask.NameToLayer("Default");
-                }
-
                 hitObject.layer = LayerMask.NameToLayer("Default");
-
                 lastHitObject.GetComponent<Renderer>().material.color = originalColor;
-                foreach (GameObject adjacent in lastAdjacentObjects)
-                {
-                    adjacent.GetComponent<Renderer>().material.color = originalColor;
-                }
-
-                lastAdjacentObjects.Clear();
+                gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
             }
         }
         else
@@ -124,24 +97,6 @@ public class SimpleGameboard : A_GameboardManager
         }
 
         Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);
-    }
-
-    private void CheckAdjacentCubes(GameObject centerCube)
-    {
-        float detectionDistance = 1.1f;
-        Vector3[] directions = { Vector3.right, Vector3.left, Vector3.forward, Vector3.back };
-
-        foreach (Vector3 direction in directions)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(centerCube.transform.position, direction, out hit, detectionDistance,
-                    LayerMask.GetMask("Ground")))
-            {
-                GameObject adjacentCube = hit.collider.gameObject;
-                adjacentCube.GetComponent<Renderer>().material.color = Color.green;
-                lastAdjacentObjects.Add(adjacentCube);
-            }
-        }
     }
 
 

@@ -26,7 +26,7 @@ public class TrackerProjectile : MonoBehaviour
         }
 
         Vector3 targetPosition = target.transform.position;
-        targetPosition.y = transform.position.y - 0.25f;
+        targetPosition.y = transform.position.y;
 
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
     }

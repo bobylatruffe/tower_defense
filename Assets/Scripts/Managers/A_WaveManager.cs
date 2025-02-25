@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class A_WaveManager : MonoBehaviour
@@ -9,5 +11,5 @@ public abstract class A_WaveManager : MonoBehaviour
 
     protected int CurrentLevel { get; set; }
 
-    public abstract void startWave();
+    public abstract void startWave(Action callback);
 }

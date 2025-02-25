@@ -10,11 +10,40 @@ class GameManager implements I_UIObserver, I_GameManagerMediator {
     - shopManager : A_ShopManager
     - playerManager : A_PlayerManager
     - systemObserver : I_SystemObserver
+    - state : I_State
     + {static} instance : GameManager
     + {static} getInstance() : GameManager
     + start()
     + end()
 }
+
+interface I_State {
+    + start()
+    + end()
+}
+
+GameManager o-- I_State
+
+class WaveTime implements I_State {
+    - context : GameManager
+    + changeState(context : GameManager)
+}
+
+WaveTime --> GameManager
+
+class ShopTime implements I_State {
+    - context : GameManager
+    + changeState(context : GameManager)
+}
+
+ShopTime --> GameManager
+
+class DeathTime implements I_State {
+    - context : GameManager
+    + changeState(context : GameManager)
+}
+
+DeathTime --> GameManager
 
 GameManager --> GameManager
 

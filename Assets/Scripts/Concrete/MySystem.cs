@@ -29,7 +29,7 @@ public class MySystem : MonoBehaviour, I_SystemObserver
     {
         hudManager = A_HudManager.Instance;
         gameManager = GameManager.Instance;
-        Application.targetFrameRate = 50;
+        Application.targetFrameRate = 120;
     }
 
     public void addLogger(I_Logger logger)
