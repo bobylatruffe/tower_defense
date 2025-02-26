@@ -9,6 +9,7 @@ public class BaseTowerDecorator : A_Tower
 
     protected virtual void Start()
     {
+        base.Start();
         A_Tower firstEnabledTower = gameObject.GetComponents<A_Tower>().FirstOrDefault(tower => tower.enabled);
         Wrappee = firstEnabledTower;
 

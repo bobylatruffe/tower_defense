@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 public class TowerDecorateur : BaseTowerDecorator
@@ -28,7 +30,12 @@ public class TowerDecorateur : BaseTowerDecorator
     private IEnumerator ShootWithStrategy()
     {
         yield return new WaitForSeconds(1f);
-        strategy.shoot(A_GameboardManager.Instance.Enemies);
+
+        List<A_Enemie> enemies = (List<A_Enemie>)Mediator.onEventFromManagers(
+            new Tuple<EventTypeFromManager, object>(EventTypeFromManager.GET_ALL_ENEMIES, null));
+
+        strategy.shoot(enemies);
+
         yield return new WaitForSeconds(1f);
     }
 }

@@ -24,11 +24,9 @@ interface I_Event {
 }
 
 class AddNewEnemy implements I_Event {
-    + object execute(eventData : object);
 }
 
 class Blablabla implements I_Event {
-    + object execute(eventData : object);
 }
 
 ' class GetExitPoint implements I_Event {
@@ -287,9 +285,12 @@ A_GameboardManager o-- A_Enemie
 TowerFactory ..> A_Tower
 
 abstract class A_Tower {
+    - mediator : I_GameManagerMediator
     - strategy : ShootStrategy
     + shoot()
 }
+
+A_Tower --> I_GameManagerMediator
 
 class SimpleTower extends A_Tower {
     
