@@ -41,7 +41,7 @@ public class SimplePlayer : A_PlayerManager
         LifePoints -= pointsToRemove;
         if (LifePoints <= 0)
         {
-            // GameManager.Instance.changeState(new DeathTime(GameManager.Instance));
+            Mediator.onEventFromManagers(new Tuple<string, object>("PLAYER_IS_DEATH", null));
         }
 
         return LifePoints;

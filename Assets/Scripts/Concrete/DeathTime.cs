@@ -11,7 +11,11 @@ public class DeathTime : I_State
 
     public void start()
     {
-
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     public void end()

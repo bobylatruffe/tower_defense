@@ -119,6 +119,10 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
             case "HIDE_TIMER_BEFORE_WAVE":
                 systemObserver.onEvent(new Tuple<string, object>("HIDE_TIMER_BEFORE_WAVE", null));
                 break;
+
+            case "PLAYER_IS_DEATH":
+                changeState(new DeathTime(this));
+                break;
         }
 
         return null;
