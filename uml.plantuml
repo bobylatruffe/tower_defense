@@ -286,7 +286,7 @@ TowerFactory ..> A_Tower
 
 abstract class A_Tower {
     - mediator : I_GameManagerMediator
-    - strategy : ShootStrategy
+    - strategy : I_TowerStrategy
     + shoot()
 }
 
@@ -315,10 +315,6 @@ A_Enemie --> I_GameManagerMediator
 
 class SimpleGameBoard extends A_GameboardManager {
 
-}
-
-interface ShootStrategy {
-    + shoot(enemy: A_Enemie);
 }
 
 class TrackFirstClosestEnemy implements I_TowerStrategy {
