@@ -16,7 +16,7 @@ public abstract class A_GameboardManager : MonoBehaviour, I_DetectorEnemyWin
     protected List<A_Tower> Towers { get; set; } = new List<A_Tower>();
     public List<A_Enemie> Enemies { get; protected set; } = new List<A_Enemie>();
 
-    public abstract void addEnemie(A_Enemie newEnemie);
+    public abstract bool addEnemie(A_Enemie newEnemie);
     public abstract void addTower(A_Tower tower);
     public abstract void upgradeTower(A_Tower aTowerToUpgrade, A_Tower newTowerUpgraded);
     public abstract GameObject getLeave();

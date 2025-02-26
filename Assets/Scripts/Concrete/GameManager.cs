@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,8 +12,9 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
     private A_PlayerManager playerManager;
     internal I_SystemObserver systemObserver;
     private A_ShopManager shopManager;
+    private I_State state;
 
-    public I_State state;
+    private Dictionary<EventTypeFromManager, I_Event> events = new Dictionary<EventTypeFromManager, I_Event>();
 
     private void Awake()
     {
@@ -32,6 +34,11 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         state.start();
     }
 
+    private void registerEventHandlers(EventTypeFromManager eventType, I_Event eventHandler)
+    {
+        events[eventType] = eventHandler;
+    }
+
     private void Start()
     {
         gameboardManager = A_GameboardManager.Instance;
@@ -41,6 +48,22 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         shopManager = A_ShopManager.Instance;
 
         state = new ShopTime(this);
+
+        registerEventHandlers(EventTypeFromManager.ADD_NEW_ENEMY, new AddNewEnemy(gameboardManager));
+        registerEventHandlers(EventTypeFromManager.GET_EXIT_ENEMY_POINT, new GetExitEnemyPoint(gameboardManager));
+        registerEventHandlers(EventTypeFromManager.GET_ENTRY_ENEMY_POINT, new GetExitEnemyPoint(gameboardManager));
+        registerEventHandlers(EventTypeFromManager.SHOW_MAIN_MENU, new ShowMainMenu(systemObserver));
+        registerEventHandlers(EventTypeFromManager.REMOVE_LIFE, new RemoveLife(playerManager, systemObserver));
+        registerEventHandlers(EventTypeFromManager.UPDATE_LIFE_POINTS, new UpdateLifePoint(systemObserver));
+        registerEventHandlers(EventTypeFromManager.UPDATE_MONEY, new UpdateMoney(systemObserver));
+        registerEventHandlers(EventTypeFromManager.SHOW_TOWER_SHOP, new UpdateMoney(systemObserver));
+        registerEventHandlers(EventTypeFromManager.REMOVE_MONEY, new RemoveMoney(systemObserver, playerManager));
+        registerEventHandlers(EventTypeFromManager.NO_MONEY, new NoMoney());
+        registerEventHandlers(EventTypeFromManager.ADD_MONEY_TO_PLAYER,
+            new AddMoneyToPlayer(playerManager, systemObserver));
+        registerEventHandlers(EventTypeFromManager.UPDATE_LEVEL_HUD, new UpdateLevelHud(systemObserver));
+        registerEventHandlers(EventTypeFromManager.UPDATE_TIMER_BEFORE_WAVE, new UpdateTimerBeforeWave(systemObserver));
+        registerEventHandlers(EventTypeFromManager.HIDE_TIMER_BEFORE_WAVE, new HideTimerBeforeWave(systemObserver));
     }
 
     public void start()
@@ -55,73 +78,21 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
     {
     }
 
-    public GameObject onEventFromManagers(Tuple<string, object> eventData)
+    public object onEventFromManagers(Tuple<EventTypeFromManager, object> eventFromManager)
     {
-        switch (eventData.Item1)
+        if (events.TryGetValue(eventFromManager.Item1, out I_Event command))
         {
-            case "ADD_NEW_ENEMY":
-                gameboardManager.addEnemie((A_Enemie)eventData.Item2);
-                break;
+            return command.execute(eventFromManager.Item2);
+        }
 
-            case "GET_LEAVE":
-                return gameboardManager.getLeave();
-
-            case "GET_ENTRY":
-                return gameboardManager.getEntry();
-
-            case "SHOW_MAIN_MENU":
-                systemObserver.onEvent(new Tuple<string, object>("SHOW_MAIN_MENU", null));
-                break;
-
-            case "REMOVE_LIFE":
-                int lifePointsToRemmove = (int)eventData.Item2;
-                int newLifePoints = playerManager.removeLifePoint(lifePointsToRemmove);
-                systemObserver.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", newLifePoints));
-                break;
-
-            case "UPDATE_LIFE_POINTS":
-                systemObserver.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", eventData.Item2));
-                break;
-
-            case "UPDATE_MONEY":
-                systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", eventData.Item2));
-                break;
-
-            case "SHOW_TOWER_SHOP":
-                systemObserver.onEvent(new Tuple<string, object>("SHOW_TOWER_SHOP", null));
-                break;
-
-            case "REMOVE_MONEY":
-                int moneyToRemove = (int)eventData.Item2;
-                int newMoneyValue = playerManager.removeMoney(moneyToRemove);
-                systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", newMoneyValue));
-                break;
-
-            case "NO_MONEY":
-                Debug.Log("NO MONEY");
-                break;
-
-            case "ADD_MONEY_PLAYER":
-                int moneyToAdd = (int)eventData.Item2;
-                systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", playerManager.addMoney(moneyToAdd)));
-                break;
-
-            case "UPDATE_LEVEL_HUD":
-                int currentLevel = (int)eventData.Item2;
-                systemObserver.onEvent(new Tuple<string, object>("UPDATE_LEVEL_HUD", currentLevel));
-                break;
-
-            case "UPDATE_TIMER_BEFORE_WAVE":
-                int currentTimer = (int)eventData.Item2;
-                systemObserver.onEvent(new Tuple<string, object>("UPDATE_TIMER_BEFORE_WAVE", currentTimer));
-                break;
-
-            case "HIDE_TIMER_BEFORE_WAVE":
-                systemObserver.onEvent(new Tuple<string, object>("HIDE_TIMER_BEFORE_WAVE", null));
-                break;
-
-            case "PLAYER_IS_DEATH":
+        switch (eventFromManager.Item1)
+        {
+            case EventTypeFromManager.PLAYER_IS_DEATH:
                 changeState(new DeathTime(this));
+                break;
+
+            default:
+                Debug.Log("Aucune commande pour l'event " + eventFromManager.Item1);
                 break;
         }
 

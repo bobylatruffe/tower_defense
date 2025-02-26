@@ -11,11 +11,79 @@ class GameManager implements I_UIObserver, I_GameManagerMediator {
     - playerManager : A_PlayerManager
     - systemObserver : I_SystemObserver
     - state : I_State
+    - eventDispatcher : Dictionnary<EVENT_TYPE, I_Event>
     + {static} instance : GameManager
     + {static} getInstance() : GameManager
     + start()
     + end()
+    + registerEvent(eventType : EVENT_TYPE, event : I_Event)
 }
+
+interface I_Event {
+    + object execute(eventData : object);
+}
+
+class AddNewEnemy implements I_Event {
+    + object execute(eventData : object);
+}
+
+class Blablabla implements I_Event {
+    + object execute(eventData : object);
+}
+
+' class GetExitPoint implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class GetEntryPoint implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class ShowMainMenu implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class RemoveLifePoint implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class UpdateLifePoint implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class UpdateMoney implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class ShowTowerShop implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class NoMoney implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class AddMoney implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class UpdateLevelHud implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class UpdateTimerBeforeWave implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class HideTimerBeforeWave implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+' class PlayerDeath implements I_Event {
+'     + object execute(eventData : object);
+' }
+
+GameManager *-- I_Event
 
 interface I_State {
     + start()

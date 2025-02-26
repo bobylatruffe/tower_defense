@@ -3,5 +3,5 @@ using UnityEngine;
 
 public interface I_GameManagerMediator
 {
-    GameObject onEventFromManagers(Tuple<string, object> eventData);
+    object onEventFromManagers(Tuple<EventTypeFromManager, object> eventFromManager);
 }

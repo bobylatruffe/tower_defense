@@ -37,7 +37,7 @@ public class MySystem : MonoBehaviour, I_SystemObserver
         loggers.Add(logger);
     }
 
-    public void onEvent(Tuple<string, object> eventData)
+    public object onEvent(Tuple<string, object> eventData)
     {
         foreach (I_Logger logger in loggers)
         {
@@ -77,5 +77,7 @@ public class MySystem : MonoBehaviour, I_SystemObserver
                 hudManager.hideTimerBeforeWave();
                 break;
         }
+
+        return true;
     }
 }

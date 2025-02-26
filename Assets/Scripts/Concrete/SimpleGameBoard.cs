@@ -131,7 +131,7 @@ public class SimpleGameboard : A_GameboardManager
     //     return true;
     // }
 
-    public override void addEnemie(A_Enemie newEnemie)
+    public override bool addEnemie(A_Enemie newEnemie)
     {
         newEnemie.transform.SetParent(transform);
 
@@ -148,6 +148,8 @@ public class SimpleGameboard : A_GameboardManager
         newEnemie.enemyTouchedByProjectile = enemyTouchedByProjectile;
 
         Enemies.Add(newEnemie);
+
+        return true;
     }
 
     public override void addTower(A_Tower tower)
@@ -181,7 +183,8 @@ public class SimpleGameboard : A_GameboardManager
     public override void enemyWin(GameObject enemyGo)
     {
         A_Enemie enemy = enemyGo.GetComponent<A_Enemie>();
-        Mediator.onEventFromManagers(new Tuple<string, object>("REMOVE_LIFE", enemy.Point));
+        Mediator.onEventFromManagers(
+            new Tuple<EventTypeFromManager, object>(EventTypeFromManager.REMOVE_LIFE, enemy.Point));
         Destroy(enemyGo);
         Enemies.Remove(enemy);
     }

@@ -46,7 +46,6 @@ public class Shop : A_ShopManager
         towersAvailable.Add(new Tuple<string, int>("Turret 7a", 140));
 
         towersAvailable.Add(new Tuple<string, int>("Turret 8a", 160));
-
     }
 
     private void Update()
@@ -106,11 +105,13 @@ public class Shop : A_ShopManager
             {
                 if (playerMoney >= tower.Item2)
                 {
-                    Mediator.onEventFromManagers(new Tuple<string, object>("REMOVE_MONEY", tower.Item2));
+                    Mediator.onEventFromManagers(
+                        new Tuple<EventTypeFromManager, object>(EventTypeFromManager.REMOVE_MONEY, tower.Item2));
                     return TowerFactory.createTower(tower.Item1);
                 }
 
-                Mediator.onEventFromManagers(new Tuple<string, object>("NO_MONEY", null));
+                Mediator.onEventFromManagers(
+                    new Tuple<EventTypeFromManager, object>(EventTypeFromManager.NO_MONEY, null));
                 return null;
             }
         }

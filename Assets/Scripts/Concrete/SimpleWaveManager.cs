@@ -51,7 +51,8 @@ public class SimpleWaveManager : A_WaveManager
         Debug.Log("currentSpawnDuration" + (currentSpawnDuration + 1));
         Debug.Log("waitTimeBeforeSpawnOneEnemy" + Mathf.Max(waitTimeBeforeSpawnOneEnemy - 0.05f, 0.1f));
 
-        Mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_LEVEL_HUD", CurrentLevel));
+        Mediator.onEventFromManagers(
+            new Tuple<EventTypeFromManager, object>(EventTypeFromManager.UPDATE_LEVEL_HUD, CurrentLevel));
 
         isWaving = true;
         StartCoroutine(ManageWave(onWaveFinished));
@@ -62,12 +63,15 @@ public class SimpleWaveManager : A_WaveManager
         while (isWaving)
         {
             yield return StartCoroutine(TimerBeforeWave(timerBeforeWave));
-            Mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_LEVEL_HUD", CurrentLevel));
+            Mediator.onEventFromManagers(
+                new Tuple<EventTypeFromManager, object>(EventTypeFromManager.UPDATE_LEVEL_HUD, CurrentLevel));
             yield return StartCoroutine(SpawnEnemies(
                 currentSpawnDuration += 1,
                 Mathf.Max(waitTimeBeforeSpawnOneEnemy -= 0.025f, 0.1f)));
 
-            Mediator.onEventFromManagers(new Tuple<string, object>("ADD_MONEY_PLAYER", 250 + (25 * CurrentLevel)));
+            Mediator.onEventFromManagers(
+                new Tuple<EventTypeFromManager, object>(EventTypeFromManager.ADD_MONEY_TO_PLAYER,
+                    250 + (25 * CurrentLevel)));
 
             isWaving = false;
             onWaveFinished?.Invoke();
@@ -82,12 +86,15 @@ public class SimpleWaveManager : A_WaveManager
 
         while (timerBeforeWave > 0)
         {
-            Mediator.onEventFromManagers(new Tuple<string, object>("UPDATE_TIMER_BEFORE_WAVE", timerBeforeWave));
+            Mediator.onEventFromManagers(
+                new Tuple<EventTypeFromManager, object>(EventTypeFromManager.UPDATE_TIMER_BEFORE_WAVE,
+                    timerBeforeWave));
             timerBeforeWave -= 1;
             yield return new WaitForSeconds(1f);
         }
 
-        yield return Mediator.onEventFromManagers(new Tuple<string, object>("HIDE_TIMER_BEFORE_WAVE", null));
+        yield return Mediator.onEventFromManagers(
+            new Tuple<EventTypeFromManager, object>(EventTypeFromManager.HIDE_TIMER_BEFORE_WAVE, null));
     }
 
     private void Update()
@@ -143,27 +150,33 @@ public class SimpleWaveManager : A_WaveManager
         Type randomStrategyType = walkingMoveStrategies[Random.Range(0, walkingMoveStrategies.Count)];
         I_MoveStrategy strategy = (I_MoveStrategy)enemy.gameObject.AddComponent(randomStrategyType);
 
-        strategy.setDestination(Mediator.onEventFromManagers(new Tuple<string, object>("GET_LEAVE", null)));
-        enemy.MoveStrategy = strategy;
-        Mediator.onEventFromManagers(new Tuple<string, object>("ADD_NEW_ENEMY", enemy));
-    }
+        GameObject destination =
+            (GameObject)Mediator.onEventFromManagers(
+                new Tuple<EventTypeFromManager, object>(EventTypeFromManager.GET_EXIT_ENEMY_POINT, null));
 
-    private void SpawnTeleportingEnemy()
-    {
-        A_Enemie enemy = EnemyAbstractFactory.createTeleportingEnemie();
-        Mediator.onEventFromManagers(new Tuple<string, object>("ADD_NEW_ENEMY", enemy));
-    }
-
-    private void SpawnFlyingEnemy()
-    {
-        A_Enemie enemy = EnemyAbstractFactory.createFlyingEnemie();
-
-        Type randomStrategyType = flyingMoveStrategies[Random.Range(0, flyingMoveStrategies.Count)];
-        I_MoveStrategy strategy = (I_MoveStrategy)enemy.gameObject.AddComponent(randomStrategyType);
-
-        strategy.setDestination(Mediator.onEventFromManagers(new Tuple<string, object>("GET_LEAVE", null)));
+        strategy.setDestination(destination);
         enemy.MoveStrategy = strategy;
 
-        Mediator.onEventFromManagers(new Tuple<string, object>("ADD_NEW_ENEMY", enemy));
+        Mediator.onEventFromManagers(
+            new Tuple<EventTypeFromManager, object>(EventTypeFromManager.ADD_NEW_ENEMY, enemy));
     }
+
+    // private void SpawnTeleportingEnemy()
+    // {
+    //     A_Enemie enemy = EnemyAbstractFactory.createTeleportingEnemie();
+    //     Mediator.onEventFromManagers(new Tuple<string, object>("ADD_NEW_ENEMY", enemy));
+    // }
+    //
+    // private void SpawnFlyingEnemy()
+    // {
+    //     A_Enemie enemy = EnemyAbstractFactory.createFlyingEnemie();
+    //
+    //     Type randomStrategyType = flyingMoveStrategies[Random.Range(0, flyingMoveStrategies.Count)];
+    //     I_MoveStrategy strategy = (I_MoveStrategy)enemy.gameObject.AddComponent(randomStrategyType);
+    //
+    //     strategy.setDestination(Mediator.onEventFromManagers(new Tuple<string, object>("GET_LEAVE", null)));
+    //     enemy.MoveStrategy = strategy;
+    //
+    //     Mediator.onEventFromManagers(new Tuple<string, object>("ADD_NEW_ENEMY", enemy));
+    // }
 }

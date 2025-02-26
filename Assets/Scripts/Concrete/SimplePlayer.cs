@@ -41,7 +41,8 @@ public class SimplePlayer : A_PlayerManager
         LifePoints -= pointsToRemove;
         if (LifePoints <= 0)
         {
-            Mediator.onEventFromManagers(new Tuple<string, object>("PLAYER_IS_DEATH", null));
+            Mediator.onEventFromManagers(
+                new Tuple<EventTypeFromManager, object>(EventTypeFromManager.PLAYER_IS_DEATH, null));
         }
 
         return LifePoints;
