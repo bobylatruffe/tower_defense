@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
+public class TrackFarthestEnemyAndTrack : MonoBehaviour, I_TowerStrategy
 {
     private Transform rotor;
     private ProjectileData projectileData;
@@ -65,11 +65,11 @@ public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
         }
     }
 
-    private A_Enemy getClosestEnemy(List<A_Enemy> enemies, float range)
+    private A_Enemy getFarthestEnemy(List<A_Enemy> enemies, float range)
     {
-        A_Enemy closestEnemy = null;
-        float closestDistance = float.MaxValue;
-        Vector3 towerPosition = gameObject.transform.position;
+        A_Enemy farthestEnemy = null;
+        float maxDistance = 0f;
+        Vector3 towerPosition = transform.position;
 
         foreach (A_Enemy enemy in enemies)
         {
@@ -77,14 +77,14 @@ public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
 
             float distance = Vector3.Distance(towerPosition, enemy.transform.position);
 
-            if (distance < closestDistance && distance <= range)
+            if (distance > maxDistance && distance <= range)
             {
-                closestDistance = distance;
-                closestEnemy = enemy;
+                maxDistance = distance;
+                farthestEnemy = enemy;
             }
         }
 
-        return closestEnemy;
+        return farthestEnemy;
     }
 
     private Vector3 PredictFuturePosition(A_Enemy enemy, float projectileSpeed)
@@ -136,7 +136,7 @@ public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
     {
         if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.transform.position) > range)
         {
-            currentTarget = getClosestEnemy(enemies, range);
+            currentTarget = getFarthestEnemy(enemies, range);
         }
 
         if (currentTarget != null)

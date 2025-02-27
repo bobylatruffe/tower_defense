@@ -22,21 +22,21 @@ public class TowerFactory : MonoBehaviour, I_TowerFactory
                 if (towerName == "Turret 1a" || towerName == "Turret 1b" || towerName == "Turret 1c" ||
                     towerName == "Turret 1d")
                 {
-                    tower.AddComponent<TrackClosestEnemy>();
+                    tower.AddComponent<TrackClosestEnemyAndTrack>();
                     atower.possibleUpgrade = Resources.Load<PossibleUpgrade>("Turret1PossibleUpgrade");
                 }
 
                 if (towerName == "Turret 4a" || towerName == "Turret 4b" || towerName == "Turret 4c" ||
                     towerName == "Turret 4d")
                 {
-                    tower.AddComponent<TrackClosestEnemy>();
+                    tower.AddComponent<TrackClosestEnemyAndTrack>();
                     atower.possibleUpgrade = Resources.Load<PossibleUpgrade>("Turret4PossibleUpgrade");
                 }
 
                 if (towerName == "Turret 6a" || towerName == "Turret 6b" || towerName == "Turret 6c" ||
                     towerName == "Turret 6d")
                 {
-                    tower.AddComponent<TrackFarthestEnemy>();
+                    tower.AddComponent<TrackOnlyClosestEnemy>();
                     atower.possibleUpgrade = Resources.Load<PossibleUpgrade>("Turret6PossibleUpgrade");
                 }
 

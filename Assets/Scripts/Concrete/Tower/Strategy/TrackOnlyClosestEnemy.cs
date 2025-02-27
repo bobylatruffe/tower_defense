@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TrackFarthestEnemy : MonoBehaviour, I_TowerStrategy
+public class TrackOnlyClosestEnemy : MonoBehaviour, I_TowerStrategy
 {
     private Transform rotor;
     private ProjectileData projectileData;
@@ -14,8 +14,6 @@ public class TrackFarthestEnemy : MonoBehaviour, I_TowerStrategy
     private float range;
     private float fireRate;
     private bool canShoot = true;
-
-    private A_Enemy currentTarget;
 
     private void Start()
     {
@@ -45,12 +43,12 @@ public class TrackFarthestEnemy : MonoBehaviour, I_TowerStrategy
         return null;
     }
 
-    private void trackTarget()
+    private void trackTarget(A_Enemy target)
     {
-        if (currentTarget == null)
+        if (target == null)
             return;
 
-        Vector3 futurePosition = PredictFuturePosition(currentTarget, projectileData.projectileSpeed);
+        Vector3 futurePosition = PredictFuturePosition(target, projectileData.projectileSpeed);
         Vector3 direction = futurePosition - rotor.position;
         // direction.y = 0;
 
@@ -61,15 +59,16 @@ public class TrackFarthestEnemy : MonoBehaviour, I_TowerStrategy
         float angleDifference = Quaternion.Angle(rotor.rotation, targetRotation);
         if (angleDifference < 5f && canShoot)
         {
-            StartCoroutine(Shoot(currentTarget));
+            StartCoroutine(Shoot(target));
         }
     }
 
-    private A_Enemy getFarthestEnemy(List<A_Enemy> enemies, float range)
+
+    private A_Enemy getClosestEnemy(List<A_Enemy> enemies, float range)
     {
-        A_Enemy farthestEnemy = null;
-        float maxDistance = 0f;
-        Vector3 towerPosition = transform.position;
+        A_Enemy closestEnemy = null;
+        float closestDistance = float.MaxValue;
+        Vector3 towerPosition = gameObject.transform.position;
 
         foreach (A_Enemy enemy in enemies)
         {
@@ -77,14 +76,14 @@ public class TrackFarthestEnemy : MonoBehaviour, I_TowerStrategy
 
             float distance = Vector3.Distance(towerPosition, enemy.transform.position);
 
-            if (distance > maxDistance && distance <= range)
+            if (distance < closestDistance && distance <= range)
             {
-                maxDistance = distance;
-                farthestEnemy = enemy;
+                closestDistance = distance;
+                closestEnemy = enemy;
             }
         }
 
-        return farthestEnemy;
+        return closestEnemy;
     }
 
     private Vector3 PredictFuturePosition(A_Enemy enemy, float projectileSpeed)
@@ -134,14 +133,13 @@ public class TrackFarthestEnemy : MonoBehaviour, I_TowerStrategy
 
     public void shoot(List<A_Enemy> enemies)
     {
-        if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.transform.position) > range)
-        {
-            currentTarget = getFarthestEnemy(enemies, range);
-        }
+        if (!canShoot) return;
 
-        if (currentTarget != null)
+        A_Enemy closestEnemy = getClosestEnemy(enemies, range);
+
+        if (closestEnemy != null)
         {
-            trackTarget();
+            trackTarget(closestEnemy);
         }
     }
 }
