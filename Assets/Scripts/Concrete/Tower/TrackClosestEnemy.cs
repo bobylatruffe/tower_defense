@@ -15,7 +15,7 @@ public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
     private float fireRate;
     private bool canShoot = true;
 
-    private A_Enemie currentTarget;
+    private A_Enemy currentTarget;
 
     private void Start()
     {
@@ -65,13 +65,13 @@ public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
         }
     }
 
-    private A_Enemie getClosestEnemy(List<A_Enemie> enemies, float range)
+    private A_Enemy getClosestEnemy(List<A_Enemy> enemies, float range)
     {
-        A_Enemie closestEnemy = null;
+        A_Enemy closestEnemy = null;
         float closestDistance = float.MaxValue;
         Vector3 towerPosition = gameObject.transform.position;
 
-        foreach (A_Enemie enemy in enemies)
+        foreach (A_Enemy enemy in enemies)
         {
             if (enemy == null) continue;
 
@@ -87,7 +87,7 @@ public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
         return closestEnemy;
     }
 
-    private Vector3 PredictFuturePosition(A_Enemie enemy, float projectileSpeed)
+    private Vector3 PredictFuturePosition(A_Enemy enemy, float projectileSpeed)
     {
         if (enemy == null) return enemy.transform.position;
 
@@ -105,7 +105,7 @@ public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
     }
 
 
-    private IEnumerator Shoot(A_Enemie target)
+    private IEnumerator Shoot(A_Enemy target)
     {
         canShoot = false;
 
@@ -132,7 +132,7 @@ public class TrackClosestEnemy : MonoBehaviour, I_TowerStrategy
         canShoot = true;
     }
 
-    public void shoot(List<A_Enemie> enemies)
+    public void shoot(List<A_Enemy> enemies)
     {
         if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.transform.position) > range)
         {

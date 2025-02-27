@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class TrackerProjectile : MonoBehaviour
 {
-    private A_Enemie target;
+    private A_Enemy target;
     private float speed;
     private float rotationSpeed = 90f;
 
-    public void SetTarget(A_Enemie newTarget)
+    public void SetTarget(A_Enemy newTarget)
     {
         target = newTarget;
         transform.rotation = Quaternion.Euler(90, 0, 0);

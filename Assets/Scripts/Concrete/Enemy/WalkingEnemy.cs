@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WalkingEnemy : A_Enemie
+public class WalkingEnemy : A_Enemy
 {
     private Animator animator;
     private NavMeshAgent agent;

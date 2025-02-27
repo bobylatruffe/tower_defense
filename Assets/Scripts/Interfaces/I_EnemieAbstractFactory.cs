@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface I_EnemieAbstractFactory
 {
-    A_Enemie createWalkingEnemie();
-    A_Enemie createFlyingEnemie();
-    A_Enemie createTeleportingEnemie();
+    A_Enemy createWalkingEnemie();
+    A_Enemy createFlyingEnemie();
+    A_Enemy createTeleportingEnemie();
 }

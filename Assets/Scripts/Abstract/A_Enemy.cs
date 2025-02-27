@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class A_Enemie : MonoBehaviour
+public abstract class A_Enemy : MonoBehaviour
 {
     public Action<GameObject, float> enemyTouchedByProjectile { get; set; }
 

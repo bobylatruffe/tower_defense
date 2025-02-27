@@ -17,7 +17,7 @@ public class Tower : A_Tower
 
     public override void shoot()
     {
-        List<A_Enemie> enemies = (List<A_Enemie>)Mediator.onEventFromManagers(
+        List<A_Enemy> enemies = (List<A_Enemy>)Mediator.onEventFromManagers(
             new Tuple<EventTypeFromManager, object>(EventTypeFromManager.GET_ALL_ENEMIES, null));
 
         Strategy.shoot(enemies);

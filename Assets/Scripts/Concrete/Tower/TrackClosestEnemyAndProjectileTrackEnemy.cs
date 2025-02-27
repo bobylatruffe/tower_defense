@@ -15,7 +15,7 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
     private float fireRate;
     private bool canShoot = true;
 
-    private List<A_Enemie> currentTargets = new List<A_Enemie>();
+    private List<A_Enemy> currentTargets = new List<A_Enemy>();
 
     private void Start()
     {
@@ -45,7 +45,7 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
         return null;
     }
 
-    private Vector3 getCenterOfTargets(List<A_Enemie> targets)
+    private Vector3 getCenterOfTargets(List<A_Enemy> targets)
     {
         if (targets == null || targets.Count == 0)
             return Vector3.zero;
@@ -79,7 +79,7 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
         }
     }
 
-    private List<A_Enemie> getClosestEnemies(List<A_Enemie> enemies, float range, int maxTargets)
+    private List<A_Enemy> getClosestEnemies(List<A_Enemy> enemies, float range, int maxTargets)
     {
         return enemies
             .Where(e => e != null && Vector3.Distance(transform.position, e.transform.position) <= range)
@@ -116,7 +116,7 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
         canShoot = true;
     }
 
-    public void shoot(List<A_Enemie> enemies)
+    public void shoot(List<A_Enemy> enemies)
     {
         currentTargets = getClosestEnemies(enemies, range, projectiles.Count);
 

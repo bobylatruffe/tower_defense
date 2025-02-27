@@ -9,6 +9,6 @@
 
     public object execute(object eventData)
     {
-        return gameboard.addEnemie((A_Enemie)eventData);
+        return gameboard.addEnemie((A_Enemy)eventData);
     }
 }

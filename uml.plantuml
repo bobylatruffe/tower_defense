@@ -5,10 +5,10 @@
 /' skinparam linetype polyline '/
 
 class GameManager implements I_UIObserver, I_GameManagerMediator {
-    - gameboardManager : A_GameboardManager
-    - waveManager : A_WaveManager
-    - shopManager : A_ShopManager
-    - playerManager : A_PlayerManager
+    - gameboardManager : Gameboard
+    - waveManager : A_Wave
+    - shopManager : A_Shop
+    - playerManager : A_Player
     - systemObserver : I_SystemObserver
     - state : I_State
     - eventDispatcher : Dictionnary<EVENT_TYPE, I_Event>
@@ -26,7 +26,7 @@ interface I_Event {
 class AddNewEnemy implements I_Event {
 }
 
-AddNewEnemy --> A_GameboardManager
+AddNewEnemy --> Gameboard
 
 class Blablabla implements I_Event {
 }
@@ -64,7 +64,7 @@ DeathTime --> GameManager
 GameManager --> GameManager
 
 class System implements I_SystemObserver {
-    - hudManager : A_HudManager
+    - hudManager : A_Hud
     - soundManager : I_SoundManagers
     - logger : List<I_Logger>
     - gameManager : GameManager
@@ -91,7 +91,7 @@ class ConsoleLogger implements I_Logger {
 '     nécessaires au fonctionnement du TowerDefense.
 ' end note
 
-abstract class A_GameboardManager  {
+abstract class Gameboard  {
     - rows : int
     - cols : int
     - mediator : I_GameManagerMediator
@@ -106,7 +106,7 @@ abstract class A_GameboardManager  {
     + getLeave() : Case
 }
 
-A_GameboardManager o-- A_Tower
+Gameboard o-- A_Tower
 BaseTowerDecorator o-- A_Tower
 
 class BaseTowerDecorator extends A_Tower {
@@ -118,55 +118,55 @@ class TowerDecorator extends BaseTowerDecorator {
     + shoot()
 }
 
-/' A_GameboardManager *-- TowerDecorator '/
-/' A_GameboardManager --> TowerDecorator '/
+/' Gameboard *-- TowerDecorator '/
+/' Gameboard --> TowerDecorator '/
 
-abstract class A_WaveManager  {
+abstract class A_Wave  {
     - mediator : I_GameManagerMediator
     - currentLevel : int
-    - enemieAbstractFactory : A_EnemieAbstractFactory
+    - enemieAbstractFactory : A_E
     + startWave()
 }
 
-abstract class A_EnemieAbstractFactory {
-    + createWalkingEnemie() : A_Enemie
-    + createFlyingEnemie() : A_Enemie
-    + createTeleportingEnemie() : A_Enemie
+interface A_EnemyFactory {
+    + createWalkingEnemie() : A_Emeny
+    + createFlyingEnemie() : A_Emeny
+    + createTeleportingEnemie() : A_Emeny
 }
 
-A_WaveManager --> A_EnemieAbstractFactory
-A_WaveManager <|-- SimpleWaveManager
+A_Wave --> A_EnemyFactory
+A_Wave <|-- SimpleWaveManager
 
-class StudentEnemieFactory extends A_EnemieAbstractFactory {
+class StudentEnemieFactory implements A_EnemyFactory {
     - prefabWalkingEnemies : List<Prebab>
     - prefabFlyingEnemies : List<Prefab>
     - prefabTeleportingEnemies : List<Prefab>
-    + createWalkingEnemie() : A_Enemie
-    + createFlyingEnemie() : A_Enemie
-    + createTeleportingEnemie() : A_Enemie
+    + createWalkingEnemie() : A_Emeny
+    + createFlyingEnemie() : A_Emeny
+    + createTeleportingEnemie() : A_Emeny
 }
 
-StudentEnemieFactory ..> A_Enemie
+StudentEnemieFactory ..> A_Emeny
 
-class SimpleEnemieFactory extends A_EnemieAbstractFactory {
+class SimpleEnemieFactory implements A_EnemyFactory {
     - prefabWalkingEnemies : List<Prebab>
     - prefabFlyingEnemies : List<Prefab>
     - prefabTeleportingEnemies : List<Prefab>
-    + createWalkingEnemie() : A_Enemie
-    + createFlyingEnemie() : A_Enemie
-    + createTeleportingEnemie() : A_Enemie
+    + createWalkingEnemie() : A_Emeny
+    + createFlyingEnemie() : A_Emeny
+    + createTeleportingEnemie() : A_Emeny
 }
 
-SimpleEnemieFactory ..> A_Enemie
+SimpleEnemieFactory ..> A_Emeny
 
-abstract class A_ShopManager {
+abstract class A_Shop {
     - mediator : I_GameManagerMediator
     - towerFactory : A_TowerFactory
     + buyTower() : A_Tower
     + sendTowerImageAvailable()
 }
 
-abstract class A_PlayerManager  {
+abstract class A_Player  {
     - mediator : I_GameManagerMediator
     - lifePoint : int
     - money : int
@@ -178,9 +178,9 @@ class TowerFactory implements A_TowerFactory {
 
 }
 
-A_ShopManager --> A_TowerFactory
+A_Shop --> A_TowerFactory
 
-abstract class A_HudManager {
+abstract class A_Hud {
     - uiObserver : I_UIObserver
     + showLevel(int level)
     + showTowerShop(towersImages : List<Tower  Image>)
@@ -211,26 +211,26 @@ interface I_GameManagerMediator {
     + onEventFromManagers()
 }
 
-/' GameManager o-- A_GameboardManager
-GameManager o-- A_WaveManager
-GameManager o-- A_ShopManager
-GameManager o-- A_PlayerManager
+/' GameManager o-- Gameboard
+GameManager o-- A_Wave
+GameManager o-- A_Shop
+GameManager o-- A_Player
 GameManager o-- I_SystemObserver '/
 
-System *-- A_HudManager
+System *-- A_Hud
 System *-- I_SoundManager
 System *-- I_Logger
 System *-- GameManager
 
-A_HudManager --> I_UIObserver
+A_Hud --> I_UIObserver
 
-I_GameManagerMediator <-- A_GameboardManager
-I_GameManagerMediator <-- A_PlayerManager
-I_GameManagerMediator <-- A_WaveManager
-I_GameManagerMediator <-- A_ShopManager
+I_GameManagerMediator <-- Gameboard
+I_GameManagerMediator <-- A_Player
+I_GameManagerMediator <-- A_Wave
+I_GameManagerMediator <-- A_Shop
 
-/' A_GameboardManager o-- A_Tower '/
-A_GameboardManager o-- A_Enemie
+/' Gameboard o-- A_Tower '/
+Gameboard o-- A_Emeny
 
 TowerFactory ..> A_Tower
 
@@ -250,7 +250,7 @@ interface I_MoveStrategy {
     + move()
 }
 
-abstract class A_Enemie {
+abstract class A_Emeny {
     - currentDamage : int
     - speed : int
     - specialMove : I_MoveStrategy
@@ -260,10 +260,10 @@ abstract class A_Enemie {
     + addSpecialMove(moveStrategy : I_MoveStrategy)
 }
 
-A_Enemie --> I_MoveStrategy
-A_Enemie --> I_GameManagerMediator
+A_Emeny --> I_MoveStrategy
+A_Emeny --> I_GameManagerMediator
 
-class SimpleGameBoard extends A_GameboardManager {
+class SimpleGameBoard extends Gameboard {
 
 }
 
@@ -273,19 +273,19 @@ class TrackFirstClosestEnemy implements I_TowerStrategy {
 
 A_Tower o-- I_TowerStrategy
 
-class Player extends A_PlayerManager {
+class Player extends A_Player {
     
 }
 
 interface I_DetectorEnemyWinObserver {
-    + enemyWin(enemy : A_Enemie)
+    + enemyWin(enemy : A_Emeny)
 }
 
 class DetectorEnemyWin {
     - gameboardManager : I_DetectorEnemyWinObserver
 }
 
-abstract class A_GameboardManager implements I_DetectorEnemyWinObserver {
+abstract class Gameboard implements I_DetectorEnemyWinObserver {
     
 }
 

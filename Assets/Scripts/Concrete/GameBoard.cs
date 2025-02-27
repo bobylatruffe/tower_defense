@@ -131,23 +131,23 @@ public class GameBoard : A_Gameboard
     //     return true;
     // }
 
-    public override bool addEnemie(A_Enemie newEnemie)
+    public override bool addEnemie(A_Enemy newEnemy)
     {
-        newEnemie.transform.SetParent(transform);
+        newEnemy.transform.SetParent(transform);
 
         int whichEntry = Random.Range(0, Rows);
 
-        newEnemie.transform.position = Entries[whichEntry].transform.position;
-        newEnemie.transform.rotation = Entries[whichEntry].transform.rotation;
-        newEnemie.transform.localScale = Entries[whichEntry].transform.localScale;
+        newEnemy.transform.position = Entries[whichEntry].transform.position;
+        newEnemy.transform.rotation = Entries[whichEntry].transform.rotation;
+        newEnemy.transform.localScale = Entries[whichEntry].transform.localScale;
 
-        newEnemie.gameObject.SetActive(true);
-        newEnemie.IsMoving = true;
-        newEnemie.GetComponent<I_MoveStrategy>().initStrategy();
+        newEnemy.gameObject.SetActive(true);
+        newEnemy.IsMoving = true;
+        newEnemy.GetComponent<I_MoveStrategy>().initStrategy();
 
-        newEnemie.enemyTouchedByProjectile = enemyTouchedByProjectile;
+        newEnemy.enemyTouchedByProjectile = enemyTouchedByProjectile;
 
-        Enemies.Add(newEnemie);
+        Enemies.Add(newEnemy);
 
         return true;
     }
@@ -182,7 +182,7 @@ public class GameBoard : A_Gameboard
 
     public override void enemyWin(GameObject enemyGo)
     {
-        A_Enemie enemy = enemyGo.GetComponent<A_Enemie>();
+        A_Enemy enemy = enemyGo.GetComponent<A_Enemy>();
         Mediator.onEventFromManagers(
             new Tuple<EventTypeFromManager, object>(EventTypeFromManager.REMOVE_LIFE, enemy.Point));
         Destroy(enemyGo);
@@ -191,11 +191,11 @@ public class GameBoard : A_Gameboard
 
     public void enemyTouchedByProjectile(GameObject enemyTouched, float projectileDammage)
     {
-        A_Enemie enemy = enemyTouched.GetComponent<A_Enemie>();
+        A_Enemy enemy = enemyTouched.GetComponent<A_Enemy>();
 
         if (enemy.CurrentHealth - projectileDammage <= 0)
         {
-            Enemies.Remove(enemyTouched.GetComponent<A_Enemie>());
+            Enemies.Remove(enemyTouched.GetComponent<A_Enemy>());
             // Pour l'animation death
             // enemyTouched.GetComponent<BoxCollider>().enabled = false;
             // Destroy(enemyTouched, 2);

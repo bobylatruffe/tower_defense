@@ -40,7 +40,7 @@ public class SimpleWave : A_Wave
     private void Start()
     {
         Mediator = GameManager.Instance;
-        EnemyAbstractFactory = FindFirstObjectByType<EnemieFactory>();
+        EnemyAbstractFactory = FindFirstObjectByType<SimpleEnemieFactory>();
         CurrentLevel = 1;
         currentSpawnDuration = inistialSpawnDuraction;
     }
@@ -145,7 +145,7 @@ public class SimpleWave : A_Wave
 
     private void SpawnWalkingEnemy()
     {
-        A_Enemie enemy = EnemyAbstractFactory.createWalkingEnemie();
+        A_Enemy enemy = EnemyAbstractFactory.createWalkingEnemie();
 
         Type randomStrategyType = walkingMoveStrategies[Random.Range(0, walkingMoveStrategies.Count)];
         I_MoveStrategy strategy = (I_MoveStrategy)enemy.gameObject.AddComponent(randomStrategyType);

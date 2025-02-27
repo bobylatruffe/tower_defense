@@ -31,7 +31,7 @@ public class TowerDecorateur : BaseTowerDecorator
     {
         yield return new WaitForSeconds(1f);
 
-        List<A_Enemie> enemies = (List<A_Enemie>)Mediator.onEventFromManagers(
+        List<A_Enemy> enemies = (List<A_Enemy>)Mediator.onEventFromManagers(
             new Tuple<EventTypeFromManager, object>(EventTypeFromManager.GET_ALL_ENEMIES, null));
 
         strategy.shoot(enemies);
