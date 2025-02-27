@@ -36,7 +36,7 @@ public class TowerFactory : MonoBehaviour, I_TowerFactory
                 if (towerName == "Turret 6a" || towerName == "Turret 6b" || towerName == "Turret 6c" ||
                     towerName == "Turret 6d")
                 {
-                    tower.AddComponent<TrackClosestEnemy>();
+                    tower.AddComponent<TrackFarthestEnemy>();
                     atower.possibleUpgrade = Resources.Load<PossibleUpgrade>("Turret6PossibleUpgrade");
                 }
 
