@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class SimplePlayer : A_PlayerManager
+public class Player : A_Player
 {
     private void Awake()
     {

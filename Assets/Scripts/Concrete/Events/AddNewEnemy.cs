@@ -1,8 +1,8 @@
 ﻿public class AddNewEnemy : I_Event
 {
-    private A_GameboardManager gameboard;
+    private A_Gameboard gameboard;
 
-    public AddNewEnemy(A_GameboardManager gameboard)
+    public AddNewEnemy(A_Gameboard gameboard)
     {
         this.gameboard = gameboard;
     }

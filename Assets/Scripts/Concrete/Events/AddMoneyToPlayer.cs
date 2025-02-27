@@ -2,10 +2,10 @@
 
 public class AddMoneyToPlayer : I_Event
 {
-    private A_PlayerManager player;
+    private A_Player player;
     private I_SystemObserver systemObserver;
 
-    public AddMoneyToPlayer(A_PlayerManager player, I_SystemObserver systemObserver)
+    public AddMoneyToPlayer(A_Player player, I_SystemObserver systemObserver)
     {
         this.player = player;
         this.systemObserver = systemObserver;

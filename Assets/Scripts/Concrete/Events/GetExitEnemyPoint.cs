@@ -1,8 +1,8 @@
 ﻿public class GetExitEnemyPoint : I_Event
 {
-    private A_GameboardManager gameboard;
+    private A_Gameboard gameboard;
 
-    public GetExitEnemyPoint(A_GameboardManager gameboard)
+    public GetExitEnemyPoint(A_Gameboard gameboard)
     {
         this.gameboard = gameboard;
     }

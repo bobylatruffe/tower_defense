@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
 
-public class Hud : A_HudManager
+public class Hud : A_Hud
 {
     private VisualElement mainMenu;
 

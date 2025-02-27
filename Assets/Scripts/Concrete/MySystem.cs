@@ -8,7 +8,7 @@ public class MySystem : MonoBehaviour, I_SystemObserver
 
     private I_SoundManager SoundManager { get; set; }
 
-    private A_HudManager hudManager;
+    private A_Hud hud;
     private GameManager gameManager;
 
     private List<I_Logger> loggers = new List<I_Logger>();
@@ -27,7 +27,7 @@ public class MySystem : MonoBehaviour, I_SystemObserver
 
     private void Start()
     {
-        hudManager = A_HudManager.Instance;
+        hud = A_Hud.Instance;
         gameManager = GameManager.Instance;
         Application.targetFrameRate = 120;
     }
@@ -47,34 +47,34 @@ public class MySystem : MonoBehaviour, I_SystemObserver
         switch (eventData.Item1)
         {
             case "SHOW_MAIN_MENU":
-                hudManager.showMenu();
+                hud.showMenu();
                 break;
 
             case "UPDATE_LIFE_POINTS":
                 int newLifePoints = (int)eventData.Item2;
-                hudManager.updateLife(newLifePoints);
+                hud.updateLife(newLifePoints);
                 break;
 
             case "SHOW_TOWER_SHOP":
-                hudManager.showTowerShop();
+                hud.showTowerShop();
                 break;
 
             case "UPDATE_MONEY":
                 int money = (int)eventData.Item2;
-                hudManager.updateMoney(money);
+                hud.updateMoney(money);
                 break;
 
             case "UPDATE_LEVEL_HUD":
                 int currentLevel = (int)eventData.Item2;
-                hudManager.updateLevel(currentLevel);
+                hud.updateLevel(currentLevel);
                 break;
 
             case "UPDATE_TIMER_BEFORE_WAVE":
-                hudManager.updateTimerBeforeWave((int)eventData.Item2);
+                hud.updateTimerBeforeWave((int)eventData.Item2);
                 break;
 
             case "HIDE_TIMER_BEFORE_WAVE":
-                hudManager.hideTimerBeforeWave();
+                hud.hideTimerBeforeWave();
                 break;
         }
 

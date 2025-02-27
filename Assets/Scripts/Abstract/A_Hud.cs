@@ -1,0 +1,20 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class A_Hud : MonoBehaviour
+{
+    public static A_Hud Instance { get; protected set; }
+
+    protected I_UIObserver uiObserver;
+
+    public abstract void updateLevel(int level);
+    public abstract void updateMoney(int money);
+    public abstract void updateLife(int life);
+    public abstract void updateTimerBeforeWave(int timer);
+    public abstract void showTowerShop();
+    public abstract void showMenu();
+    public abstract void showError();
+    public abstract void sendUIEvent(Tuple<string, int> eventData);
+    public abstract void hideTimerBeforeWave();
+}

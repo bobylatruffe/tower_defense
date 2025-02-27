@@ -1,8 +1,8 @@
 ﻿public class GetAllEnemies : I_Event
 {
-    private A_GameboardManager gameboard;
+    private A_Gameboard gameboard;
 
-    public GetAllEnemies(A_GameboardManager gameboard)
+    public GetAllEnemies(A_Gameboard gameboard)
     {
         this.gameboard = gameboard;
     }

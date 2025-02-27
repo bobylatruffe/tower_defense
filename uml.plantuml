@@ -26,60 +26,10 @@ interface I_Event {
 class AddNewEnemy implements I_Event {
 }
 
+AddNewEnemy --> A_GameboardManager
+
 class Blablabla implements I_Event {
 }
-
-' class GetExitPoint implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class GetEntryPoint implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class ShowMainMenu implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class RemoveLifePoint implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class UpdateLifePoint implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class UpdateMoney implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class ShowTowerShop implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class NoMoney implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class AddMoney implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class UpdateLevelHud implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class UpdateTimerBeforeWave implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class HideTimerBeforeWave implements I_Event {
-'     + object execute(eventData : object);
-' }
-
-' class PlayerDeath implements I_Event {
-'     + object execute(eventData : object);
-' }
 
 GameManager *-- I_Event
 

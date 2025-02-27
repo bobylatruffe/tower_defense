@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
 {
     public static GameManager Instance { get; private set; }
 
-    private A_GameboardManager gameboardManager;
-    private A_WaveManager waveManager;
-    private A_PlayerManager playerManager;
+    private A_Gameboard gameboard;
+    private A_Wave wave;
+    private A_Player player;
     internal I_SystemObserver systemObserver;
-    private A_ShopManager shopManager;
+    private A_Shop shop;
     private I_State state;
 
     private Dictionary<EventTypeFromManager, I_Event> events = new Dictionary<EventTypeFromManager, I_Event>();
@@ -41,36 +41,36 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
 
     private void Start()
     {
-        gameboardManager = A_GameboardManager.Instance;
-        waveManager = A_WaveManager.Instance;
-        playerManager = A_PlayerManager.Instance;
+        gameboard = A_Gameboard.Instance;
+        wave = A_Wave.Instance;
+        player = A_Player.Instance;
         systemObserver = MySystem.Instance;
-        shopManager = A_ShopManager.Instance;
+        shop = A_Shop.Instance;
 
         state = new ShopTime(this);
 
-        registerEventHandlers(EventTypeFromManager.ADD_NEW_ENEMY, new AddNewEnemy(gameboardManager));
-        registerEventHandlers(EventTypeFromManager.GET_EXIT_ENEMY_POINT, new GetExitEnemyPoint(gameboardManager));
-        registerEventHandlers(EventTypeFromManager.GET_ENTRY_ENEMY_POINT, new GetExitEnemyPoint(gameboardManager));
+        registerEventHandlers(EventTypeFromManager.ADD_NEW_ENEMY, new AddNewEnemy(gameboard));
+        registerEventHandlers(EventTypeFromManager.GET_EXIT_ENEMY_POINT, new GetExitEnemyPoint(gameboard));
+        registerEventHandlers(EventTypeFromManager.GET_ENTRY_ENEMY_POINT, new GetExitEnemyPoint(gameboard));
         registerEventHandlers(EventTypeFromManager.SHOW_MAIN_MENU, new ShowMainMenu(systemObserver));
-        registerEventHandlers(EventTypeFromManager.REMOVE_LIFE, new RemoveLife(playerManager, systemObserver));
+        registerEventHandlers(EventTypeFromManager.REMOVE_LIFE, new RemoveLife(player, systemObserver));
         registerEventHandlers(EventTypeFromManager.UPDATE_LIFE_POINTS, new UpdateLifePoint(systemObserver));
         registerEventHandlers(EventTypeFromManager.UPDATE_MONEY, new UpdateMoney(systemObserver));
         registerEventHandlers(EventTypeFromManager.SHOW_TOWER_SHOP, new UpdateMoney(systemObserver));
-        registerEventHandlers(EventTypeFromManager.REMOVE_MONEY, new RemoveMoney(systemObserver, playerManager));
+        registerEventHandlers(EventTypeFromManager.REMOVE_MONEY, new RemoveMoney(systemObserver, player));
         registerEventHandlers(EventTypeFromManager.NO_MONEY, new NoMoney());
         registerEventHandlers(EventTypeFromManager.ADD_MONEY_TO_PLAYER,
-            new AddMoneyToPlayer(playerManager, systemObserver));
+            new AddMoneyToPlayer(player, systemObserver));
         registerEventHandlers(EventTypeFromManager.UPDATE_LEVEL_HUD, new UpdateLevelHud(systemObserver));
         registerEventHandlers(EventTypeFromManager.UPDATE_TIMER_BEFORE_WAVE, new UpdateTimerBeforeWave(systemObserver));
         registerEventHandlers(EventTypeFromManager.HIDE_TIMER_BEFORE_WAVE, new HideTimerBeforeWave(systemObserver));
-        registerEventHandlers(EventTypeFromManager.GET_ALL_ENEMIES, new GetAllEnemies(gameboardManager));
+        registerEventHandlers(EventTypeFromManager.GET_ALL_ENEMIES, new GetAllEnemies(gameboard));
     }
 
     public void start()
     {
-        systemObserver.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", playerManager.LifePoints));
-        systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", playerManager.Money));
+        systemObserver.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", player.LifePoints));
+        systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", player.Money));
 
         state.start();
     }
@@ -106,8 +106,8 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         {
             case "TOWER_SELECTED_FROM_HUD":
                 string nameTowerSelectedByUser = dataEvent.Item2 as string;
-                A_Tower tower = shopManager.buyIfPlayerCanAffordIt(playerManager.Money, nameTowerSelectedByUser);
-                gameboardManager.addTower(tower);
+                A_Tower tower = shop.buyIfPlayerCanAffordIt(player.Money, nameTowerSelectedByUser);
+                gameboard.addTower(tower);
                 break;
 
             case "START_GAME":

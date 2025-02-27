@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SimpleWaveManager : A_WaveManager
+public class SimpleWave : A_Wave
 {
     private List<Type> walkingMoveStrategies = new List<Type>
     {
@@ -40,7 +40,7 @@ public class SimpleWaveManager : A_WaveManager
     private void Start()
     {
         Mediator = GameManager.Instance;
-        EnemyAbstractFactory = FindFirstObjectByType<SimpleAEnemieFactory>();
+        EnemyAbstractFactory = FindFirstObjectByType<EnemieFactory>();
         CurrentLevel = 1;
         currentSpawnDuration = inistialSpawnDuraction;
     }
@@ -81,7 +81,7 @@ public class SimpleWaveManager : A_WaveManager
     private IEnumerator TimerBeforeWave(int timerBeforeWave)
     {
         Debug.Log("TimerBeforeWave");
-        while (A_GameboardManager.Instance.Enemies.Count > 0 && isWaving)
+        while (A_Gameboard.Instance.Enemies.Count > 0 && isWaving)
             yield return new WaitForSeconds(0.1f);
 
         while (timerBeforeWave > 0)

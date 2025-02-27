@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleAEnemieFactory : MonoBehaviour, I_EnemieAbstractFactory
+public class EnemieFactory : MonoBehaviour, I_EnemieAbstractFactory
 {
     [SerializeField] private List<GameObject> prefabEnemiesWalking = new List<GameObject>();
     [SerializeField] private List<GameObject> prefabEnemiesFlying = new List<GameObject>();

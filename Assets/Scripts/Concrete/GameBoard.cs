@@ -4,7 +4,7 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SimpleGameboard : A_GameboardManager
+public class GameBoard : A_Gameboard
 {
     private GameObject wall;
     private GameObject lastHitObject;

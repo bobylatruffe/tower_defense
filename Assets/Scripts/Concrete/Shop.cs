@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shop : A_ShopManager
+public class Shop : A_Shop
 {
     List<Tuple<string, int>> towersAvailable = new List<Tuple<string, int>>();
 
@@ -81,8 +81,8 @@ public class Shop : A_ShopManager
 
                 if (nextUpgradedTower != null)
                 {
-                    A_Tower newATower = buyIfPlayerCanAffordIt(A_PlayerManager.Instance.Money, nextUpgradedTower.name);
-                    A_GameboardManager.Instance.upgradeTower(atower, newATower);
+                    A_Tower newATower = buyIfPlayerCanAffordIt(A_Player.Instance.Money, nextUpgradedTower.name);
+                    A_Gameboard.Instance.upgradeTower(atower, newATower);
                 }
             }
 

@@ -11,7 +11,7 @@ public class WaveTime : I_State
 
     public void start()
     {
-        A_WaveManager.Instance.startWave(end);
+        A_Wave.Instance.startWave(end);
     }
 
     public void end()

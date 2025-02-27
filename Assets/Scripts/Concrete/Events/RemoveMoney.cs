@@ -3,9 +3,9 @@
 public class RemoveMoney : I_Event
 {
     private I_SystemObserver systemObserver;
-    private A_PlayerManager player;
+    private A_Player player;
 
-    public RemoveMoney(I_SystemObserver systemObserver, A_PlayerManager player)
+    public RemoveMoney(I_SystemObserver systemObserver, A_Player player)
     {
         this.systemObserver = systemObserver;
         this.player = player;
