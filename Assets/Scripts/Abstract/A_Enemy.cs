@@ -3,9 +3,10 @@ using UnityEngine;
 
 public abstract class A_Enemy : MonoBehaviour
 {
-    public Action<GameObject, float> enemyTouchedByProjectile { get; set; }
+    protected I_GameManagerMediator Mediator { get; set; }
+    protected float CurrentHealth { get; set; }
+    protected float MaxHealth { get; set; }
 
-    public float CurrentHealth { get; set; }
     protected int Speed { get; set; }
 
     public int Point { get; set; }

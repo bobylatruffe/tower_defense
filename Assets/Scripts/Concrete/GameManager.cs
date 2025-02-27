@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         registerEventHandlers(EventTypeFromManager.UPDATE_TIMER_BEFORE_WAVE, new UpdateTimerBeforeWave(systemObserver));
         registerEventHandlers(EventTypeFromManager.HIDE_TIMER_BEFORE_WAVE, new HideTimerBeforeWave(systemObserver));
         registerEventHandlers(EventTypeFromManager.GET_ALL_ENEMIES, new GetAllEnemies(gameboard));
+        registerEventHandlers(EventTypeFromManager.ENEMY_IS_DEATH, new EnemyIsDeath(gameboard));
     }
 
     public void start()

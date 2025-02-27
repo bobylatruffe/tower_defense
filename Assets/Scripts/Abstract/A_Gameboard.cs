@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class A_Gameboard : MonoBehaviour, I_DetectorEnemyWin
 {
-    public static A_Gameboard Instance {get; protected set;}
+    public static A_Gameboard Instance { get; protected set; }
 
     protected int Rows { get; set; }
     protected int Cols { get; set; }
@@ -22,4 +22,5 @@ public abstract class A_Gameboard : MonoBehaviour, I_DetectorEnemyWin
     public abstract GameObject getLeave();
     public abstract GameObject getEntry();
     public abstract void enemyWin(GameObject enemyGo);
+    public abstract void enemyIsDeath(GameObject enemyDeath);
 }

@@ -145,8 +145,6 @@ public class GameBoard : A_Gameboard
         newEnemy.IsMoving = true;
         newEnemy.GetComponent<I_MoveStrategy>().initStrategy();
 
-        newEnemy.enemyTouchedByProjectile = enemyTouchedByProjectile;
-
         Enemies.Add(newEnemy);
 
         return true;
@@ -189,21 +187,9 @@ public class GameBoard : A_Gameboard
         Enemies.Remove(enemy);
     }
 
-    public void enemyTouchedByProjectile(GameObject enemyTouched, float projectileDammage)
+    public override void enemyIsDeath(GameObject enemyDeath)
     {
-        A_Enemy enemy = enemyTouched.GetComponent<A_Enemy>();
-
-        if (enemy.CurrentHealth - projectileDammage <= 0)
-        {
-            Enemies.Remove(enemyTouched.GetComponent<A_Enemy>());
-            // Pour l'animation death
-            // enemyTouched.GetComponent<BoxCollider>().enabled = false;
-            // Destroy(enemyTouched, 2);
-            Destroy(enemyTouched);
-        }
-        else
-        {
-            enemy.CurrentHealth -= projectileDammage;
-        }
+        Enemies.Remove(enemyDeath.GetComponent<A_Enemy>());
+        Destroy(enemyDeath);
     }
 }
