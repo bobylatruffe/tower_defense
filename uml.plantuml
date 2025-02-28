@@ -11,7 +11,7 @@ class GameManager implements I_UIObserver, I_GameManagerMediator {
     - playerManager : A_Player
     - systemObserver : I_SystemObserver
     - state : I_State
-    - eventDispatcher : Dictionnary<EVENT_TYPE, I_Event>
+    - events : Dictionnary<EVENT_TYPE, I_Event>
     + {static} instance : GameManager
     + {static} getInstance() : GameManager
     + start()
@@ -27,6 +27,11 @@ class AddNewEnemy implements I_Event {
 }
 
 AddNewEnemy --> Gameboard
+
+class EnemyIsDeath implements I_Event {
+}
+
+EnemyIsDeath --> A_Player
 
 class Blablabla implements I_Event {
 }
@@ -124,20 +129,20 @@ class TowerDecorator extends BaseTowerDecorator {
 abstract class A_Wave  {
     - mediator : I_GameManagerMediator
     - currentLevel : int
-    - enemieAbstractFactory : A_E
+    - enemieAbstractFactory : I_EnemyAbstractFactory
     + startWave()
 }
 
-interface A_EnemyFactory {
+interface I_EnemyAbstractFactory {
     + createWalkingEnemie() : A_Emeny
     + createFlyingEnemie() : A_Emeny
     + createTeleportingEnemie() : A_Emeny
 }
 
-A_Wave --> A_EnemyFactory
-A_Wave <|-- SimpleWaveManager
+A_Wave --> I_EnemyAbstractFactory
+A_Wave <|-- SimpleWave
 
-class StudentEnemieFactory implements A_EnemyFactory {
+class StudentEnemieFactory implements I_EnemyAbstractFactory {
     - prefabWalkingEnemies : List<Prebab>
     - prefabFlyingEnemies : List<Prefab>
     - prefabTeleportingEnemies : List<Prefab>
@@ -148,7 +153,7 @@ class StudentEnemieFactory implements A_EnemyFactory {
 
 StudentEnemieFactory ..> A_Emeny
 
-class SimpleEnemieFactory implements A_EnemyFactory {
+class SimpleEnemieFactory implements I_EnemyAbstractFactory {
     - prefabWalkingEnemies : List<Prebab>
     - prefabFlyingEnemies : List<Prefab>
     - prefabTeleportingEnemies : List<Prefab>
@@ -161,7 +166,7 @@ SimpleEnemieFactory ..> A_Emeny
 
 abstract class A_Shop {
     - mediator : I_GameManagerMediator
-    - towerFactory : A_TowerFactory
+    - towerFactory : I_TowerFactory
     + buyTower() : A_Tower
     + sendTowerImageAvailable()
 }
@@ -174,11 +179,11 @@ abstract class A_Player  {
     + showTowerShop()
 }
 
-class TowerFactory implements A_TowerFactory {
+class TowerFactory implements I_TowerFactory {
 
 }
 
-A_Shop --> A_TowerFactory
+A_Shop --> I_TowerFactory
 
 abstract class A_Hud {
     - uiObserver : I_UIObserver
@@ -189,7 +194,7 @@ abstract class A_Hud {
     + sendUIEvent()
 }
 
-interface A_TowerFactory {
+interface I_TowerFactory {
     + createTower(typeTower : string) : A_Tower
 }
 
@@ -232,7 +237,7 @@ I_GameManagerMediator <-- A_Shop
 /' Gameboard o-- A_Tower '/
 Gameboard o-- A_Emeny
 
-TowerFactory ..> A_Tower
+I_TowerFactory ..> A_Tower
 
 abstract class A_Tower {
     - mediator : I_GameManagerMediator
