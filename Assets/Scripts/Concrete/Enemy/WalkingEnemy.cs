@@ -40,7 +40,7 @@ public class WalkingEnemy : A_Enemy
         Destroy(projectile.gameObject);
 
         CurrentHealth -= projectileData.projectileDamage;
-        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+        // CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
 
         if (progressBar)
         {
