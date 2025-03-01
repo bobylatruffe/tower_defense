@@ -194,6 +194,5 @@ public class GameBoard : A_Gameboard
     public override void enemyIsDeath(GameObject enemyDeath)
     {
         Enemies.Remove(enemyDeath.GetComponent<A_Enemy>());
-        Destroy(enemyDeath);
     }
 }

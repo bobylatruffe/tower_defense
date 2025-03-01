@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -48,7 +49,21 @@ public class WalkingEnemy : A_Enemy
         }
 
         if (CurrentHealth <= 0)
-            Mediator.onEventFromManagers(
-                new Tuple<EventTypeFromManager, object>(EventTypeFromManager.ENEMY_IS_DEATH, gameObject));
+        {
+            agent.speed = 0f;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            animator.SetTrigger("Death");
+
+            StartCoroutine(sendDeathEvent());
+        }
+    }
+
+    private IEnumerator sendDeathEvent()
+    {
+        Mediator.onEventFromManagers(
+            new Tuple<EventTypeFromManager, object>(EventTypeFromManager.ENEMY_IS_DEATH, gameObject));
+
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
     }
 }
