@@ -109,11 +109,11 @@ public class SimpleWave : A_Wave
             Time.timeScale /= 2;
         }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            for (int i = 0; i < 10; i++) SpawnWalkingEnemy();
-            // StartCoroutine(SpawnEnemies());
-        }
+        // if (Input.GetMouseButtonDown(1))
+        // {
+        //     for (int i = 0; i < 10; i++) SpawnWalkingEnemy();
+        //     // StartCoroutine(SpawnEnemies());
+        // }
     }
 
     private IEnumerator SpawnEnemies(float spawnDuration, float waitTime)

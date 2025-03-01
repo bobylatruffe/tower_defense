@@ -81,6 +81,7 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
 
     private List<A_Enemy> getClosestEnemies(List<A_Enemy> enemies, float range, int maxTargets)
     {
+        if (this == null) return null;
         return enemies
             .Where(e => e != null && Vector3.Distance(transform.position, e.transform.position) <= range)
             .OrderBy(e => Vector3.Distance(transform.position, e.transform.position))
@@ -120,7 +121,7 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
     {
         currentTargets = getClosestEnemies(enemies, range, projectiles.Count);
 
-        if (currentTargets.Count > 0)
+        if (currentTargets != null && currentTargets.Count > 0)
         {
             trackTargets();
         }

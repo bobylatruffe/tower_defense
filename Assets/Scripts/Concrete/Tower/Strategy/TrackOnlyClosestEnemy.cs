@@ -135,7 +135,7 @@ public class TrackOnlyClosestEnemy : MonoBehaviour, I_TowerStrategy
 
     public void shoot(List<A_Enemy> enemies)
     {
-        if (!canShoot) return;
+        // if (!canShoot) return;
 
         A_Enemy closestEnemy = getClosestEnemy(enemies, range);
 

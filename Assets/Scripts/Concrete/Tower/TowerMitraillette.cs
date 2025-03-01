@@ -10,6 +10,8 @@ public class TowerMitraillette : A_Tower
     private void Start()
     {
         base.Start();
+        StrategySelector.onValueChanged.AddListener(onStrategiesChanged);
+        onStrategiesChanged(StrategySelector.index);
     }
 
     private void Update()

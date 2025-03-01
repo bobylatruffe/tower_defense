@@ -85,7 +85,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &8979029719656446897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,7 +948,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 911201090276280960}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2632957499430651715}
+        m_TargetAssemblyTypeName: TowerOptionsHandler, Assembly-CSharp
+        m_MethodName: upgradeTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9213463448916481198
 GameObject:
   m_ObjectHideFlags: 0

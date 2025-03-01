@@ -27,11 +27,9 @@ public abstract class A_Tower : MonoBehaviour
         TowerOptions.SetActive(false);
 
         StrategySelector = findDeepChild(transform, "strategySelector").GetComponent<HorizontalSelector>();
-        StrategySelector.onValueChanged.AddListener(onStrategiesChanged);
-        onStrategiesChanged(StrategySelector.index);
     }
 
-    private void onStrategiesChanged(int index)
+    protected void onStrategiesChanged(int index)
     {
         if (Strategy != null)
         {
@@ -55,10 +53,12 @@ public abstract class A_Tower : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetMouseButtonUp(1))
+        {
             TowerOptions.SetActive(true);
+        }
     }
 
     protected Transform findDeepChild(Transform parent, string childName)

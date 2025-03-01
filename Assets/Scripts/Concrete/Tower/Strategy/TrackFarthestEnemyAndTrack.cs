@@ -67,6 +67,8 @@ public class TrackFarthestEnemyAndTrack : MonoBehaviour, I_TowerStrategy
 
     private A_Enemy getFarthestEnemy(List<A_Enemy> enemies, float range)
     {
+        if (this == null) return null;
+
         A_Enemy farthestEnemy = null;
         float maxDistance = 0f;
         Vector3 towerPosition = transform.position;

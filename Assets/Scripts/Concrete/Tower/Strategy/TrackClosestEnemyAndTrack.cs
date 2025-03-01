@@ -67,6 +67,8 @@ public class TrackClosestEnemyAndTrack : MonoBehaviour, I_TowerStrategy
 
     private A_Enemy getClosestEnemy(List<A_Enemy> enemies, float range)
     {
+        if (this == null) return null;
+
         A_Enemy closestEnemy = null;
         float closestDistance = float.MaxValue;
         Vector3 towerPosition = gameObject.transform.position;
