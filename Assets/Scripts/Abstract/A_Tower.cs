@@ -55,6 +55,12 @@ public abstract class A_Tower : MonoBehaviour
         }
     }
 
+    private void OnMouseDown()
+    {
+        if (Input.GetKey(KeyCode.LeftControl))
+            TowerOptions.SetActive(true);
+    }
+
     protected Transform findDeepChild(Transform parent, string childName)
     {
         foreach (Transform child in parent)

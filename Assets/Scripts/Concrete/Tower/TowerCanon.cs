@@ -15,11 +15,6 @@ public class TowerCanon : A_Tower
         shoot();
     }
 
-    private void OnMouseDown()
-    {
-        TowerOptions.SetActive(!TowerOptions.activeSelf);
-    }
-
     public override void shoot()
     {
         List<A_Enemy> enemies = (List<A_Enemy>)Mediator.onEventFromManagers(

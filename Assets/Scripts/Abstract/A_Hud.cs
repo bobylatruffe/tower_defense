@@ -17,4 +17,7 @@ public abstract class A_Hud : MonoBehaviour
     public abstract void showError();
     public abstract void sendUIEvent(Tuple<string, int> eventData);
     public abstract void hideTimerBeforeWave();
+
+    public abstract void showTowerOptions();
+    public abstract void closeTowerOptions(GameObject towerOptions);
 }

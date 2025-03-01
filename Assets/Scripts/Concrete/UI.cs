@@ -2,6 +2,7 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -78,7 +79,6 @@ public class UI : A_Hud
         }
     }
 
-
     public override void updateLevel(int level)
     {
         currentLevel.text = level.ToString();
@@ -142,5 +142,15 @@ public class UI : A_Hud
     public override void hideTimerBeforeWave()
     {
         timeBeforeWave.gameObject.SetActive(false);
+    }
+
+    public override void showTowerOptions()
+    {
+        Debug.Log("bonjour towerOptions");
+    }
+
+    public override void closeTowerOptions(GameObject towerOptions)
+    {
+        towerOptions.gameObject.SetActive(false);
     }
 }
