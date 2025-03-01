@@ -19,9 +19,9 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
 
     private void Start()
     {
-        projectileSpawn = findDeepChild(transform, "projectilesSpawn").gameObject;
+        projectileSpawn = gameObject.GetComponent<A_Tower>().ProjectileSpawn;
         rotor = findDeepChild(transform, "Turret");
-        projectileData = projectileSpawn.GetComponent<Projectile>().projectileData;
+        projectileData = gameObject.GetComponent<A_Tower>().ProjectileData;
         range = projectileData.projectileRange;
         fireRate = projectileData.projectileFireRate;
         foreach (Transform child in projectileSpawn.transform)

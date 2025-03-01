@@ -75,6 +75,8 @@ public class GameBoard : A_Gameboard
 
             pendingTower.gameObject.transform.position = hitObject.transform.position + Vector3.up * 0.5f;
 
+            DrawCircle(hitObject.transform.position, pendingTower.ProjectileData.projectileRange, Color.blue, 30);
+
             if (Input.GetMouseButtonDown(0))
             {
                 pendingTower.gameObject.SetActive(true);
@@ -101,37 +103,65 @@ public class GameBoard : A_Gameboard
         Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);
     }
 
+    private LineRenderer rangeCircle;
 
-    // private bool checkIfPossibleToAddTower(Vector3 possibleNewTower)
-    // {
-    //     GameObject tempObstacle = Instantiate(wall, possibleNewTower + Vector3.up, Quaternion.identity);
-    //     surface.BuildNavMesh();
-    //
-    //     foreach (A_Enemie enemy in Enemies)
-    //     {
-    //         if (enemy == null || enemy.gameObject == null) continue;
-    //
-    //         NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
-    //         if (agent == null) continue;
-    //
-    //         Vector3 src = enemy.transform.position;
-    //         Vector3 dst = agent.destination;
-    //
-    //         NavMeshPath path = new NavMeshPath();
-    //         bool pathExists = NavMesh.CalculatePath(src, dst, NavMesh.AllAreas, path);
-    //
-    //         if (!pathExists || path.status != NavMeshPathStatus.PathComplete)
-    //         {
-    //             Destroy(tempObstacle);
-    //             surface.BuildNavMesh();
-    //             return false;
-    //         }
-    //     }
-    //
-    //     Destroy(tempObstacle);
-    //     surface.BuildNavMesh();
-    //     return true;
-    // }
+    private void DrawCircle(Vector3 center, float radius, Color color, int segments)
+    {
+        if (rangeCircle == null)
+        {
+            GameObject circleObject = new GameObject("RangeCircle");
+            rangeCircle = circleObject.AddComponent<LineRenderer>();
+
+            rangeCircle.positionCount = segments + 1;
+            rangeCircle.startWidth = 0.05f;
+            rangeCircle.endWidth = 0.05f;
+            rangeCircle.loop = true;
+            rangeCircle.material = new Material(Shader.Find("Sprites/Default"));
+            rangeCircle.startColor = color;
+            rangeCircle.endColor = color;
+        }
+
+        center += Vector3.up * 0.51f;
+
+        for (int i = 0; i <= segments; i++)
+        {
+            float angle = (i * 360f / segments) * Mathf.Deg2Rad;
+            Vector3 point = center + new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
+            rangeCircle.SetPosition(i, point);
+        }
+    }
+
+
+// private bool checkIfPossibleToAddTower(Vector3 possibleNewTower)
+// {
+//     GameObject tempObstacle = Instantiate(wall, possibleNewTower + Vector3.up, Quaternion.identity);
+//     surface.BuildNavMesh();
+//
+//     foreach (A_Enemie enemy in Enemies)
+//     {
+//         if (enemy == null || enemy.gameObject == null) continue;
+//
+//         NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+//         if (agent == null) continue;
+//
+//         Vector3 src = enemy.transform.position;
+//         Vector3 dst = agent.destination;
+//
+//         NavMeshPath path = new NavMeshPath();
+//         bool pathExists = NavMesh.CalculatePath(src, dst, NavMesh.AllAreas, path);
+//
+//         if (!pathExists || path.status != NavMeshPathStatus.PathComplete)
+//         {
+//             Destroy(tempObstacle);
+//             surface.BuildNavMesh();
+//             return false;
+//         }
+//     }
+//
+//     Destroy(tempObstacle);
+//     surface.BuildNavMesh();
+//     return true;
+// }
 
     public override bool addEnemie(A_Enemy newEnemy)
     {

@@ -9,12 +9,7 @@ public class TowerMissile : A_Tower
 
     private void Start()
     {
-        Mediator = GameManager.Instance;
-        Strategy = GetComponent<I_TowerStrategy>();
-        TowerOptions = Resources.Load<GameObject>("Prefabs/towerOptions");
-        TowerOptions = Instantiate(TowerOptions, transform);
-        TowerOptions.SetActive(false);
-        StrategySelector = findDeepChild(transform, "strategySelector").GetComponent<HorizontalSelector>();
+        base.Start();
         StrategySelector.gameObject.SetActive(false);
     }
 

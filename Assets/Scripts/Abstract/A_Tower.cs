@@ -15,6 +15,9 @@ public abstract class A_Tower : MonoBehaviour
 
     public int Cost { get; set; }
 
+    public ProjectileData ProjectileData { get; set; }
+    public GameObject ProjectileSpawn { get; set; }
+
     protected HorizontalSelector StrategySelector;
 
     public abstract void shoot();
@@ -23,6 +26,8 @@ public abstract class A_Tower : MonoBehaviour
     {
         Mediator = GameManager.Instance;
         Strategy = GetComponent<I_TowerStrategy>();
+        ProjectileSpawn = findDeepChild(transform, "projectilesSpawn").gameObject;
+        ProjectileData = ProjectileSpawn.GetComponent<Projectile>().projectileData;
 
         TowerOptions = Resources.Load<GameObject>("Prefabs/towerOptions");
         TowerOptions = Instantiate(TowerOptions, transform);
@@ -63,7 +68,7 @@ public abstract class A_Tower : MonoBehaviour
         }
     }
 
-    protected Transform findDeepChild(Transform parent, string childName)
+    public Transform findDeepChild(Transform parent, string childName)
     {
         foreach (Transform child in parent)
         {
