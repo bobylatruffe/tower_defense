@@ -11,7 +11,6 @@ public class EnemyIsDeath : I_Event
 
     public object execute(object eventData)
     {
-        Debug.Log(eventData.GetType());
         gameboard.enemyIsDeath((GameObject)eventData);
         return true;
     }
