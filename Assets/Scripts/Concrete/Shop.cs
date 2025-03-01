@@ -48,54 +48,54 @@ public class Shop : A_Shop
         towersAvailable.Add(new Tuple<string, int>("Turret 8a", 160));
     }
 
-    private void Update()
-    {
-        Camera Cam = Camera.main;
-        Ray ray = Cam.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hit;
-        float maxDistance = 50;
-        int groundLayer = LayerMask.GetMask("ItemAdded");
-
-        if (Physics.Raycast(ray, out hit, maxDistance, groundLayer))
-        {
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                A_Tower atower = hit.collider.gameObject.GetComponent<A_Tower>();
-                string atowerName = atower.name.Replace("(Clone)", "");
-                GameObject nextUpgradedTower = null;
-                for (int i = 0; i < atower.possibleUpgrade.towers.Count; i++)
-                {
-                    if (atower.possibleUpgrade.towers[i].name == atowerName)
-                    {
-                        if (i + 1 < atower.possibleUpgrade.towers.Count)
-                        {
-                            nextUpgradedTower = atower.possibleUpgrade.towers[i + 1];
-                        }
-                        else
-                        {
-                            Debug.Log("No more upgrades available");
-                        }
-                    }
-                }
-
-                if (nextUpgradedTower != null)
-                {
-                    A_Tower newATower = buyIfPlayerCanAffordIt(A_Player.Instance.Money, nextUpgradedTower.name);
-                    A_Gameboard.Instance.upgradeTower(atower, newATower);
-                }
-            }
-
-            // if (Input.GetKeyDown(KeyCode.T))
-            // {
-            //     Debug.Log("Decorateur");
-            //     GameObject towerGo = hit.collider.gameObject;
-            //     towerGo.AddComponent<TowerDecorateur>();
-            // }
-        }
-
-        Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);
-    }
+    // private void Update()
+    // {
+    //     Camera Cam = Camera.main;
+    //     Ray ray = Cam.ScreenPointToRay(Input.mousePosition);
+    //
+    //     RaycastHit hit;
+    //     float maxDistance = 50;
+    //     int groundLayer = LayerMask.GetMask("ItemAdded");
+    //
+    //     if (Physics.Raycast(ray, out hit, maxDistance, groundLayer))
+    //     {
+    //         if (Input.GetKeyDown(KeyCode.U))
+    //         {
+    //             A_Tower atower = hit.collider.gameObject.GetComponent<A_Tower>();
+    //             string atowerName = atower.name.Replace("(Clone)", "");
+    //             GameObject nextUpgradedTower = null;
+    //             for (int i = 0; i < atower.possibleUpgrade.towers.Count; i++)
+    //             {
+    //                 if (atower.possibleUpgrade.towers[i].name == atowerName)
+    //                 {
+    //                     if (i + 1 < atower.possibleUpgrade.towers.Count)
+    //                     {
+    //                         nextUpgradedTower = atower.possibleUpgrade.towers[i + 1];
+    //                     }
+    //                     else
+    //                     {
+    //                         Debug.Log("No more upgrades available");
+    //                     }
+    //                 }
+    //             }
+    //
+    //             if (nextUpgradedTower != null)
+    //             {
+    //                 A_Tower newATower = buyIfPlayerCanAffordIt(A_Player.Instance.Money, nextUpgradedTower.name);
+    //                 A_Gameboard.Instance.upgradeTower(atower, newATower);
+    //             }
+    //         }
+    //
+    //         // if (Input.GetKeyDown(KeyCode.T))
+    //         // {
+    //         //     Debug.Log("Decorateur");
+    //         //     GameObject towerGo = hit.collider.gameObject;
+    //         //     towerGo.AddComponent<TowerDecorateur>();
+    //         // }
+    //     }
+    //
+    //     Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);
+    // }
 
     public override A_Tower buyIfPlayerCanAffordIt(int playerMoney, string towerName)
     {
@@ -105,9 +105,9 @@ public class Shop : A_Shop
             {
                 if (playerMoney >= tower.Item2)
                 {
-                    Mediator.onEventFromManagers(
-                        new Tuple<EventTypeFromManager, object>(EventTypeFromManager.REMOVE_MONEY, tower.Item2));
-                    return TowerFactory.createTower(tower.Item1);
+                    A_Tower newtower = TowerFactory.createTower(tower.Item1);
+                    newtower.Cost = tower.Item2;
+                    return newtower;
                 }
 
                 Mediator.onEventFromManagers(

@@ -81,6 +81,8 @@ public class GameBoard : A_Gameboard
                 pendingTower.gameObject.layer = LayerMask.NameToLayer("ItemAdded");
                 pendingTower.transform.SetParent(transform);
                 // pendingTower.GetEnemies = () => Enemies;
+                Mediator.onEventFromManagers(
+                    new Tuple<EventTypeFromManager, object>(EventTypeFromManager.REMOVE_MONEY, pendingTower.Cost));
                 pendingTower = null;
                 hitObject.layer = LayerMask.NameToLayer("Default");
                 lastHitObject.GetComponent<Renderer>().material.color = originalColor;
@@ -164,6 +166,8 @@ public class GameBoard : A_Gameboard
         newTowerUpgraded.transform.rotation = aTowerToUpgrade.transform.rotation;
         newTowerUpgraded.gameObject.SetActive(true);
         newTowerUpgraded.gameObject.layer = LayerMask.NameToLayer("ItemAdded");
+        Mediator.onEventFromManagers(
+            new Tuple<EventTypeFromManager, object>(EventTypeFromManager.REMOVE_MONEY, newTowerUpgraded.Cost));
 
         Destroy(aTowerToUpgrade.gameObject);
     }

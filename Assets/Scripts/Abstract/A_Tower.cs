@@ -13,6 +13,8 @@ public abstract class A_Tower : MonoBehaviour
 
     protected I_TowerStrategy Strategy { get; set; }
 
+    public int Cost { get; set; }
+
     protected HorizontalSelector StrategySelector;
 
     public abstract void shoot();
