@@ -242,12 +242,25 @@ I_TowerFactory ..> A_Tower
 abstract class A_Tower {
     - mediator : I_GameManagerMediator
     - strategy : I_TowerStrategy
+    - towerOptions : Gameobject
     + shoot()
 }
 
 A_Tower --> I_GameManagerMediator
 
-class SimpleTower extends A_Tower {
+class TowerCanon extends A_Tower {
+    
+}
+
+class TowerFusee extends A_Tower {
+    
+}
+
+class TowerMitraillette extends A_Tower {
+    
+}
+
+class TowerMissile extends A_Tower {
     
 }
 

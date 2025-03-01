@@ -41,6 +41,10 @@ public class TowerCanon : A_Tower
 
     private void onStrategiesChanged(int index)
     {
+        if (Strategy != null)
+        {
+            Destroy(Strategy as Component);
+        }
 
         switch (index)
         {

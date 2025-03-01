@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TowerFactory : MonoBehaviour, I_TowerFactory
 {
-    [SerializeField] List<GameObject> towers;
+    [SerializeField] private List<GameObject> towers;
 
     public A_Tower createTower(string towerName)
     {
