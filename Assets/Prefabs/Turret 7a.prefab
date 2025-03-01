@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2403233279345305028}
   - component: {fileID: 4251279341514776934}
   - component: {fileID: 88328100393721878}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GunBaseElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 8618963639165789496}
   - component: {fileID: 1816088528989627968}
   - component: {fileID: 3546089155043691447}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GunBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 2215068698519315823}
   - component: {fileID: 1461415089274087104}
   - component: {fileID: 1393089744587427685}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GunBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 1781284354723638469}
   - component: {fileID: 1034885916402365025}
   - component: {fileID: 6769256713088946466}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BaseElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 4867425078403348062}
   - component: {fileID: 2985892974755203063}
   - component: {fileID: 1603103948259604435}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 653242651774962267}
   - component: {fileID: 1237455848566290356}
   - component: {fileID: 4098175602559962413}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GunBaseWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +534,7 @@ GameObject:
   - component: {fileID: 4830909766462185011}
   - component: {fileID: 2943438555143452740}
   - component: {fileID: 5524344183919048292}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GunSide1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 6508449873527167191}
   - component: {fileID: 8958295544209306246}
   - component: {fileID: 6257671257995874231}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BaseSupport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -707,7 +707,7 @@ GameObject:
   - component: {fileID: 7125362734631871503}
   - component: {fileID: 985283660524473646}
   - component: {fileID: 3234057868563091056}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Turret 7a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,7 +722,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7410065180680991006}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -3.8497486}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
@@ -778,7 +778,7 @@ GameObject:
   - component: {fileID: 2392896869472389906}
   - component: {fileID: 8268001329307189391}
   - component: {fileID: 3519138165791814615}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GunSide2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 1546812209185010511}
   - component: {fileID: 1180377817576465221}
   - component: {fileID: 3148131701003426024}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BasePlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

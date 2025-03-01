@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8805565043611314545}
   - component: {fileID: 7380366448781077531}
   - component: {fileID: 5488790654615647697}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Circle 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 5792899319557468919}
   - component: {fileID: 1779999415468216403}
   - component: {fileID: 8064774208024418025}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Turret 8a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001359574732279177}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 2796850796793213816}
   - component: {fileID: 6136814877516257176}
   - component: {fileID: 5693233301008170094}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 9011392648245740744}
   - component: {fileID: 6271943617331173920}
   - component: {fileID: 7523161622526463266}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 1277171990749816078}
   - component: {fileID: 8132730536726844151}
   - component: {fileID: 6708603129650602360}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Ciircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 4459282662505837815}
   - component: {fileID: 1686753259461059743}
   - component: {fileID: 4344855415753301449}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BaseElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 908629691295477168}
   - component: {fileID: 4728993397855001035}
   - component: {fileID: 4967433159324408995}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Circle 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,7 +649,7 @@ GameObject:
   - component: {fileID: 626146167678439333}
   - component: {fileID: 4865158188035732715}
   - component: {fileID: 7632212368533595401}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CentralSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

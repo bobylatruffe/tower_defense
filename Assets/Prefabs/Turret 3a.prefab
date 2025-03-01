@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3719020395652307954}
   - component: {fileID: 6649113046881882614}
   - component: {fileID: 4138376132234689982}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pylon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 4090227716767362040}
   - component: {fileID: 9107066578749898207}
   - component: {fileID: 8618666100170259911}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Turret 3a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3532634932922945104}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.02291298, y: -0.05900299, z: -19.219145}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 4665238393020616730}
   - component: {fileID: 7231804230300082269}
   - component: {fileID: 735226158701793239}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BaseElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 637444592211857786}
   - component: {fileID: 34902222179978618}
   - component: {fileID: 1710863345320441193}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PylonElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 6737087004506855874}
   - component: {fileID: 5807035830203369202}
   - component: {fileID: 4318870347663670532}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 4396995877760417319}
   - component: {fileID: 6860373582531943546}
   - component: {fileID: 8861821015696850749}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TurretFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 7396557632879056964}
   - component: {fileID: 2833762373775224658}
   - component: {fileID: 4188069435815909897}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}

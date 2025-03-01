@@ -1,25 +1,20 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using System;
 using DG.Tweening;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
-public class Hud : A_Hud
+
+public class UI : A_Hud
 {
-    private VisualElement mainMenu;
+    [SerializeField] private GameObject mainMenu;
 
-    private Label nbLife;
-    private Label money;
-    private Label nbWave;
-    private Label timerBeforeWave;
+    [SerializeField] private TextMeshProUGUI money;
+    [SerializeField] private TextMeshProUGUI currentLevel;
+    [SerializeField] private TextMeshProUGUI life;
+    [SerializeField] private TextMeshProUGUI timeBeforeWave;
 
-    private VisualElement shopPanel;
-
-    private Button jouer;
-    private Button quitter;
-    private Button options;
-    private Button historique;
-    private Button startWave;
+    [SerializeField] private Button startWave;
 
     [SerializeField] private Light towerLight;
 
@@ -42,36 +37,18 @@ public class Hud : A_Hud
     {
         uiObserver = GameManager.Instance;
         cam = Camera.main;
-
-        VisualElement root = GetComponentInChildren<UIDocument>().rootVisualElement;
-        mainMenu = root.Q<VisualElement>("MainMenuPanel");
-        nbLife = root.Q<Label>("NbLife");
-        money = root.Q<Label>("Money");
-        nbWave = root.Q<Label>("NbWave");
-        timerBeforeWave = root.Q<Label>("TimerBeforeWave");
-
-        jouer = root.Q<Button>("Jouer");
-        quitter = root.Q<Button>("Quitter");
-        options = root.Q<Button>("Options");
-        historique = root.Q<Button>("Historique");
-        startWave = root.Q<Button>("StartWave");
-
-        jouer.RegisterCallback<ClickEvent>(OnJouerClicked);
-        startWave.RegisterCallback<ClickEvent>(OnStartWaveClicked);
-
-        shopPanel = root.Q<VisualElement>("ShopPanel");
     }
 
-    private void OnStartWaveClicked(ClickEvent evt)
+    public void OnStartWaveClicked()
     {
         showTowerShop();
         uiObserver.onEventFromUI(new Tuple<string, object>("BUY_TOWER_FINISHED", null));
     }
 
-    private void OnJouerClicked(ClickEvent evt)
+    public void OnJouerClicked()
     {
         uiObserver.onEventFromUI(new Tuple<string, object>("START_GAME", null));
-        mainMenu.style.display = DisplayStyle.None;
+        mainMenu.SetActive(false);
     }
 
     private void Update()
@@ -104,7 +81,7 @@ public class Hud : A_Hud
 
     public override void updateLevel(int level)
     {
-        nbWave.text = level.ToString();
+        currentLevel.text = level.ToString();
     }
 
     public override void updateMoney(int money)
@@ -114,13 +91,13 @@ public class Hud : A_Hud
 
     public override void updateLife(int life)
     {
-        nbLife.text = $"{life}";
+        this.life.text = $"{life}";
     }
 
     public override void updateTimerBeforeWave(int timer)
     {
-        timerBeforeWave.style.display = DisplayStyle.Flex;
-        timerBeforeWave.text = timer.ToString();
+        timeBeforeWave.gameObject.SetActive(true);
+        timeBeforeWave.text = timer.ToString();
     }
 
     public override void showTowerShop()
@@ -130,24 +107,25 @@ public class Hud : A_Hud
         if (transformPosition.x < 16f)
         {
             Camera.main.transform.DOMoveX(20, 0.5f).SetEase(Ease.Flash);
-            shopPanel.style.display = DisplayStyle.Flex;
+            startWave.gameObject.SetActive(true);
         }
         else
         {
             Camera.main.transform.DOMoveX(12, 0.5f).SetEase(Ease.Flash);
-            shopPanel.style.display = DisplayStyle.None;
+            startWave.gameObject.SetActive(false);
         }
     }
 
     public override void showMenu()
     {
-        if (mainMenu.style.display == DisplayStyle.None)
+        mainMenu.SetActive(!mainMenu.activeSelf);
+        if (mainMenu.activeSelf)
         {
-            mainMenu.style.display = DisplayStyle.Flex;
+            Time.timeScale = 0f;
         }
         else
         {
-            mainMenu.style.display = DisplayStyle.None;
+            Time.timeScale = 1f;
         }
     }
 
@@ -163,6 +141,6 @@ public class Hud : A_Hud
 
     public override void hideTimerBeforeWave()
     {
-        timerBeforeWave.style.display = DisplayStyle.None;
+        timeBeforeWave.gameObject.SetActive(false);
     }
 }

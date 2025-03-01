@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 183496018458098433}
   - component: {fileID: 8494346593193449133}
   - component: {fileID: 7767344205546370221}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 200967675434384974}
   - component: {fileID: 251567769412438228}
   - component: {fileID: 7032581881574491589}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Turret 5a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2181012344016865543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.02291298, y: -0.05900324, z: -11.51964}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 533674433611003312}
   - component: {fileID: 6906250619536587266}
   - component: {fileID: 4891828441151902517}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TurretElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 2540040027024200504}
   - component: {fileID: 537086347817021238}
   - component: {fileID: 3205702803647804371}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GunBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 8704089468737154891}
   - component: {fileID: 9127583666469332472}
   - component: {fileID: 3494544421821390160}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TuretMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 1985239801087894899}
   - component: {fileID: 8328005230286832081}
   - component: {fileID: 7084086631797849669}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BaseElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 5745046901976269607}
   - component: {fileID: 6627702031748830372}
   - component: {fileID: 7217860276286685748}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 4530138690923888502}
   - component: {fileID: 8256635778344714725}
   - component: {fileID: 8998000293399871413}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GunElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
