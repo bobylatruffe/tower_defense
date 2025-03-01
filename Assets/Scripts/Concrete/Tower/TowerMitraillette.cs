@@ -19,6 +19,8 @@ public class TowerMitraillette : A_Tower
 
     public override void shoot()
     {
+        if (Strategy == null) return;
+
         List<A_Enemy> enemies = (List<A_Enemy>)Mediator.onEventFromManagers(
             new Tuple<EventTypeFromManager, object>(EventTypeFromManager.GET_ALL_ENEMIES, null));
 

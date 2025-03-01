@@ -134,6 +134,8 @@ public class TrackClosestEnemyAndTrack : MonoBehaviour, I_TowerStrategy
 
     public void shoot(List<A_Enemy> enemies)
     {
+        if (this == null) return;
+
         if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.transform.position) > range)
         {
             currentTarget = getClosestEnemy(enemies, range);

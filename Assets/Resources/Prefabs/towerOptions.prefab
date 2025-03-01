@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2815465926061314741}
   - component: {fileID: 1909915002581606309}
   - component: {fileID: 8979029719656446897}
+  - component: {fileID: 2632957499430651715}
   m_Layer: 5
   m_Name: towerOptions
   m_TagString: Untagged
@@ -102,6 +103,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2632957499430651715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001836387209124900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee7cc8580fdc564083bde7ac538d7a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2910202561556920381
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +314,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8140103606040600049}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2632957499430651715}
+        m_TargetAssemblyTypeName: TowerOptionsHandler, Assembly-CSharp
+        m_MethodName: addTowerDecorator
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6472881490324627221
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +435,6 @@ GameObject:
   - component: {fileID: 7248253409705415326}
   - component: {fileID: 9113886198241658745}
   - component: {fileID: 7638859455792288847}
-  - component: {fileID: 5060946454473147974}
   m_Layer: 5
   m_Name: quit
   m_TagString: Untagged
@@ -520,8 +544,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5060946454473147974}
-        m_TargetAssemblyTypeName: QuitTowerOptions, Assembly-CSharp
+      - m_Target: {fileID: 2632957499430651715}
+        m_TargetAssemblyTypeName: TowerOptionsHandler, Assembly-CSharp
         m_MethodName: closeTowerOptions
         m_Mode: 1
         m_Arguments:
@@ -532,18 +556,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5060946454473147974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7031897715237702260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ee7cc8580fdc564083bde7ac538d7a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8330861244603066128
 GameObject:
   m_ObjectHideFlags: 0

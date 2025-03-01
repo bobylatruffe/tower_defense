@@ -86,12 +86,12 @@ public class Shop : A_Shop
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                Debug.Log("Decorateur");
-                GameObject towerGo = hit.collider.gameObject;
-                towerGo.AddComponent<TowerDecorateur>();
-            }
+            // if (Input.GetKeyDown(KeyCode.T))
+            // {
+            //     Debug.Log("Decorateur");
+            //     GameObject towerGo = hit.collider.gameObject;
+            //     towerGo.AddComponent<TowerDecorateur>();
+            // }
         }
 
         Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);

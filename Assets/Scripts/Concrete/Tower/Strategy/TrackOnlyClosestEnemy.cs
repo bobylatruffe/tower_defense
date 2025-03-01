@@ -45,7 +45,7 @@ public class TrackOnlyClosestEnemy : MonoBehaviour, I_TowerStrategy
 
     private void trackTarget(A_Enemy target)
     {
-        if (target == null)
+        if (target == null || this == null)
             return;
 
         Vector3 futurePosition = PredictFuturePosition(target, projectileData.projectileSpeed);
@@ -66,6 +66,8 @@ public class TrackOnlyClosestEnemy : MonoBehaviour, I_TowerStrategy
 
     private A_Enemy getClosestEnemy(List<A_Enemy> enemies, float range)
     {
+        if(this == null) return null;
+
         A_Enemy closestEnemy = null;
         float closestDistance = float.MaxValue;
         Vector3 towerPosition = gameObject.transform.position;
