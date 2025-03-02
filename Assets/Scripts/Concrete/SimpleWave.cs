@@ -16,6 +16,7 @@ public class SimpleWave : A_Wave
     private List<Type> flyingMoveStrategies = new List<Type>
     {
         typeof(SimpleFlyingStrategy),
+        typeof(OscillatingFlyingStrategy),
     };
 
     private int timerBeforeWave = 3;

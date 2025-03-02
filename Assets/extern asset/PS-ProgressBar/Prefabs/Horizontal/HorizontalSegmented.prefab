@@ -333,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_value: 1
   animateBar: 1
-  animationType: 1
+  animationType: 0
   animTime: 0.25
   views:
   - {fileID: 114965248149250614}

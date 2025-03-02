@@ -15,5 +15,5 @@ MonoBehaviour:
   projectilePrefab: {fileID: 9011120737154723414, guid: efab1515874b5584583445debd1e8a38, type: 3}
   projectileDamage: 0.3
   projectileSpeed: 30
-  projectileRange: 2
+  projectileRange: 5
   projectileFireRate: 0.25

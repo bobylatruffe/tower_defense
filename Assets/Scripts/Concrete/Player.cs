@@ -32,7 +32,9 @@ public class Player : A_Player
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            showTowerShop();
+            Mediator.onEventFromManagers(
+                new Tuple<EventTypeFromManager, object>(EventTypeFromManager.ADD_MONEY_TO_PLAYER,
+                    500));
         }
     }
 
