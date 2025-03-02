@@ -414,6 +414,7 @@ GameObject:
   - component: {fileID: 9037749565335970209}
   - component: {fileID: 3408495247264098258}
   - component: {fileID: 6230661068530628092}
+  - component: {fileID: 4761607489708360804}
   m_Layer: 7
   m_Name: EaglePlane_FrontPropeller
   m_TagString: Untagged
@@ -429,13 +430,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7635717595871543114}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.00000005960465, z: -0, w: 1}
+  m_LocalRotation: {x: 0.82496566, y: -0, z: -0, w: -0.5651829}
   m_LocalPosition: {x: -0.38820273, y: 0.21893072, z: 0.00012459213}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7736686442989421010}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 248.83, y: 0, z: 0}
 --- !u!33 &3408495247264098258
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -489,6 +490,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4761607489708360804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635717595871543114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab1c0d17fea37940a4653c322fef8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 1000
 --- !u!1001 &7399181945403333380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -500,22 +514,6 @@ PrefabInstance:
     - target: {fileID: 1546385946583366, guid: 14a759585291f914c86607be50c213cc, type: 3}
       propertyPath: m_Name
       value: progressBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 114860996982918648, guid: 14a759585291f914c86607be50c213cc, type: 3}
-      propertyPath: m_value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114860996982918648, guid: 14a759585291f914c86607be50c213cc, type: 3}
-      propertyPath: animateBar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114860996982918648, guid: 14a759585291f914c86607be50c213cc, type: 3}
-      propertyPath: animationType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114965248149250614, guid: 14a759585291f914c86607be50c213cc, type: 3}
-      propertyPath: numSteps
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 224245669313364630, guid: 14a759585291f914c86607be50c213cc, type: 3}
       propertyPath: m_Pivot.x
