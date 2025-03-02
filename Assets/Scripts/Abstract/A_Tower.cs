@@ -7,7 +7,7 @@ public abstract class A_Tower : MonoBehaviour
 {
     protected I_GameManagerMediator Mediator { get; set; }
 
-    public PossibleUpgrade possibleUpgrade { get; set; }
+    public PossibleUpgrade PossibleUpgrade { get; set; }
 
     protected GameObject TowerOptions { get; set; }
 

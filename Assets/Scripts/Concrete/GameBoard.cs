@@ -75,7 +75,7 @@ public class GameBoard : A_Gameboard
 
             pendingTower.gameObject.transform.position = hitObject.transform.position + Vector3.up * 0.5f;
 
-            DrawCircle(hitObject.transform.position, pendingTower.ProjectileData.projectileRange, Color.blue, 30);
+            DrawCircle(hitObject.transform.position, pendingTower.ProjectileData.projectileRange, Color.white, 30);
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -89,6 +89,7 @@ public class GameBoard : A_Gameboard
                 hitObject.layer = LayerMask.NameToLayer("Default");
                 lastHitObject.GetComponent<Renderer>().material.color = originalColor;
                 gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
+                Destroy(rangeCircle);
             }
         }
         else

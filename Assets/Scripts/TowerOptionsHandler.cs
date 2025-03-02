@@ -28,13 +28,13 @@ public class TowerOptionsHandler : MonoBehaviour
         A_Tower atower = gameObject.transform.parent.gameObject.GetComponent<A_Tower>();
         string atowerName = atower.name.Replace("(Clone)", "");
         GameObject nextUpgradedTower = null;
-        for (int i = 0; i < atower.possibleUpgrade.towers.Count; i++)
+        for (int i = 0; i < atower.PossibleUpgrade.towers.Count; i++)
         {
-            if (atower.possibleUpgrade.towers[i].name == atowerName)
+            if (atower.PossibleUpgrade.towers[i].name == atowerName)
             {
-                if (i + 1 < atower.possibleUpgrade.towers.Count)
+                if (i + 1 < atower.PossibleUpgrade.towers.Count)
                 {
-                    nextUpgradedTower = atower.possibleUpgrade.towers[i + 1];
+                    nextUpgradedTower = atower.PossibleUpgrade.towers[i + 1];
                 }
                 else
                 {
