@@ -10022,16 +10022,8 @@ MonoBehaviour:
   - {fileID: 4349332925948199703, guid: 8d713256dccf3df4f805f6719cf82317, type: 3}
   prefabEnemiesFlying:
   - {fileID: 7531073346955281151, guid: e08a5673f5daadf448356c5323325e1a, type: 3}
-  prefabEnemiesTeleporting:
-  - {fileID: 8424651998470670488, guid: 3319d3058c9424744b80c3493393d609, type: 3}
-  - {fileID: 8850904451266298107, guid: 980f992fd6b92d34599f1d07c71c74ca, type: 3}
-  - {fileID: 4882376540902750747, guid: aa9c5997f7c58004291f94389cd0e480, type: 3}
-  - {fileID: 4859791240142080185, guid: d8de89a4ed18039468b18f6f3f633c1f, type: 3}
-  - {fileID: 6558217237259560821, guid: 8acb5a7805fc2894a9acb0c8c456651d, type: 3}
-  - {fileID: 8879074125731635993, guid: a2dfee59ea3d78c4da3f52702f44fc9d, type: 3}
-  - {fileID: 6128152816116768445, guid: a0abc5232b2396543ae495e23450c823, type: 3}
-  - {fileID: 184788881092861705, guid: 11d3b746955450842ba77cdcc5b4237c, type: 3}
-  - {fileID: 2045075581395886749, guid: 68c553d6bd36a98418c2e0cd0dd83b2f, type: 3}
+  - {fileID: 1269294768511468500, guid: 1804fbd03f0c57241853c11995544637, type: 3}
+  prefabEnemiesTeleporting: []
 --- !u!1 &475224018
 GameObject:
   m_ObjectHideFlags: 0
