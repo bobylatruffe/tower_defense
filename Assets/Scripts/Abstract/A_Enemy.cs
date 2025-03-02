@@ -11,6 +11,8 @@ public abstract class A_Enemy : MonoBehaviour
 
     public int Point { get; set; }
 
+    public EnemyType EnemyType { get; set; }
+
     public bool IsMoving { get; set; }
     public I_MoveStrategy MoveStrategy { get; set; }
 }

@@ -19,7 +19,7 @@ public class WalkingEnemy : A_Enemy
         Point = 10;
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-
+        EnemyType = EnemyType.WALKING;
         progressBar = transform.Find("progressBar").gameObject.GetComponent<ProgressBarPro>();
     }
 
@@ -31,8 +31,7 @@ public class WalkingEnemy : A_Enemy
             animator.SetFloat("Speed", agent.velocity.magnitude);
         }
 
-        if (progressBar)
-            progressBar.transform.LookAt(progressBar.transform.position + cam.transform.forward);
+        progressBar.transform.LookAt(progressBar.transform.position + cam.transform.forward);
     }
 
     private void OnTriggerEnter(Collider projectile)
@@ -41,7 +40,6 @@ public class WalkingEnemy : A_Enemy
         Destroy(projectile.gameObject);
 
         CurrentHealth -= projectileData.projectileDamage;
-        // CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
 
         if (progressBar)
         {

@@ -18,7 +18,8 @@ public class DetectorEnemyWin : MonoBehaviour
 
         foreach (Collider col in colliders)
         {
-            GameboardObserver.enemyWin(col.gameObject);
+            if (col.gameObject)
+                GameboardObserver.enemyWin(col.gameObject);
         }
     }
 

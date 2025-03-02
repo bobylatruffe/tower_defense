@@ -66,7 +66,7 @@ public class TrackClosestEnemyAndProjectileTrackEnemy : MonoBehaviour, I_TowerSt
 
         Vector3 centerPosition = getCenterOfTargets(currentTargets);
         Vector3 direction = centerPosition - rotor.position;
-        direction.y = 0; // On ignore la hauteur
+        // direction.y = 0; // On ignore la hauteur
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         targetRotation *= Quaternion.Euler(0, -90, 0);

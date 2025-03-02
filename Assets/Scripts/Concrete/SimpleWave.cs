@@ -15,7 +15,7 @@ public class SimpleWave : A_Wave
 
     private List<Type> flyingMoveStrategies = new List<Type>
     {
-        // typeof(SimpleFlyingStrategy),
+        typeof(SimpleFlyingStrategy),
     };
 
     private int timerBeforeWave = 3;
@@ -122,13 +122,13 @@ public class SimpleWave : A_Wave
 
         while (elapsedTime < spawnDuration)
         {
-            switch (Random.Range(0, 1))
+            switch (Random.Range(0, 2))
             {
                 case 0:
                     SpawnWalkingEnemy();
                     break;
                 case 1:
-                    // SpawnFlyingEnemy();
+                    SpawnFlyingEnemy();
                     break;
                 case 2:
                     // SpawnTeleportingEnemy();
@@ -161,22 +161,21 @@ public class SimpleWave : A_Wave
             new Tuple<EventTypeFromManager, object>(EventTypeFromManager.ADD_NEW_ENEMY, enemy));
     }
 
-    // private void SpawnTeleportingEnemy()
-    // {
-    //     A_Enemie enemy = EnemyAbstractFactory.createTeleportingEnemie();
-    //     Mediator.onEventFromManagers(new Tuple<string, object>("ADD_NEW_ENEMY", enemy));
-    // }
-    //
-    // private void SpawnFlyingEnemy()
-    // {
-    //     A_Enemie enemy = EnemyAbstractFactory.createFlyingEnemie();
-    //
-    //     Type randomStrategyType = flyingMoveStrategies[Random.Range(0, flyingMoveStrategies.Count)];
-    //     I_MoveStrategy strategy = (I_MoveStrategy)enemy.gameObject.AddComponent(randomStrategyType);
-    //
-    //     strategy.setDestination(Mediator.onEventFromManagers(new Tuple<string, object>("GET_LEAVE", null)));
-    //     enemy.MoveStrategy = strategy;
-    //
-    //     Mediator.onEventFromManagers(new Tuple<string, object>("ADD_NEW_ENEMY", enemy));
-    // }
+    private void SpawnFlyingEnemy()
+    {
+        A_Enemy enemy = EnemyAbstractFactory.createFlyingEnemie();
+
+        Type randomStrategyType = flyingMoveStrategies[Random.Range(0, flyingMoveStrategies.Count)];
+        I_MoveStrategy strategy = (I_MoveStrategy)enemy.gameObject.AddComponent(randomStrategyType);
+
+        GameObject destination =
+            (GameObject)Mediator.onEventFromManagers(
+                new Tuple<EventTypeFromManager, object>(EventTypeFromManager.GET_EXIT_ENEMY_POINT, null));
+
+        strategy.setDestination(destination);
+        enemy.MoveStrategy = strategy;
+
+        Mediator.onEventFromManagers(
+            new Tuple<EventTypeFromManager, object>(EventTypeFromManager.ADD_NEW_ENEMY, enemy));
+    }
 }
