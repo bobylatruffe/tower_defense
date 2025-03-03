@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         registerEventHandlers(EventTypeFromManager.UPDATE_MONEY, new UpdateMoney(systemObserver));
         registerEventHandlers(EventTypeFromManager.SHOW_TOWER_SHOP, new UpdateMoney(systemObserver));
         registerEventHandlers(EventTypeFromManager.REMOVE_MONEY, new RemoveMoney(systemObserver, player));
-        registerEventHandlers(EventTypeFromManager.NO_MONEY, new NoMoney());
+        registerEventHandlers(EventTypeFromManager.NO_MONEY, new NoMoney(systemObserver));
         registerEventHandlers(EventTypeFromManager.ADD_MONEY_TO_PLAYER,
             new AddMoneyToPlayer(player, systemObserver));
         registerEventHandlers(EventTypeFromManager.UPDATE_LEVEL_HUD, new UpdateLevelHud(systemObserver));
@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         registerEventHandlers(EventTypeFromManager.HIDE_TIMER_BEFORE_WAVE, new HideTimerBeforeWave(systemObserver));
         registerEventHandlers(EventTypeFromManager.GET_ALL_ENEMIES, new GetAllEnemies(gameboard));
         registerEventHandlers(EventTypeFromManager.ENEMY_IS_DEATH, new EnemyIsDeath(gameboard));
+        registerEventHandlers(EventTypeFromManager.SELECTING_ON_TOWERSHOP, new SelectingOnTowerShop(systemObserver));
     }
 
     public void start()
@@ -108,7 +109,11 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
             case "TOWER_SELECTED_FROM_HUD":
                 string nameTowerSelectedByUser = dataEvent.Item2 as string;
                 A_Tower tower = shop.buyIfPlayerCanAffordIt(player.Money, nameTowerSelectedByUser);
-                gameboard.addTower(tower);
+                if (tower)
+                    gameboard.addTower(tower);
+                else
+                    onEventFromManagers(
+                        new Tuple<EventTypeFromManager, object>(EventTypeFromManager.NO_MONEY, null));
                 break;
 
             case "START_GAME":

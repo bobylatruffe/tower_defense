@@ -20,7 +20,6 @@ public class UI : A_Hud
     [SerializeField] private Light towerLight;
 
     private Camera cam;
-    private bool isSelectionTower = false;
 
     private void Awake()
     {
@@ -71,6 +70,7 @@ public class UI : A_Hud
 
                 if (Input.GetMouseButtonDown(0))
                 {
+                    isSelectionTower = false;
                     uiObserver.onEventFromUI(new Tuple<string, object>("TOWER_SELECTED_FROM_HUD", item.name));
                 }
             }
@@ -102,7 +102,7 @@ public class UI : A_Hud
 
     public override void showTowerShop()
     {
-        isSelectionTower = !isSelectionTower;
+        isSelectionTower = true;
         Vector3 transformPosition = cam.transform.position;
         if (transformPosition.x < 16f)
         {

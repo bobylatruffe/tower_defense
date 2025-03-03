@@ -7,6 +7,7 @@ public abstract class A_Hud : MonoBehaviour
     public static A_Hud Instance { get; protected set; }
 
     protected I_UIObserver uiObserver;
+    public bool isSelectionTower { get; set; }
 
     public abstract void updateLevel(int level);
     public abstract void updateMoney(int money);

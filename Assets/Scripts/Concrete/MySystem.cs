@@ -76,6 +76,10 @@ public class MySystem : MonoBehaviour, I_SystemObserver
             case "HIDE_TIMER_BEFORE_WAVE":
                 hud.hideTimerBeforeWave();
                 break;
+
+            case "SelectingOnTowerShop":
+                hud.isSelectionTower = true;
+                break;
         }
 
         return true;

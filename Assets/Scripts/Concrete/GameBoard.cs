@@ -85,6 +85,8 @@ public class GameBoard : A_Gameboard
                 // pendingTower.GetEnemies = () => Enemies;
                 Mediator.onEventFromManagers(
                     new Tuple<EventTypeFromManager, object>(EventTypeFromManager.REMOVE_MONEY, pendingTower.Cost));
+                Mediator.onEventFromManagers(
+                    new Tuple<EventTypeFromManager, object>(EventTypeFromManager.SELECTING_ON_TOWERSHOP, null));
                 pendingTower = null;
                 hitObject.layer = LayerMask.NameToLayer("Default");
                 lastHitObject.GetComponent<Renderer>().material.color = originalColor;
