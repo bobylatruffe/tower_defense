@@ -14,7 +14,7 @@ public abstract class A_Player : MonoBehaviour
     public void showMenu()
     {
         Mediator.onEventFromManagers(
-            new Tuple<EventTypeFromManager, object>(EventTypeFromManager.SHOW_MAIN_MENU, null));
+            new Tuple<EventTypeFromManager, object>(EventTypeFromManager.SHOW_PAUSE_MENU, null));
     }
 
     public void showTowerShop()

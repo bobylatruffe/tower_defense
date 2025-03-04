@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         systemObserver = MySystem.Instance;
         shop = A_Shop.Instance;
 
-        state = new ShopTime(this);
+        state = new InitTime(this);
 
         registerEventHandlers(EventTypeFromManager.ADD_NEW_ENEMY, new AddNewEnemy(gameboard));
         registerEventHandlers(EventTypeFromManager.GET_EXIT_ENEMY_POINT, new GetExitEnemyPoint(gameboard));
@@ -67,14 +67,11 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         registerEventHandlers(EventTypeFromManager.GET_ALL_ENEMIES, new GetAllEnemies(gameboard));
         registerEventHandlers(EventTypeFromManager.ENEMY_IS_DEATH, new EnemyIsDeath(gameboard));
         registerEventHandlers(EventTypeFromManager.SELECTING_ON_TOWERSHOP, new SelectingOnTowerShop(systemObserver));
+        registerEventHandlers(EventTypeFromManager.SHOW_PAUSE_MENU, new ShowPauseMenu(this, systemObserver));
     }
 
     public void start()
     {
-        systemObserver.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", player.LifePoints));
-        systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", player.Money));
-
-        state.start();
     }
 
     public void end()
@@ -117,12 +114,20 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
                 break;
 
             case "START_GAME":
-                start();
+                systemObserver.onEvent(new Tuple<string, object>("UPDATE_LIFE_POINTS", player.LifePoints));
+                systemObserver.onEvent(new Tuple<string, object>("UPDATE_MONEY", player.Money));
+
+                state.start();
                 break;
 
             case "BUY_TOWER_FINISHED":
                 state.end();
                 break;
         }
+    }
+
+    public I_State getState()
+    {
+        return state;
     }
 }

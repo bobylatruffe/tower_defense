@@ -3,12 +3,14 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
 public class UI : A_Hud
 {
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject pauseMenu;
 
     [SerializeField] private TextMeshProUGUI money;
     [SerializeField] private TextMeshProUGUI currentLevel;
@@ -49,6 +51,16 @@ public class UI : A_Hud
     {
         uiObserver.onEventFromUI(new Tuple<string, object>("START_GAME", null));
         mainMenu.SetActive(false);
+    }
+
+    public void OnReprendreClicked()
+    {
+        showPauseMenu();
+    }
+
+    public void OnRecommencerClicked()
+    {
+
     }
 
     private void Update()
@@ -116,17 +128,10 @@ public class UI : A_Hud
         }
     }
 
-    public override void showMenu()
+    public override void showMenu(object callback)
     {
-        mainMenu.SetActive(!mainMenu.activeSelf);
-        if (mainMenu.activeSelf)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
+        mainMenu.SetActive(true);
+        ((Action)callback).Invoke();
     }
 
     public override void showError()
@@ -152,5 +157,21 @@ public class UI : A_Hud
     public override void closeTowerOptions(GameObject towerOptions)
     {
         towerOptions.gameObject.SetActive(false);
+    }
+
+    public override void showPauseMenu()
+    {
+        if (pauseMenu.activeSelf) closePauseMenu();
+        else
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+        }
+    }
+
+    public override void closePauseMenu()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

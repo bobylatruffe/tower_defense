@@ -47,7 +47,7 @@ public class MySystem : MonoBehaviour, I_SystemObserver
         switch (eventData.Item1)
         {
             case "SHOW_MAIN_MENU":
-                hud.showMenu();
+                hud.showMenu(eventData.Item2);
                 break;
 
             case "UPDATE_LIFE_POINTS":
@@ -79,6 +79,10 @@ public class MySystem : MonoBehaviour, I_SystemObserver
 
             case "SelectingOnTowerShop":
                 hud.isSelectionTower = true;
+                break;
+
+            case "ShowPauseMenu":
+                hud.showPauseMenu();
                 break;
         }
 
