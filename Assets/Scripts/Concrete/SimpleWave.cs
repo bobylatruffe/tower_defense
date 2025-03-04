@@ -48,9 +48,9 @@ public class SimpleWave : A_Wave
 
     public override void startWave(Action onWaveFinished)
     {
-        Debug.Log("Level " + CurrentLevel);
-        Debug.Log("currentSpawnDuration" + (currentSpawnDuration + 1));
-        Debug.Log("waitTimeBeforeSpawnOneEnemy" + Mathf.Max(waitTimeBeforeSpawnOneEnemy - 0.05f, 0.1f));
+        // Debug.Log("Level " + CurrentLevel);
+        // Debug.Log("currentSpawnDuration" + (currentSpawnDuration + 1));
+        // Debug.Log("waitTimeBeforeSpawnOneEnemy" + Mathf.Max(waitTimeBeforeSpawnOneEnemy - 0.05f, 0.1f));
 
         Mediator.onEventFromManagers(
             new Tuple<EventTypeFromManager, object>(EventTypeFromManager.UPDATE_LEVEL_HUD, CurrentLevel));
