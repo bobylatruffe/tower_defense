@@ -5,10 +5,10 @@
 /' skinparam linetype polyline '/
 
 class GameManager implements I_UIObserver, I_GameManagerMediator {
-    - gameboardManager : Gameboard
-    - waveManager : A_Wave
-    - shopManager : A_Shop
-    - playerManager : A_Player
+    - gameboard : Gameboard
+    - wave : A_Wave
+    - shop : A_Shop
+    - player : A_Player
     - systemObserver : I_SystemObserver
     - state : I_State
     - events : Dictionnary<EVENT_TYPE, I_Event>
@@ -17,6 +17,7 @@ class GameManager implements I_UIObserver, I_GameManagerMediator {
     + start()
     + end()
     + registerEvent(eventType : EVENT_TYPE, event : I_Event)
+    + changeState(context : I_State)
 }
 
 interface I_Event {
@@ -43,25 +44,30 @@ interface I_State {
     + end()
 }
 
+GameManager --> I_SystemObserver
+
 GameManager o-- I_State
+
+class InitTime implements I_State {
+    - context : GameManager
+}
+
+InitTime --> GameManager
 
 class WaveTime implements I_State {
     - context : GameManager
-    + changeState(context : GameManager)
 }
 
 WaveTime --> GameManager
 
 class ShopTime implements I_State {
     - context : GameManager
-    + changeState(context : GameManager)
 }
 
 ShopTime --> GameManager
 
 class DeathTime implements I_State {
     - context : GameManager
-    + changeState(context : GameManager)
 }
 
 DeathTime --> GameManager
