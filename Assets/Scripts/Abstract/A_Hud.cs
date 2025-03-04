@@ -24,5 +24,6 @@ public abstract class A_Hud : MonoBehaviour
     public abstract void closePauseMenu();
     public abstract void quitter();
     public abstract void showScores();
+    public abstract void closeScores();
     public abstract void showDeadScreen();
 }

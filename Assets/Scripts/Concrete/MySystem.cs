@@ -93,6 +93,9 @@ public class MySystem : MonoBehaviour, I_SystemObserver
             case "SAVE_PSEUDO_AND_NAME_OF_PLAYER":
                 scoreLogger.log((string)eventData.Item2);
                 break;
+
+            case "GET_SCORES":
+                return ((ScoreLogger)scoreLogger).getAllScores();
         }
 
         return true;

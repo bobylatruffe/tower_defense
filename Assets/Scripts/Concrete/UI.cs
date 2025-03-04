@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
+using Michsky.MUIP;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -12,6 +12,7 @@ public class UI : A_Hud
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject finDeJeu;
+    [SerializeField] private GameObject scoresPanel;
 
     [SerializeField] private TextMeshProUGUI money;
     [SerializeField] private TextMeshProUGUI currentLevel;
@@ -20,10 +21,10 @@ public class UI : A_Hud
     [SerializeField] private TextMeshProUGUI currentLevelOfPlayer;
 
     [SerializeField] private TMP_InputField pseudoInput;
-
     [SerializeField] private Button startWave;
-
     [SerializeField] private Light towerLight;
+
+    [SerializeField] private ListView scores;
 
     private Camera cam;
 
@@ -49,7 +50,7 @@ public class UI : A_Hud
 
     private void savePlayerPseudoAndLevel(string pseudo)
     {
-        string dataToSave = $"{pseudo} {currentLevel.text}";
+        string dataToSave = $"{pseudo}:{currentLevel.text}";
         systemObserver.onEvent(new Tuple<string, object>("SAVE_PSEUDO_AND_NAME_OF_PLAYER", dataToSave));
         pseudoInput.gameObject.SetActive(false);
     }
@@ -184,12 +185,44 @@ public class UI : A_Hud
 
     public override void quitter()
     {
-        throw new NotImplementedException();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     public override void showScores()
     {
-        throw new NotImplementedException();
+        scoresPanel.gameObject.SetActive(true);
+        List<(string, string)> pseudoAndLevel =
+            (List<(string, string)>)systemObserver.onEvent(new Tuple<string, object>("GET_SCORES", null));
+
+        scores.listItems.Clear();
+
+        foreach ((string pseudo, string score) in pseudoAndLevel)
+        {
+            ListView.ListItem item = new ListView.ListItem();
+
+            item.row0 = new ListView.ListRow();
+            item.row0.rowText = pseudo;
+            item.row0.usePreferredWidth = true;
+
+            item.row1 = new ListView.ListRow();
+            item.row1.rowText = $"{score}";
+            item.row1.usePreferredWidth = true;
+
+
+            scores.listItems.Add(item);
+        }
+
+        scores.rowCount = ListView.RowCount.Two;
+        scores.InitializeItems();
+    }
+
+    public override void closeScores()
+    {
+        scoresPanel.gameObject.SetActive(false);
     }
 
     public override void showDeadScreen()
