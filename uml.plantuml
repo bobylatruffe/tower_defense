@@ -70,6 +70,10 @@ class DeathTime implements I_State {
     - context : GameManager
 }
 
+class ScoreLogger implements I_Logger {
+    
+}
+
 DeathTime --> GameManager
 
 GameManager --> GameManager

@@ -12,6 +12,7 @@ public class MySystem : MonoBehaviour, I_SystemObserver
     private GameManager gameManager;
 
     private List<I_Logger> loggers = new List<I_Logger>();
+    private I_Logger scoreLogger = new ScoreLogger();
 
     private void Awake()
     {
@@ -83,6 +84,14 @@ public class MySystem : MonoBehaviour, I_SystemObserver
 
             case "ShowPauseMenu":
                 hud.showPauseMenu();
+                break;
+
+            case "PLAYER_IS_DEATH":
+                hud.showDeadScreen();
+                break;
+
+            case "SAVE_PSEUDO_AND_NAME_OF_PLAYER":
+                scoreLogger.log((string)eventData.Item2);
                 break;
         }
 

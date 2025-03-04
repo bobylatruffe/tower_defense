@@ -11,11 +11,15 @@ public class UI : A_Hud
 {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject finDeJeu;
 
     [SerializeField] private TextMeshProUGUI money;
     [SerializeField] private TextMeshProUGUI currentLevel;
     [SerializeField] private TextMeshProUGUI life;
     [SerializeField] private TextMeshProUGUI timeBeforeWave;
+    [SerializeField] private TextMeshProUGUI currentLevelOfPlayer;
+
+    [SerializeField] private TMP_InputField pseudoInput;
 
     [SerializeField] private Button startWave;
 
@@ -38,7 +42,16 @@ public class UI : A_Hud
     private void Start()
     {
         uiObserver = GameManager.Instance;
+        systemObserver = MySystem.Instance;
         cam = Camera.main;
+        pseudoInput.onSubmit.AddListener(savePlayerPseudoAndLevel);
+    }
+
+    private void savePlayerPseudoAndLevel(string pseudo)
+    {
+        string dataToSave = $"{pseudo} {currentLevel.text}";
+        systemObserver.onEvent(new Tuple<string, object>("SAVE_PSEUDO_AND_NAME_OF_PLAYER", dataToSave));
+        pseudoInput.gameObject.SetActive(false);
     }
 
     public void OnStartWaveClicked()
@@ -60,7 +73,6 @@ public class UI : A_Hud
 
     public void OnRecommencerClicked()
     {
-
     }
 
     private void Update()
@@ -139,11 +151,6 @@ public class UI : A_Hud
         throw new NotImplementedException();
     }
 
-    public override void sendUIEvent(Tuple<string, int> eventData)
-    {
-        throw new NotImplementedException();
-    }
-
     public override void hideTimerBeforeWave()
     {
         timeBeforeWave.gameObject.SetActive(false);
@@ -173,5 +180,22 @@ public class UI : A_Hud
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public override void quitter()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void showScores()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void showDeadScreen()
+    {
+        finDeJeu.SetActive(true);
+        Time.timeScale = 0f;
+        currentLevelOfPlayer.text = currentLevel.text;
     }
 }

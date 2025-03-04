@@ -1,22 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEditor;
 
 public class DeathTime : I_State
 {
-    private GameManager gameManager;
+    private I_SystemObserver systemObserver;
+    private int currentLevel;
 
-    public DeathTime(GameManager gameManager)
+    public DeathTime(I_SystemObserver systemObserver, int currentLevel)
     {
-        this.gameManager = gameManager;
+        this.systemObserver = systemObserver;
+        this.currentLevel = currentLevel;
     }
 
     public void start()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        systemObserver.onEvent(new Tuple<string, object>("PLAYER_IS_DEATH", currentLevel));
     }
 
     public void end()

@@ -17,12 +17,6 @@ public abstract class A_Player : MonoBehaviour
             new Tuple<EventTypeFromManager, object>(EventTypeFromManager.SHOW_PAUSE_MENU, null));
     }
 
-    public void showTowerShop()
-    {
-        Mediator.onEventFromManagers(
-            new Tuple<EventTypeFromManager, object>(EventTypeFromManager.SHOW_TOWER_SHOP, null));
-    }
-
     public abstract int removeLifePoint(int pointsToRemove);
     public abstract int removeMoney(int moneyToRemove);
     public abstract int addMoney(int moneyToAdd);

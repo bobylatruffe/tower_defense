@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         switch (eventFromManager.Item1)
         {
             case EventTypeFromManager.PLAYER_IS_DEATH:
-                changeState(new DeathTime(this));
+                changeState(new DeathTime(systemObserver, wave.CurrentLevel));
                 break;
 
             default:
@@ -122,6 +122,10 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
 
             case "BUY_TOWER_FINISHED":
                 state.end();
+                break;
+
+            case "SAVE_PSEUDO_AND_NAME_OF_PLAYER":
+                Debug.Log("SAVE_PSEUDO_AND_NAME_OF_PLAYER " + dataEvent.Item2);
                 break;
         }
     }

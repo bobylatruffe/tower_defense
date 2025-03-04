@@ -19,7 +19,7 @@ public class Player : A_Player
     {
         Mediator = GameManager.Instance;
 
-        LifePoints = 500;
+        LifePoints = 100;
         Money = 500;
     }
 
