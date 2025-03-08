@@ -70,14 +70,6 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
         registerEventHandlers(EventTypeFromManager.SHOW_PAUSE_MENU, new ShowPauseMenu(this, systemObserver));
     }
 
-    public void start()
-    {
-    }
-
-    public void end()
-    {
-    }
-
     public object onEventFromManagers(Tuple<EventTypeFromManager, object> eventFromManager)
     {
         if (events.TryGetValue(eventFromManager.Item1, out I_Event command))
@@ -108,9 +100,6 @@ public class GameManager : MonoBehaviour, I_GameManagerMediator, I_UIObserver
                 A_Tower tower = shop.buyIfPlayerCanAffordIt(player.Money, nameTowerSelectedByUser);
                 if (tower)
                     gameboard.addTower(tower);
-                else
-                    onEventFromManagers(
-                        new Tuple<EventTypeFromManager, object>(EventTypeFromManager.NO_MONEY, null));
                 break;
 
             case "START_GAME":

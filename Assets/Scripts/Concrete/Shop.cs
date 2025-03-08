@@ -110,6 +110,8 @@ public class Shop : A_Shop
                     return newtower;
                 }
 
+                Mediator.onEventFromManagers(
+                    new Tuple<EventTypeFromManager, object>(EventTypeFromManager.NO_MONEY, null));
                 return null;
             }
         }

@@ -26,6 +26,8 @@ public class UI : A_Hud
 
     [SerializeField] private ListView scores;
 
+    [SerializeField] private NotificationManager notificationManager;
+
     private Camera cam;
 
     private void Awake()
@@ -230,5 +232,13 @@ public class UI : A_Hud
         finDeJeu.SetActive(true);
         Time.timeScale = 0f;
         currentLevelOfPlayer.text = currentLevel.text;
+    }
+
+    public override void showPopup(object eventDataItem2)
+    {
+        notificationManager.title = "Avetissement";
+        notificationManager.description = eventDataItem2.ToString();
+        notificationManager.UpdateUI();
+        notificationManager.Open();
     }
 }

@@ -96,6 +96,10 @@ public class MySystem : MonoBehaviour, I_SystemObserver
 
             case "GET_SCORES":
                 return ((ScoreLogger)scoreLogger).getAllScores();
+
+            case "Notification":
+                hud.showPopup(eventData.Item2);
+                break;
         }
 
         return true;

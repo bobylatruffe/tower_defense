@@ -38,7 +38,7 @@ public class TowerOptionsHandler : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("No more upgrades available");
+                    hud.showPopup("Tu es déjà au max bro!");
                 }
             }
         }

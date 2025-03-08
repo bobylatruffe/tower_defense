@@ -26,4 +26,5 @@ public abstract class A_Hud : MonoBehaviour
     public abstract void showScores();
     public abstract void closeScores();
     public abstract void showDeadScreen();
+    public abstract void showPopup(object eventDataItem2);
 }

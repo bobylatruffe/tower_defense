@@ -32,10 +32,12 @@ AddNewEnemy --> Gameboard
 class EnemyIsDeath implements I_Event {
 }
 
-EnemyIsDeath --> A_Player
+EnemyIsDeath --> Gameboard
 
-class Blablabla implements I_Event {
+class NoMoney implements I_Event {
 }
+
+NoMoney --> I_SystemObserver
 
 GameManager *-- I_Event
 
@@ -284,11 +286,9 @@ abstract class A_Emeny {
     - specialMove : I_MoveStrategy
     - isMoving : boolean
     - mediator : I_GameManagerMediator
-    + takeDamage()
-    + addSpecialMove(moveStrategy : I_MoveStrategy)
 }
 
-A_Emeny --> I_MoveStrategy
+A_Emeny o-- I_MoveStrategy
 A_Emeny --> I_GameManagerMediator
 
 class SimpleGameBoard extends Gameboard {
@@ -318,5 +318,9 @@ abstract class Gameboard implements I_DetectorEnemyWinObserver {
 }
 
 DetectorEnemyWin --> I_DetectorEnemyWinObserver
+
+I_MoveStrategy <|.. SimpleWalkingToDestinationStrategy
+I_MoveStrategy <|.. SimpleFlyingtrategy
+I_MoveStrategy <|.. OscillatingFlyingStrategy
 
 @enduml

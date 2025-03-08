@@ -14,6 +14,7 @@ public class NoMoney : I_Event
     {
         Debug.Log("No Money");
         systemObserver.onEvent(new Tuple<string, object>("SelectingOnTowerShop", null));
+        systemObserver.onEvent(new Tuple<string, object>("Notification", "Tu es pauvre!"));
         return null;
     }
 }
