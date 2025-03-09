@@ -5,7 +5,7 @@ InitTime : Le jeu commence est affiche le menu principal
 InitTime --> ShopTime : [clique_btn_start] / afficheLeShop
 ShopTime : Le joueur peut acheter des tours et les placer
 
-ShopTime --> WaveTime : [clique_btn_end_shop] / nouvelleVague
+ShopTime --> WaveTime : [clique_btn_start_wave] / nouvelleVague
 WaveTime : Les vagues d'ennemis arrivent et contrôlé par le WaveManager
 
 WaveTime --> ShopTime : [player_life > 0] / nouvelleVague

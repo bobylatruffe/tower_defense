@@ -4,6 +4,7 @@ using DG.Tweening;
 using Michsky.MUIP;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -76,6 +77,8 @@ public class UI : A_Hud
 
     public void OnRecommencerClicked()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 
     private void Update()
